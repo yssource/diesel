@@ -1,4 +1,3 @@
 (function() {var implementors = {};
-implementors["custom_types"] = [{"text":"impl <a class=\"trait\" href=\"diesel/sql_types/trait.HasSqlType.html\" title=\"trait diesel::sql_types::HasSqlType\">HasSqlType</a>&lt;<a class=\"struct\" href=\"custom_types/model/struct.LanguageType.html\" title=\"struct custom_types::model::LanguageType\">LanguageType</a>&gt; for <a class=\"struct\" href=\"diesel/pg/backend/struct.Pg.html\" title=\"struct diesel::pg::backend::Pg\">Pg</a>","synthetic":false,"types":["diesel::pg::backend::Pg"]}];
 implementors["diesel"] = [];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

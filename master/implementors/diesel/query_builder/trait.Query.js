@@ -1,4 +1,3 @@
 (function() {var implementors = {};
-implementors["advanced_blog_cli"] = [{"text":"impl&lt;T:&nbsp;<a class=\"trait\" href=\"diesel/query_builder/trait.Query.html\" title=\"trait diesel::query_builder::Query\">Query</a>&gt; <a class=\"trait\" href=\"diesel/query_builder/trait.Query.html\" title=\"trait diesel::query_builder::Query\">Query</a> for <a class=\"struct\" href=\"advanced_blog_cli/pagination/struct.Paginated.html\" title=\"struct advanced_blog_cli::pagination::Paginated\">Paginated</a>&lt;T&gt;","synthetic":false,"types":["advanced_blog_cli::pagination::Paginated"]}];
 implementors["diesel"] = [];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
