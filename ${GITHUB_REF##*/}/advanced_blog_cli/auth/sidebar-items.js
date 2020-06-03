@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["AuthenticationError",""]],"fn":[["current_user_from_env",""],["find_user",""],["get_password",""],["get_username",""],["if_not_present",""],["register_user",""],["register_user_from_env",""]],"struct":[["User",""],["UserWithPassword",""]]});

@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["custom_types"] = [{"text":"impl <a class=\"trait\" href=\"diesel/deserialize/trait.FromSql.html\" title=\"trait diesel::deserialize::FromSql\">FromSql</a>&lt;<a class=\"struct\" href=\"custom_types/model/struct.LanguageType.html\" title=\"struct custom_types::model::LanguageType\">LanguageType</a>, <a class=\"struct\" href=\"diesel/pg/backend/struct.Pg.html\" title=\"struct diesel::pg::backend::Pg\">Pg</a>&gt; for <a class=\"enum\" href=\"custom_types/model/enum.Language.html\" title=\"enum custom_types::model::Language\">Language</a>","synthetic":false,"types":["custom_types::model::Language"]}];
+implementors["diesel"] = [];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["determine_column_type",""],["determine_type_name",""],["determine_unsigned",""],["load_foreign_key_constraints","Even though this is using `information_schema`, MySQL needs non-ANSI columns in order to do this."]],"mod":[["information_schema",""]]});
