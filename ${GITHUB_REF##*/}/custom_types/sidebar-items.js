@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["main",""]],"mod":[["model",""],["schema",""]],"struct":[["Translation",""]]});

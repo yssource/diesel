@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["contains_unmappable_chars",""],["determine_column_type",""],["get_column_information",""],["get_primary_keys",""],["is_reserved_name",""],["load_foreign_key_constraints",""],["load_table_data",""],["load_table_names",""],["rust_name_for_sql_name",""]],"static":[["RESERVED_NAMES",""]]});

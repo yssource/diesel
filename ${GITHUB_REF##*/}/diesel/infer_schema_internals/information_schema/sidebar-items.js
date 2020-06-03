@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["get_primary_keys",""],["get_table_data",""],["load_foreign_key_constraints",""],["load_table_names",""]],"mod":[["information_schema",""]],"trait":[["UsesInformationSchema",""]]});
