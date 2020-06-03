@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["convert_auth_error",""],["current_user",""],["handle_error",""],["main",""],["print_error_and_exit",""],["register_user",""],["run_cli",""]],"mod":[["auth",""],["cli",""],["comment",""],["editor",""],["pagination",""],["post",""],["schema",""]]});

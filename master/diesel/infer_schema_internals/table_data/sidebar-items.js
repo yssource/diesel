@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Never",""]],"mod":[["serde_impls",""]],"struct":[["TableData",""],["TableName",""]]});

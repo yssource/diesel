@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["key_column_usage",""],["table_constraints",""]]});
