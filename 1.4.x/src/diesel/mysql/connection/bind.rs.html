@@ -254,6 +254,7 @@
 <span id="254">254</span>
 <span id="255">255</span>
 <span id="256">256</span>
+<span id="257">257</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">mysqlclient_sys</span> <span class="kw">as</span> <span class="ident">ffi</span>;
 
@@ -261,6 +262,7 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span> <span class="kw">as</span> <span class="ident">libc</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">stmt</span>::<span class="ident">Statement</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">mysql</span>::<span class="ident">types</span>::<span class="ident">MYSQL_TIME</span>;
 <span class="kw">use</span> <span class="ident">mysql</span>::<span class="ident">MysqlType</span>;
 <span class="kw">use</span> <span class="ident">result</span>::<span class="ident">QueryResult</span>;
 <span class="kw">use</span> <span class="ident">sql_types</span>::<span class="ident">IsSigned</span>;
@@ -495,7 +497,7 @@
         <span class="ident">t</span>::<span class="ident">MYSQL_TYPE_TIME</span>
         <span class="op">|</span> <span class="ident">t</span>::<span class="ident">MYSQL_TYPE_DATE</span>
         <span class="op">|</span> <span class="ident">t</span>::<span class="ident">MYSQL_TYPE_DATETIME</span>
-        <span class="op">|</span> <span class="ident">t</span>::<span class="ident">MYSQL_TYPE_TIMESTAMP</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">MYSQL_TIME</span><span class="op">&gt;</span>()),
+        <span class="op">|</span> <span class="ident">t</span>::<span class="ident">MYSQL_TYPE_TIMESTAMP</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">MYSQL_TIME</span><span class="op">&gt;</span>()),
         <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
     }
 }
