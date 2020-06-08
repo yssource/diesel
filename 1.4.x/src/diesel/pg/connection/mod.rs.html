@@ -292,7 +292,7 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_debug_implementations</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PgConnection</span> {
     <span class="ident">raw_connection</span>: <span class="ident">RawConnection</span>,
-    <span class="ident">transaction_manager</span>: <span class="ident">AnsiTransactionManager</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">transaction_manager</span>: <span class="ident">AnsiTransactionManager</span>,
     <span class="ident">statement_cache</span>: <span class="ident">StatementCache</span><span class="op">&lt;</span><span class="ident">Pg</span>, <span class="ident">Statement</span><span class="op">&gt;</span>,
 }
 
