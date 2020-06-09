@@ -289,10 +289,6 @@
 <span id="289">289</span>
 <span id="290">290</span>
 <span id="291">291</span>
-<span id="292">292</span>
-<span id="293">293</span>
-<span id="294">294</span>
-<span id="295">295</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">chrono</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">mysqlclient_sys</span> <span class="kw">as</span> <span class="ident">ffi</span>;
@@ -328,12 +324,8 @@
                 <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="macro">not_none</span><span class="macro">!</span>(<span class="ident">bytes</span>);
                 <span class="kw">let</span> <span class="ident">bytes_ptr</span> <span class="op">=</span> <span class="ident">bytes</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">MYSQL_TIME</span>;
 
-                <span class="comment">// We cannot use `mem::MaybeUninit` here</span>
-                <span class="comment">// because that would require a bump of the </span>
-                <span class="comment">// minimal supported rust version</span>
-                <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
                 <span class="kw">unsafe</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">uninitialized</span>();
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">zeroed</span>();
                     <span class="ident">ptr</span>::<span class="ident">copy_nonoverlapping</span>(<span class="ident">bytes_ptr</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">result</span>, <span class="number">1</span>);
                     <span class="kw">if</span> <span class="ident">result</span>.<span class="ident">neg</span> {
                         <span class="prelude-val">Err</span>(<span class="string">&quot;Negative dates/times are not yet supported&quot;</span>.<span class="ident">into</span>())

@@ -1228,7 +1228,6 @@
 <span id="1228">1228</span>
 <span id="1229">1229</span>
 <span id="1230">1230</span>
-<span id="1231">1231</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">rustfmt</span>, <span class="ident">rustfmt_skip</span>)]</span> <span class="comment">// https://github.com/rust-lang-nursery/rustfmt/issues/2755</span>
 
@@ -1512,8 +1511,7 @@
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">__diesel_invalid_table_syntax</span> {
     () <span class="op">=</span><span class="op">&gt;</span> {
         <span class="macro">compile_error</span><span class="macro">!</span>(
-            <span class="string">&quot;Invalid `table!` syntax. Please see the `table!` macro docs for more info. \
-             `https://docs.diesel.rs/diesel/macro.table.html`&quot;</span>
+            <span class="string">&quot;Invalid `table!` syntax. Please see the `table!` macro docs for more info.&quot;</span>
         );
     };
 }
@@ -1858,7 +1856,7 @@
                             <span class="string">&quot;\&quot;]` to reference the table&#39;s `&quot;</span>,
                             <span class="macro">stringify</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span>),
                             <span class="string">&quot;` column. \n \
-                            Docs available at: `https://docs.diesel.rs/diesel/macro.table.html`\n&quot;</span>
+                            See the documentation of the `table!` macro for details`\n&quot;</span>
                         ));
                     } <span class="kw">else</span> {
                         <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">columns</span>::{<span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span>};
@@ -2160,13 +2158,13 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// * `child_table` is the Table with the Foreign key.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// So given the Table decaration from [Associations docs](http://docs.diesel.rs/diesel/associations/index.html)</span>
+<span class="doccomment">/// So given the Table decaration from [Associations docs](/associations/index.html)</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// * The parent table would be `User`</span>
 <span class="doccomment">/// * The child table would be `Post`</span>
 <span class="doccomment">/// * and the Foreign key would be `Post.user_id`</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// For joins that do not explicitly use on clauses via [`JoinOnDsl`](http://docs.diesel.rs/diesel/prelude/trait.JoinOnDsl.html)</span>
+<span class="doccomment">/// For joins that do not explicitly use on clauses via [`JoinOnDsl`](/prelude/trait.JoinOnDsl.html)</span>
 <span class="doccomment">/// the following on clause is generated implicitly:</span>
 <span class="doccomment">/// ```sql</span>
 <span class="doccomment">/// post JOIN users ON posts.user_id = users.id</span>
