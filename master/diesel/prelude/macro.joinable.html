@@ -7,8 +7,8 @@ explicit <code>ON</code> clause.</p>
 <p>The generated <code>ON</code> clause will always join to the primary key of the parent
 table. This macro removes the need to call [<code>.on</code>] explicitly, you will
 still need to invoke [<code>allow_tables_to_appear_in_same_query!</code>] for these two tables to
-be able to use the resulting query, unless you are using <code>infer_schema!</code> or
-<code>diesel print-schema</code> which will generate it for you.</p>
+be able to use the resulting query, unless you are using <code>diesel print-schema</code>
+which will generate it for you.</p>
 <p>If you are using <code>infer_schema!</code> or <code>diesel print-schema</code>, an invocation of
 this macro will be generated for every foreign key in your database unless
 one of the following is true:</p>
