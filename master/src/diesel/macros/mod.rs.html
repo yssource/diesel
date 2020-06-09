@@ -1244,7 +1244,6 @@
 <span id="1244">1244</span>
 <span id="1245">1245</span>
 <span id="1246">1246</span>
-<span id="1247">1247</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_parens</span>)]</span> <span class="comment">// FIXME: Remove this attribute once false positive is resolved.</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">rustfmt</span>, <span class="ident">rustfmt_skip</span>)]</span> <span class="comment">// https://github.com/rust-lang-nursery/rustfmt/issues/2755</span>
@@ -1539,8 +1538,7 @@
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">__diesel_invalid_table_syntax</span> {
     () <span class="op">=</span><span class="op">&gt;</span> {
         <span class="macro">compile_error</span><span class="macro">!</span>(
-            <span class="string">&quot;Invalid `table!` syntax. Please see the `table!` macro docs for more info. \
-             `https://docs.diesel.rs/diesel/macro.table.html`&quot;</span>
+            <span class="string">&quot;Invalid `table!` syntax. Please see the `table!` macro docs for more info.&quot;</span>
         );
     };
 }
