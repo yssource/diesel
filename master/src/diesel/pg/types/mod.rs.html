@@ -490,27 +490,6 @@
 <span id="490">490</span>
 <span id="491">491</span>
 <span id="492">492</span>
-<span id="493">493</span>
-<span id="494">494</span>
-<span id="495">495</span>
-<span id="496">496</span>
-<span id="497">497</span>
-<span id="498">498</span>
-<span id="499">499</span>
-<span id="500">500</span>
-<span id="501">501</span>
-<span id="502">502</span>
-<span id="503">503</span>
-<span id="504">504</span>
-<span id="505">505</span>
-<span id="506">506</span>
-<span id="507">507</span>
-<span id="508">508</span>
-<span id="509">509</span>
-<span id="510">510</span>
-<span id="511">511</span>
-<span id="512">512</span>
-<span id="513">513</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! PostgreSQL specific types</span>
 
@@ -709,27 +688,6 @@
 
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Bpchar</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">VarChar</span>;
-
-    <span class="doccomment">/// The JSON SQL type.  This type can only be used with `feature =</span>
-    <span class="doccomment">/// &quot;serde_json&quot;`</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Normally you should prefer [`Jsonb`](struct.Jsonb.html) instead, for the reasons</span>
-    <span class="doccomment">/// discussed there.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### [`ToSql`] impls</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - [`serde_json::Value`]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### [`FromSql`] impls</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// - [`serde_json::Value`]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`ToSql`]: ../../../serialize/trait.ToSql.html</span>
-    <span class="doccomment">/// [`FromSql`]: ../../../deserialize/trait.FromSql.html</span>
-    <span class="doccomment">/// [`serde_json::Value`]: ../../../../serde_json/value/enum.Value.html</span>
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Default</span>, <span class="ident">QueryId</span>, <span class="ident">SqlType</span>)]</span>
-    <span class="attribute">#[<span class="ident">postgres</span>(<span class="ident">oid</span> <span class="op">=</span> <span class="string">&quot;114&quot;</span>, <span class="ident">array_oid</span> <span class="op">=</span> <span class="string">&quot;199&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Json</span>;
 
     <span class="doccomment">/// The `jsonb` SQL type.  This type can only be used with `feature =</span>
     <span class="doccomment">/// &quot;serde_json&quot;`</span>

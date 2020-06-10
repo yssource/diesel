@@ -79,8 +79,6 @@
 <span id="79">79</span>
 <span id="80">80</span>
 <span id="81">81</span>
-<span id="82">82</span>
-<span id="83">83</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! The MySQL backend</span>
 
@@ -96,56 +94,54 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Mysql</span>;
 
-<span class="doccomment">/// The full type metadata for MySQL</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This includes the type of the value, and whether it is signed.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MysqlTypeMetadata</span> {
-    <span class="doccomment">/// The underlying data type</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Affects the `buffer_type` sent to libmysqlclient</span>
-    <span class="kw">pub</span> <span class="ident">data_type</span>: <span class="ident">MysqlType</span>,
-
-    <span class="doccomment">/// Is this type signed?</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Affects the `is_unsigned` flag sent to libmysqlclient</span>
-    <span class="kw">pub</span> <span class="ident">is_unsigned</span>: <span class="ident">bool</span>,
-}
-
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_debug_implementations</span>)]</span>
-<span class="doccomment">/// Represents the possible forms a bind parameter can be transmitted as.</span>
-<span class="doccomment">/// Each variant represents one of the forms documented at</span>
-<span class="doccomment">/// &lt;https://dev.mysql.com/doc/refman/5.7/en/c-api-prepared-statement-type-codes.html&gt;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The null variant is omitted, as we will never prepare a statement in which</span>
-<span class="doccomment">/// one of the bind parameters can always be NULL</span>
+<span class="doccomment">/// Represents possible types, that can be transmitted as via the</span>
+<span class="doccomment">/// Mysql wire protocol</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">MysqlType</span> {
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_TINY`</span>
+    <span class="doccomment">/// A 8 bit signed integer</span>
     <span class="ident">Tiny</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_SHORT`</span>
+    <span class="doccomment">/// A 8 bit unsigned integer</span>
+    <span class="ident">UnsignedTiny</span>,
+    <span class="doccomment">/// A 16 bit signed integer</span>
     <span class="ident">Short</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_LONG`</span>
+    <span class="doccomment">/// A 16 bit unsigned integer</span>
+    <span class="ident">UnsignedShort</span>,
+    <span class="doccomment">/// A 32 bit signed integer</span>
     <span class="ident">Long</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_LONGLONG`</span>
+    <span class="doccomment">/// A 32 bit unsigned integer</span>
+    <span class="ident">UnsignedLong</span>,
+    <span class="doccomment">/// A 64 bit signed integer</span>
     <span class="ident">LongLong</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_FLOAT`</span>
+    <span class="doccomment">/// A 64 bit unsigned integer</span>
+    <span class="ident">UnsignedLongLong</span>,
+    <span class="doccomment">/// A 32 bit floating point number</span>
     <span class="ident">Float</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_DOUBLE`</span>
+    <span class="doccomment">/// A 64 bit floating point number</span>
     <span class="ident">Double</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_TIME`</span>
+    <span class="doccomment">/// A fixed point decimal value</span>
+    <span class="ident">Numeric</span>,
+    <span class="doccomment">/// A datatype to store a time value</span>
     <span class="ident">Time</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_DATE`</span>
+    <span class="doccomment">/// A datatype to store a date value</span>
     <span class="ident">Date</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_DATETIME`</span>
+    <span class="doccomment">/// A datatype containing timestamp values ranging from</span>
+    <span class="doccomment">/// &#39;1000-01-01 00:00:00&#39; to &#39;9999-12-31 23:59:59&#39;.</span>
     <span class="ident">DateTime</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_TIMESTAMP`</span>
+    <span class="doccomment">/// A datatype containing timestamp values ranging from</span>
+    <span class="doccomment">/// 1970-01-01 00:00:01&#39; UTC to &#39;2038-01-19 03:14:07&#39; UTC.</span>
     <span class="ident">Timestamp</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_STRING`</span>
+    <span class="doccomment">/// A datatype for string values</span>
     <span class="ident">String</span>,
-    <span class="doccomment">/// Sets `buffer_type` to `MYSQL_TYPE_BLOB`</span>
+    <span class="doccomment">/// A datatype containing binary large objects</span>
     <span class="ident">Blob</span>,
+    <span class="doccomment">/// A value containing a set of bit&#39;s</span>
+    <span class="ident">Bit</span>,
+    <span class="doccomment">/// A user defined set type</span>
+    <span class="ident">Set</span>,
+    <span class="doccomment">/// A user defined enum type</span>
+    <span class="ident">Enum</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Backend</span> <span class="kw">for</span> <span class="ident">Mysql</span> {
@@ -159,7 +155,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">TypeMetadata</span> <span class="kw">for</span> <span class="ident">Mysql</span> {
-    <span class="kw">type</span> <span class="ident">TypeMetadata</span> <span class="op">=</span> <span class="ident">MysqlTypeMetadata</span>;
+    <span class="kw">type</span> <span class="ident">TypeMetadata</span> <span class="op">=</span> <span class="ident">MysqlType</span>;
     <span class="kw">type</span> <span class="ident">MetadataLookup</span> <span class="op">=</span> ();
 }
 
