@@ -50,6 +50,7 @@ ALIASES["smallvec"] = {};
 ALIASES["syn"] = {};
 ALIASES["thread_local"] = {};
 ALIASES["time"] = {};
+ALIASES["tinyvec"] = {};
 ALIASES["unicode_bidi"] = {};
 ALIASES["unicode_normalization"] = {};
 ALIASES["unicode_xid"] = {};
