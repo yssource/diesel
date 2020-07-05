@@ -11,6 +11,7 @@ sourcesIndex["diesel_migrations"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["env_logger"] = {"name":"","dirs":[{"name":"filter","files":["mod.rs","regex.rs"]},{"name":"fmt","dirs":[{"name":"humantime","files":["mod.rs","shim_impl.rs"]},{"name":"writer","dirs":[{"name":"termcolor","files":["mod.rs","shim_impl.rs"]}],"files":["atty.rs","mod.rs"]}],"files":["mod.rs"]}],"files":["lib.rs"]};
 sourcesIndex["getrandom"] = {"name":"","files":["error.rs","error_impls.rs","lib.rs","linux_android.rs","use_file.rs","util.rs","util_libc.rs"]};
 sourcesIndex["idna"] = {"name":"","files":["lib.rs","punycode.rs","uts46.rs"]};
+sourcesIndex["instant"] = {"name":"","files":["lib.rs","native.rs"]};
 sourcesIndex["ipnetwork"] = {"name":"","files":["common.rs","ipv4.rs","ipv6.rs","lib.rs"]};
 sourcesIndex["itoa"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["lazy_static"] = {"name":"","files":["inline_lazy.rs","lib.rs"]};

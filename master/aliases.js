@@ -11,6 +11,7 @@ ALIASES["diesel_migrations"] = {};
 ALIASES["env_logger"] = {};
 ALIASES["getrandom"] = {};
 ALIASES["idna"] = {};
+ALIASES["instant"] = {};
 ALIASES["ipnetwork"] = {};
 ALIASES["itoa"] = {};
 ALIASES["lazy_static"] = {};
