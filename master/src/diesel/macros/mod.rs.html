@@ -1232,18 +1232,6 @@
 <span id="1232">1232</span>
 <span id="1233">1233</span>
 <span id="1234">1234</span>
-<span id="1235">1235</span>
-<span id="1236">1236</span>
-<span id="1237">1237</span>
-<span id="1238">1238</span>
-<span id="1239">1239</span>
-<span id="1240">1240</span>
-<span id="1241">1241</span>
-<span id="1242">1242</span>
-<span id="1243">1243</span>
-<span id="1244">1244</span>
-<span id="1245">1245</span>
-<span id="1246">1246</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_parens</span>)]</span> <span class="comment">// FIXME: Remove this attribute once false positive is resolved.</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">rustfmt</span>, <span class="ident">rustfmt_skip</span>)]</span> <span class="comment">// https://github.com/rust-lang-nursery/rustfmt/issues/2755</span>
@@ -1348,9 +1336,9 @@
 
         <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">EqAll</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span> <span class="kw">where</span>
             <span class="ident">T</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">AsExpression</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>)<span class="kw-2">*</span><span class="op">&gt;</span>,
-            <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Eq</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span>, <span class="ident">T</span><span class="op">&gt;</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span><span class="op">=</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span><span class="op">&gt;</span>,
+            <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Eq</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span><span class="op">=</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span><span class="op">&gt;</span>,
         {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Eq</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span><span class="op">&gt;</span>;
+            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Eq</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span>;
 
             <span class="kw">fn</span> <span class="ident">eq_all</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
                 <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">operators</span>::<span class="ident">Eq</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">rhs</span>.<span class="ident">as_expression</span>())
@@ -1427,6 +1415,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// # mod diesel_full_text_search {</span>
+<span class="doccomment">/// #     #[derive(diesel::sql_types::SqlType)]</span>
 <span class="doccomment">/// #     pub struct TsVector;</span>
 <span class="doccomment">/// # }</span>
 <span class="doccomment">///</span>
@@ -2066,7 +2055,7 @@
                 }
 
                 <span class="kw">impl</span> <span class="ident">Expression</span> <span class="kw">for</span> <span class="ident">star</span> {
-                    <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> ();
+                    <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">expression_types</span>::<span class="ident">NotSelectable</span>;
                 }
 
                 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">DB</span>: <span class="ident">Backend</span><span class="op">&gt;</span> <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">star</span> <span class="kw">where</span>
@@ -2304,19 +2293,6 @@
     () <span class="op">=</span><span class="op">&gt;</span> {};
 }
 
-<span class="doccomment">/// Gets the value out of an option, or returns an error.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This is used by `FromSql` implementations.</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">not_none</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bytes</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">bytes</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">bytes</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">bytes</span>,
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">result</span>::<span class="ident">UnexpectedNullError</span>)),
-        }
-    };
-}
-
 <span class="comment">// The order of these modules is important (at least for those which have tests).</span>
 <span class="comment">// Utility macros which don&#39;t call any others need to come first.</span>
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
@@ -2340,7 +2316,7 @@
     }
 
     <span class="kw">mod</span> <span class="ident">my_types</span> {
-        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
+        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">SqlType</span>)]</span>
         <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MyCustomType</span>;
     }
 
@@ -2388,11 +2364,11 @@
         <span class="ident">table_with_arbitrarily_complex_types</span> {
             <span class="ident">id</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sql_types</span>::<span class="ident">Integer</span>,
             <span class="ident">qualified_nullable</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">sql_types</span>::<span class="ident">Nullable</span><span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Integer</span><span class="op">&gt;</span>,
-            <span class="ident">deeply_nested_type</span> <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Nullable</span><span class="op">&lt;</span><span class="ident">Integer</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+            <span class="ident">deeply_nested_type</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Nullable</span><span class="op">&lt;</span><span class="ident">Nullable</span><span class="op">&lt;</span><span class="ident">Integer</span><span class="op">&gt;</span><span class="op">&gt;</span>,
             <span class="comment">// This actually should work, but there appears to be a rustc bug</span>
             <span class="comment">// on the `AsExpression` bound for `EqAll` when the ty param is a projection</span>
             <span class="comment">// projected_type -&gt; &lt;Nullable&lt;Integer&gt; as sql_types::IntoNullable&gt;::Nullable,</span>
-            <span class="ident">random_tuple</span> <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Integer</span>, <span class="ident">Integer</span>),
+            <span class="comment">//random_tuple -&gt; (Integer, Integer),</span>
         }
     }
 

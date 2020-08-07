@@ -138,10 +138,22 @@
 <span id="138">138</span>
 <span id="139">139</span>
 <span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">operators</span>::{<span class="ident">Concat</span>, <span class="ident">Like</span>, <span class="ident">NotLike</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::{<span class="ident">AsExpression</span>, <span class="ident">Expression</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">Nullable</span>, <span class="ident">Text</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">Nullable</span>, <span class="ident">SqlType</span>, <span class="ident">Text</span>};
 
 <span class="doccomment">/// Methods present on text expressions</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TextExpressionMethods</span>: <span class="ident">Expression</span> <span class="op">+</span> <span class="ident">Sized</span> {
@@ -195,7 +207,11 @@
     <span class="doccomment">/// assert_eq!(Ok(expected_names), names);</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">concat</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">SqlType</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Concat</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">concat</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Concat</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="self">Self</span>::<span class="ident">SqlType</span>: <span class="ident">SqlType</span>,
+        <span class="ident">T</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
+    {
         <span class="ident">Concat</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>.<span class="ident">as_expression</span>())
     }
 
@@ -227,8 +243,12 @@
     <span class="doccomment">/// #     Ok(())</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">like</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">SqlType</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Like</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span> {
-        <span class="ident">Like</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">as_expression</span>(), <span class="ident">other</span>.<span class="ident">as_expression</span>())
+    <span class="kw">fn</span> <span class="ident">like</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Like</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="self">Self</span>::<span class="ident">SqlType</span>: <span class="ident">SqlType</span>,
+        <span class="ident">T</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">Like</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>.<span class="ident">as_expression</span>())
     }
 
     <span class="doccomment">/// Returns a SQL `NOT LIKE` expression</span>
@@ -259,8 +279,12 @@
     <span class="doccomment">/// #     Ok(())</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">not_like</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">SqlType</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NotLike</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span> {
-        <span class="ident">NotLike</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">as_expression</span>(), <span class="ident">other</span>.<span class="ident">as_expression</span>())
+    <span class="kw">fn</span> <span class="ident">not_like</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NotLike</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="self">Self</span>::<span class="ident">SqlType</span>: <span class="ident">SqlType</span>,
+        <span class="ident">T</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">NotLike</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>.<span class="ident">as_expression</span>())
     }
 }
 

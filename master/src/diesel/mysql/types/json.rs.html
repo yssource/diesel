@@ -53,8 +53,6 @@
 <span id="53">53</span>
 <span id="54">54</span>
 <span id="55">55</span>
-<span id="56">56</span>
-<span id="57">57</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::{<span class="self">self</span>, <span class="ident">FromSql</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">mysql</span>::{<span class="ident">Mysql</span>, <span class="ident">MysqlValue</span>};
@@ -63,8 +61,7 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Mysql</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">serde_json</span>::<span class="ident">Value</span> {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="macro">not_none</span><span class="macro">!</span>(<span class="ident">value</span>);
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="ident">serde_json</span>::<span class="ident">from_slice</span>(<span class="ident">value</span>.<span class="ident">as_bytes</span>()).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="string">&quot;Invalid Json&quot;</span>.<span class="ident">into</span>())
     }
 }
@@ -89,25 +86,24 @@
 <span class="kw">fn</span> <span class="ident">some_json_from_sql</span>() {
     <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">mysql</span>::<span class="ident">MysqlType</span>;
     <span class="kw">let</span> <span class="ident">input_json</span> <span class="op">=</span> <span class="string">b&quot;true&quot;</span>;
-    <span class="kw">let</span> <span class="ident">output_json</span>: <span class="ident">serde_json</span>::<span class="ident">Value</span> <span class="op">=</span> <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Mysql</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">Some</span>(
-        <span class="ident">MysqlValue</span>::<span class="ident">new</span>(<span class="ident">input_json</span>, <span class="ident">MysqlType</span>::<span class="ident">String</span>),
-    ))
-    .<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">output_json</span>: <span class="ident">serde_json</span>::<span class="ident">Value</span> <span class="op">=</span>
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Mysql</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">MysqlValue</span>::<span class="ident">new</span>(<span class="ident">input_json</span>, <span class="ident">MysqlType</span>::<span class="ident">String</span>))
+            .<span class="ident">unwrap</span>();
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">output_json</span>, <span class="ident">serde_json</span>::<span class="ident">Value</span>::<span class="ident">Bool</span>(<span class="bool-val">true</span>));
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">bad_json_from_sql</span>() {
     <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">mysql</span>::<span class="ident">MysqlType</span>;
-    <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Mysql</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">Some</span>(
-        <span class="ident">MysqlValue</span>::<span class="ident">new</span>(<span class="string">b&quot;boom&quot;</span>, <span class="ident">MysqlType</span>::<span class="ident">String</span>),
-    ));
+    <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span>
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Mysql</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">MysqlValue</span>::<span class="ident">new</span>(<span class="string">b&quot;boom&quot;</span>, <span class="ident">MysqlType</span>::<span class="ident">String</span>));
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">uuid</span>.<span class="ident">unwrap_err</span>().<span class="ident">to_string</span>(), <span class="string">&quot;Invalid Json&quot;</span>);
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">no_json_from_sql</span>() {
-    <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Mysql</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">None</span>);
+    <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span>
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Mysql</span><span class="op">&gt;</span>::<span class="ident">from_nullable_sql</span>(<span class="prelude-val">None</span>);
     <span class="macro">assert_eq</span><span class="macro">!</span>(
         <span class="ident">uuid</span>.<span class="ident">unwrap_err</span>().<span class="ident">to_string</span>(),
         <span class="string">&quot;Unexpected null for non-null column&quot;</span>

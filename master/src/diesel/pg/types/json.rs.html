@@ -130,8 +130,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>;
 
 <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Pg</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">serde_json</span>::<span class="ident">Value</span> {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PgValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="macro">not_none</span><span class="macro">!</span>(<span class="ident">value</span>);
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="ident">PgValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="ident">serde_json</span>::<span class="ident">from_slice</span>(<span class="ident">value</span>.<span class="ident">as_bytes</span>()).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="string">&quot;Invalid Json&quot;</span>.<span class="ident">into</span>())
     }
 }
@@ -145,8 +144,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Jsonb</span>, <span class="ident">Pg</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">serde_json</span>::<span class="ident">Value</span> {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PgValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="macro">not_none</span><span class="macro">!</span>(<span class="ident">value</span>);
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="ident">PgValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">as_bytes</span>();
         <span class="kw">if</span> <span class="ident">bytes</span>[<span class="number">0</span>] <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="string">&quot;Unsupported JSONB encoding version&quot;</span>.<span class="ident">into</span>());
@@ -176,20 +174,21 @@
 <span class="kw">fn</span> <span class="ident">some_json_from_sql</span>() {
     <span class="kw">let</span> <span class="ident">input_json</span> <span class="op">=</span> <span class="string">b&quot;true&quot;</span>;
     <span class="kw">let</span> <span class="ident">output_json</span>: <span class="ident">serde_json</span>::<span class="ident">Value</span> <span class="op">=</span>
-        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">Some</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="ident">input_json</span>))).<span class="ident">unwrap</span>();
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="ident">input_json</span>)).<span class="ident">unwrap</span>();
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">output_json</span>, <span class="ident">serde_json</span>::<span class="ident">Value</span>::<span class="ident">Bool</span>(<span class="bool-val">true</span>));
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">bad_json_from_sql</span>() {
     <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span>
-        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">Some</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="string">b&quot;boom&quot;</span>)));
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="string">b&quot;boom&quot;</span>));
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">uuid</span>.<span class="ident">unwrap_err</span>().<span class="ident">to_string</span>(), <span class="string">&quot;Invalid Json&quot;</span>);
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">no_json_from_sql</span>() {
-    <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">None</span>);
+    <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span>
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Json</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_nullable_sql</span>(<span class="prelude-val">None</span>);
     <span class="macro">assert_eq</span><span class="macro">!</span>(
         <span class="ident">uuid</span>.<span class="ident">unwrap_err</span>().<span class="ident">to_string</span>(),
         <span class="string">&quot;Unexpected null for non-null column&quot;</span>
@@ -208,21 +207,21 @@
 <span class="kw">fn</span> <span class="ident">some_jsonb_from_sql</span>() {
     <span class="kw">let</span> <span class="ident">input_json</span> <span class="op">=</span> <span class="string">b&quot;\x01true&quot;</span>;
     <span class="kw">let</span> <span class="ident">output_json</span>: <span class="ident">serde_json</span>::<span class="ident">Value</span> <span class="op">=</span>
-        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Jsonb</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">Some</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="ident">input_json</span>))).<span class="ident">unwrap</span>();
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Jsonb</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="ident">input_json</span>)).<span class="ident">unwrap</span>();
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">output_json</span>, <span class="ident">serde_json</span>::<span class="ident">Value</span>::<span class="ident">Bool</span>(<span class="bool-val">true</span>));
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">bad_jsonb_from_sql</span>() {
     <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span>
-        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Jsonb</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">Some</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="string">b&quot;\x01boom&quot;</span>)));
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Jsonb</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="string">b&quot;\x01boom&quot;</span>));
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">uuid</span>.<span class="ident">unwrap_err</span>().<span class="ident">to_string</span>(), <span class="string">&quot;Invalid Json&quot;</span>);
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">bad_jsonb_version_from_sql</span>() {
     <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span>
-        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Jsonb</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">Some</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="string">b&quot;\x02true&quot;</span>)));
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Jsonb</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">PgValue</span>::<span class="ident">for_test</span>(<span class="string">b&quot;\x02true&quot;</span>));
     <span class="macro">assert_eq</span><span class="macro">!</span>(
         <span class="ident">uuid</span>.<span class="ident">unwrap_err</span>().<span class="ident">to_string</span>(),
         <span class="string">&quot;Unsupported JSONB encoding version&quot;</span>
@@ -231,7 +230,8 @@
 
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">no_jsonb_from_sql</span>() {
-    <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Jsonb</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="prelude-val">None</span>);
+    <span class="kw">let</span> <span class="ident">uuid</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">serde_json</span>::<span class="ident">Value</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span>
+        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Jsonb</span>, <span class="ident">Pg</span><span class="op">&gt;</span>::<span class="ident">from_nullable_sql</span>(<span class="prelude-val">None</span>);
     <span class="macro">assert_eq</span><span class="macro">!</span>(
         <span class="ident">uuid</span>.<span class="ident">unwrap_err</span>().<span class="ident">to_string</span>(),
         <span class="string">&quot;Unexpected null for non-null column&quot;</span>

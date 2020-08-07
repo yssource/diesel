@@ -29,10 +29,10 @@
 <span id="29">29</span>
 <span id="30">30</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="self">self</span>, <span class="ident">NotNull</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="self">self</span>, <span class="ident">is_nullable</span>, <span class="ident">SqlType</span>};
 
 <span class="doccomment">/// Marker trait for types which can be used with `MAX` and `MIN`</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SqlOrd</span> {}
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SqlOrd</span>: <span class="ident">SqlType</span> {}
 
 <span class="kw">impl</span> <span class="ident">SqlOrd</span> <span class="kw">for</span> <span class="ident">sql_types</span>::<span class="ident">SmallInt</span> {}
 <span class="kw">impl</span> <span class="ident">SqlOrd</span> <span class="kw">for</span> <span class="ident">sql_types</span>::<span class="ident">Integer</span> {}
@@ -44,7 +44,7 @@
 <span class="kw">impl</span> <span class="ident">SqlOrd</span> <span class="kw">for</span> <span class="ident">sql_types</span>::<span class="ident">Interval</span> {}
 <span class="kw">impl</span> <span class="ident">SqlOrd</span> <span class="kw">for</span> <span class="ident">sql_types</span>::<span class="ident">Time</span> {}
 <span class="kw">impl</span> <span class="ident">SqlOrd</span> <span class="kw">for</span> <span class="ident">sql_types</span>::<span class="ident">Timestamp</span> {}
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">SqlOrd</span> <span class="op">+</span> <span class="ident">NotNull</span><span class="op">&gt;</span> <span class="ident">SqlOrd</span> <span class="kw">for</span> <span class="ident">sql_types</span>::<span class="ident">Nullable</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">SqlOrd</span> <span class="kw">for</span> <span class="ident">sql_types</span>::<span class="ident">Nullable</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">SqlOrd</span> <span class="op">+</span> <span class="ident">SqlType</span><span class="op">&lt;</span><span class="ident">IsNull</span> <span class="op">=</span> <span class="ident">is_nullable</span>::<span class="ident">NotNull</span><span class="op">&gt;</span> {}
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;postgres&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">SqlOrd</span> <span class="kw">for</span> <span class="ident">sql_types</span>::<span class="ident">Timestamptz</span> {}

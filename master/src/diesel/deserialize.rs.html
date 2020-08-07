@@ -371,6 +371,75 @@
 <span id="371">371</span>
 <span id="372">372</span>
 <span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Types and traits related to deserializing values from the database</span>
 
@@ -379,6 +448,7 @@
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::{<span class="self">self</span>, <span class="ident">Backend</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">row</span>::{<span class="ident">NamedRow</span>, <span class="ident">Row</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">SingleValue</span>, <span class="ident">SqlType</span>, <span class="ident">Untyped</span>};
 
 <span class="doccomment">/// A specialized result type representing the result of deserializing</span>
 <span class="doccomment">/// a value from the database.</span>
@@ -430,7 +500,8 @@
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// # use schema::users;</span>
 <span class="doccomment">/// # use diesel::backend::{self, Backend};</span>
-<span class="doccomment">/// # use diesel::deserialize::Queryable;</span>
+<span class="doccomment">/// # use diesel::deserialize::{Queryable, FromSql};</span>
+<span class="doccomment">/// # use diesel::sql_types::Text;</span>
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// struct LowercaseString(String);</span>
 <span class="doccomment">///</span>
@@ -440,15 +511,15 @@
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// impl&lt;DB, ST&gt; Queryable&lt;ST, DB&gt; for LowercaseString</span>
+<span class="doccomment">/// impl&lt;DB&gt; Queryable&lt;Text, DB&gt; for LowercaseString</span>
 <span class="doccomment">/// where</span>
 <span class="doccomment">///     DB: Backend,</span>
-<span class="doccomment">///     String: Queryable&lt;ST, DB&gt;,</span>
+<span class="doccomment">///     String: FromSql&lt;Text, DB&gt;,</span>
 <span class="doccomment">/// {</span>
-<span class="doccomment">///     type Row = &lt;String as Queryable&lt;ST, DB&gt;&gt;::Row;</span>
+<span class="doccomment">///     type Row = String;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     fn build(row: Self::Row) -&gt; Self {</span>
-<span class="doccomment">///         LowercaseString(String::build(row).to_lowercase())</span>
+<span class="doccomment">///     fn build(s: String) -&gt; Self {</span>
+<span class="doccomment">///         LowercaseString(s.to_lowercase())</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
@@ -522,7 +593,7 @@
     <span class="doccomment">/// The Rust type you&#39;d like to map from.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is typically a tuple of all of your struct&#39;s fields.</span>
-    <span class="kw">type</span> <span class="ident">Row</span>: <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Row</span>: <span class="ident">FromStaticSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Construct an instance of this type</span>
     <span class="kw">fn</span> <span class="ident">build</span>(<span class="ident">row</span>: <span class="self">Self</span>::<span class="ident">Row</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
@@ -590,7 +661,7 @@
 <span class="doccomment">///     DB: Backend,</span>
 <span class="doccomment">///     String: FromSql&lt;ST, DB&gt;,</span>
 <span class="doccomment">/// {</span>
-<span class="doccomment">///     fn from_sql(bytes: Option&lt;backend::RawValue&lt;DB&gt;&gt;) -&gt; deserialize::Result&lt;Self&gt; {</span>
+<span class="doccomment">///     fn from_sql(bytes: backend::RawValue&lt;DB&gt;) -&gt; deserialize::Result&lt;Self&gt; {</span>
 <span class="doccomment">///         String::from_sql(bytes)</span>
 <span class="doccomment">///             .map(|s| LowercaseString(s.to_lowercase()))</span>
 <span class="doccomment">///     }</span>
@@ -623,7 +694,7 @@
     <span class="ident">DB</span>: <span class="ident">Backend</span>,
 {
     <span class="doccomment">/// Construct an instance of `Self` from the database row</span>
-    <span class="kw">fn</span> <span class="ident">build</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">NamedRow</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">build</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">NamedRow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
 }
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
@@ -634,7 +705,8 @@
 <span class="doccomment">/// When possible, implementations of this trait should prefer to use an</span>
 <span class="doccomment">/// existing implementation, rather than reading from `bytes`. (For example, if</span>
 <span class="doccomment">/// you are implementing this for an enum which is represented as an integer in</span>
-<span class="doccomment">/// the database, prefer `i32::from_sql(bytes)` over reading from `bytes`</span>
+<span class="doccomment">/// the database, prefer `i32::from_sql(bytes)` (or the explicit form</span>
+<span class="doccomment">/// `&lt;i32 as FromSql&lt;Integer, DB&gt;&gt;::from_sql(bytes)`) over reading from `bytes`</span>
 <span class="doccomment">/// directly)</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Types which implement this trait should also have `#[derive(FromSqlRow)]`</span>
@@ -659,10 +731,10 @@
 <span class="doccomment">/// ```rust</span>
 <span class="doccomment">/// # use diesel::backend::{self, Backend};</span>
 <span class="doccomment">/// # use diesel::sql_types::*;</span>
-<span class="doccomment">/// # use diesel::deserialize::{self, FromSql};</span>
+<span class="doccomment">/// # use diesel::deserialize::{self, FromSql, FromSqlRow};</span>
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// #[repr(i32)]</span>
-<span class="doccomment">/// #[derive(Debug, Clone, Copy)]</span>
+<span class="doccomment">/// #[derive(Debug, Clone, Copy, FromSqlRow)]</span>
 <span class="doccomment">/// pub enum MyEnum {</span>
 <span class="doccomment">///     A = 1,</span>
 <span class="doccomment">///     B = 2,</span>
@@ -673,7 +745,7 @@
 <span class="doccomment">///     DB: Backend,</span>
 <span class="doccomment">///     i32: FromSql&lt;Integer, DB&gt;,</span>
 <span class="doccomment">/// {</span>
-<span class="doccomment">///     fn from_sql(bytes: Option&lt;backend::RawValue&lt;DB&gt;&gt;) -&gt; deserialize::Result&lt;Self&gt; {</span>
+<span class="doccomment">///     fn from_sql(bytes: backend::RawValue&lt;DB&gt;) -&gt; deserialize::Result&lt;Self&gt; {</span>
 <span class="doccomment">///         match i32::from_sql(bytes)? {</span>
 <span class="doccomment">///             1 =&gt; Ok(MyEnum::A),</span>
 <span class="doccomment">///             2 =&gt; Ok(MyEnum::B),</span>
@@ -684,66 +756,132 @@
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">DB</span>: <span class="ident">Backend</span><span class="op">&gt;</span>: <span class="ident">Sized</span> {
     <span class="doccomment">/// See the trait documentation.</span>
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
+
+    <span class="doccomment">/// A specialized variant of `from_sql` for handling null values.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The default implementation returns an `UnexpectedNullError` for</span>
+    <span class="doccomment">/// an encountered null value and calls `Self::from_sql` otherwise</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If your custom type supports null values you need to provide a</span>
+    <span class="doccomment">/// custom implementation.</span>
+    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">from_nullable_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">match</span> <span class="ident">bytes</span> {
+            <span class="prelude-val">Some</span>(<span class="ident">bytes</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">from_sql</span>(<span class="ident">bytes</span>),
+            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">UnexpectedNullError</span>)),
+        }
+    }
 }
 
-<span class="doccomment">/// Deserialize one or more fields.</span>
+<span class="doccomment">/// Deserialize a database row into a rust data structure</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// All types which implement `FromSql` should also implement this trait. This</span>
-<span class="doccomment">/// trait differs from `FromSql` in that it is also implemented by tuples.</span>
-<span class="doccomment">/// Implementations of this trait are usually derived.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// In the future, we hope to be able to provide a blanket impl of this trait</span>
-<span class="doccomment">/// for all types which implement `FromSql`. However, as of Diesel 1.0, such an</span>
-<span class="doccomment">/// impl would conflict with our impl for tuples.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This trait can be [derived](derive.FromSqlRow.html)</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">DB</span>: <span class="ident">Backend</span><span class="op">&gt;</span>: <span class="ident">Sized</span> {
-    <span class="doccomment">/// The number of fields that this type will consume. Must be equal to</span>
-    <span class="doccomment">/// the number of times you would call `row.take()` in `build_from_row`</span>
-    <span class="kw">const</span> <span class="ident">FIELDS_NEEDED</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1</span>;
-
+<span class="doccomment">/// Diesel provides wild card implementations of this trait for all types</span>
+<span class="doccomment">/// that implement one of the following traits:</span>
+<span class="doccomment">///    * [`Queryable`](trait.Queryable.html)</span>
+<span class="doccomment">///    * [`QueryableByName`](trait.QueryableByName.html)</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span>: <span class="ident">Backend</span><span class="op">&gt;</span>: <span class="ident">Sized</span> {
     <span class="doccomment">/// See the trait documentation.</span>
-    <span class="kw">fn</span> <span class="ident">build_from_row</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Row</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">build_from_row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
 }
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">diesel_derives</span>::<span class="ident">FromSqlRow</span>;
 
-<span class="comment">// Reasons we can&#39;t write this:</span>
-<span class="comment">//</span>
-<span class="comment">// impl&lt;T, ST, DB&gt; FromSqlRow&lt;ST, DB&gt; for T</span>
-<span class="comment">// where</span>
-<span class="comment">//     DB: Backend + HasSqlType&lt;ST&gt;,</span>
-<span class="comment">//     T: FromSql&lt;ST, DB&gt;,</span>
-<span class="comment">// {</span>
-<span class="comment">//     fn build_from_row&lt;T: Row&lt;DB&gt;&gt;(row: &amp;mut T) -&gt; Result&lt;Self&gt; {</span>
-<span class="comment">//         Self::from_sql(row.take())</span>
-<span class="comment">//     }</span>
-<span class="comment">// }</span>
-<span class="comment">//</span>
-<span class="comment">// (this is mostly here so @sgrif has a better reference every time they think</span>
-<span class="comment">// they&#39;ve somehow had a breakthrough on solving this problem):</span>
-<span class="comment">//</span>
-<span class="comment">// - It conflicts with our impl for tuples, because `DB` is a bare type</span>
-<span class="comment">//   parameter, it could in theory be a local type for some other impl.</span>
-<span class="comment">//   - This is fixed by replacing our impl with 3 impls, where `DB` is changed</span>
-<span class="comment">//     concrete backends. This would mean that any third party crates adding new</span>
-<span class="comment">//     backends would need to add the tuple impls, which sucks but is fine.</span>
-<span class="comment">// - It conflicts with our impl for `Option`</span>
-<span class="comment">//   - So we could in theory fix this by both splitting the generic impl into</span>
-<span class="comment">//     backend specific impls, and removing the `FromSql` impls. In theory there</span>
-<span class="comment">//     is no reason that it needs to implement `FromSql`, since everything</span>
-<span class="comment">//     requires `FromSqlRow`, but it really feels like it should.</span>
-<span class="comment">//   - Specialization might also fix this one. The impl isn&#39;t quite a strict</span>
-<span class="comment">//     subset (the `FromSql` impl has `T: FromSql`, and the `FromSqlRow` impl</span>
-<span class="comment">//     has `T: FromSqlRow`), but if `FromSql` implies `FromSqlRow`,</span>
-<span class="comment">//     specialization might consider that a subset?</span>
-<span class="comment">// - I don&#39;t know that we really need it. `#[derive(FromSqlRow)]` is probably</span>
-<span class="comment">//   good enough. That won&#39;t improve our own codebase, since 99% of our</span>
-<span class="comment">//   `FromSqlRow` impls are for types from another crate, but it&#39;s almost</span>
-<span class="comment">//   certainly good enough for user types.</span>
-<span class="comment">//   - Still, it really feels like `FromSql` *should* be able to imply both</span>
-<span class="comment">//   `FromSqlRow` and `Queryable`</span>
+<span class="doccomment">/// A marker trait indicating that the corresponding type consumes a static at</span>
+<span class="doccomment">/// compile time known number of field</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// There is normally no need to implement this trait. Diesel provides</span>
+<span class="doccomment">/// wild card impls for all types that implement `FromSql&lt;ST, DB&gt;` or `Queryable&lt;ST, DB&gt;`</span>
+<span class="doccomment">/// where the size of `ST` is known</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">StaticallySizedRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span>: <span class="ident">Backend</span><span class="op">&gt;</span>: <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// The number of fields that this type will consume.</span>
+    <span class="kw">const</span> <span class="ident">FIELD_COUNT</span>: <span class="ident">usize</span>;
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">DB</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">Untyped</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span>
+<span class="kw">where</span>
+    <span class="ident">DB</span>: <span class="ident">Backend</span>,
+    <span class="ident">T</span>: <span class="ident">QueryableByName</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
+{
+    <span class="kw">fn</span> <span class="ident">build_from_row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="ident">T</span>::<span class="ident">build</span>(<span class="ident">row</span>)
+    }
+}
+
+<span class="doccomment">/// A helper trait to deserialize a statically sized row into an tuple</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// **If you see an error message mentioning this trait you likly</span>
+<span class="doccomment">///   trying to map the result of an query to an struct with missmatching</span>
+<span class="doccomment">///   field types. Recheck your field order and the concrete field types**</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// You should not need to implement this trait directly.</span>
+<span class="doccomment">/// Diesel provides wild card implementations for any supported tuple size</span>
+<span class="doccomment">/// and for any type that implements `FromSql&lt;ST, DB&gt;`.</span>
+<span class="doccomment">///</span>
+<span class="comment">// This is a distinct trait from `FromSqlRow` because otherwise we</span>
+<span class="comment">// are getting conflicting implementation errors for our `FromSqlRow`</span>
+<span class="comment">// implementation for tuples and our wild card impl for all types</span>
+<span class="comment">// implementing `Queryable`</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">FromStaticSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span>: <span class="ident">Backend</span><span class="op">&gt;</span>: <span class="ident">Sized</span> {
+    <span class="doccomment">/// See the trait documentation</span>
+    <span class="kw">fn</span> <span class="ident">build_from_row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span>
+<span class="kw">where</span>
+    <span class="ident">T</span>: <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="ident">ST</span>: <span class="ident">SqlType</span>,
+    <span class="ident">DB</span>: <span class="ident">Backend</span>,
+    <span class="ident">T</span>::<span class="ident">Row</span>: <span class="ident">FromStaticSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
+{
+    <span class="kw">fn</span> <span class="ident">build_from_row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">row</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">Row</span> <span class="kw">as</span> <span class="ident">FromStaticSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">build_from_row</span>(<span class="ident">row</span>)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">T</span>::<span class="ident">build</span>(<span class="ident">row</span>))
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="ident">FromStaticSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span>
+<span class="kw">where</span>
+    <span class="ident">DB</span>: <span class="ident">Backend</span>,
+    <span class="ident">T</span>: <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="ident">ST</span>: <span class="ident">SingleValue</span>,
+{
+    <span class="kw">fn</span> <span class="ident">build_from_row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">row</span>::<span class="ident">Field</span>;
+
+        <span class="kw">let</span> <span class="ident">field</span> <span class="op">=</span> <span class="ident">row</span>.<span class="ident">get</span>(<span class="number">0</span>).<span class="ident">ok_or</span>(<span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">UnexpectedEndOfRow</span>)<span class="question-mark">?</span>;
+        <span class="ident">T</span>::<span class="ident">from_nullable_sql</span>(<span class="ident">field</span>.<span class="ident">value</span>())
+    }
+}
+
+<span class="comment">// We cannot have this impl because rustc</span>
+<span class="comment">// then complains in third party crates that</span>
+<span class="comment">// diesel may implement `SingleValue` for tuples</span>
+<span class="comment">// in the future. While that is theoretically true,</span>
+<span class="comment">// that will likly not happen in practice.</span>
+<span class="comment">// If we get negative trait impls at some point in time</span>
+<span class="comment">// it should be possible to make this work.</span>
+<span class="comment">/*impl&lt;T, ST, DB&gt; Queryable&lt;ST, DB&gt; for T
+where
+    DB: Backend,
+    T: FromStaticSqlRow&lt;ST, DB&gt;,
+    ST: SingleValue,
+{
+    type Row = Self;
+
+    fn build(row: Self::Row) -&gt; Self {
+        row
+    }
+}*/</span>
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="ident">StaticallySizedRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span>
+<span class="kw">where</span>
+    <span class="ident">ST</span>: <span class="ident">SqlType</span> <span class="op">+</span> <span class="kw">crate</span>::<span class="ident">type_impls</span>::<span class="ident">tuples</span>::<span class="ident">TupleSize</span>,
+    <span class="ident">T</span>: <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="ident">DB</span>: <span class="ident">Backend</span>,
+{
+    <span class="kw">const</span> <span class="ident">FIELD_COUNT</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">ST</span> <span class="kw">as</span> <span class="kw">crate</span>::<span class="ident">type_impls</span>::<span class="ident">tuples</span>::<span class="ident">TupleSize</span><span class="op">&gt;</span>::<span class="ident">SIZE</span>;
+}
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "diesel";</script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>

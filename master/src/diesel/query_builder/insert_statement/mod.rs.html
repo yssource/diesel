@@ -774,8 +774,8 @@
         <span class="ident">columns</span>: <span class="ident">C2</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">InsertStatement</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">InsertFromSelect</span><span class="op">&lt;</span><span class="ident">U</span>, <span class="ident">C2</span><span class="op">&gt;</span>, <span class="ident">Op</span>, <span class="ident">Ret</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">C2</span>: <span class="ident">ColumnList</span><span class="op">&lt;</span><span class="ident">Table</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">U</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
-        <span class="ident">U</span>: <span class="ident">Query</span>,
+        <span class="ident">C2</span>: <span class="ident">ColumnList</span><span class="op">&lt;</span><span class="ident">Table</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Expression</span>,
+        <span class="ident">U</span>: <span class="ident">Query</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">C2</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
     {
         <span class="ident">InsertStatement</span>::<span class="ident">new</span>(
             <span class="self">self</span>.<span class="ident">target</span>,

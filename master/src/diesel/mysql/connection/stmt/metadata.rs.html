@@ -50,57 +50,73 @@
 <span id="50">50</span>
 <span id="51">51</span>
 <span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">NonNull</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">slice</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">ffi</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">mysql</span>::<span class="ident">connection</span>::<span class="ident">bind</span>::<span class="ident">Flags</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StatementMetadata</span> {
-    <span class="ident">result</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">MYSQL_RES</span>,
-    <span class="ident">column_indices</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>, <span class="ident">usize</span><span class="op">&gt;</span>,
+    <span class="ident">result</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">MYSQL_RES</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">StatementMetadata</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">result</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">StatementMetadata</span> {
-            <span class="ident">column_indices</span>: <span class="ident">HashMap</span>::<span class="ident">new</span>(),
-            <span class="ident">result</span>,
-        };
-        <span class="ident">res</span>.<span class="ident">populate_column_indices</span>();
-        <span class="ident">res</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">result</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">MYSQL_RES</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">StatementMetadata</span> { <span class="ident">result</span> }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fields</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">ffi</span>::<span class="ident">MYSQL_FIELD</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fields</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;_</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;_</span> [<span class="ident">MysqlFieldMetadata</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>] {
         <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">result</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
-            <span class="kw">let</span> <span class="ident">num_fields</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">mysql_num_fields</span>(<span class="ident">ptr</span>);
-            <span class="kw">let</span> <span class="ident">field_ptr</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">mysql_fetch_fields</span>(<span class="ident">ptr</span>);
-            <span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">field_ptr</span>, <span class="ident">num_fields</span> <span class="kw">as</span> <span class="ident">usize</span>)
+            <span class="kw">let</span> <span class="ident">num_fields</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">mysql_num_fields</span>(<span class="self">self</span>.<span class="ident">result</span>.<span class="ident">as_ptr</span>());
+            <span class="kw">let</span> <span class="ident">field_ptr</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">mysql_fetch_fields</span>(<span class="self">self</span>.<span class="ident">result</span>.<span class="ident">as_ptr</span>());
+            <span class="kw">if</span> <span class="ident">field_ptr</span>.<span class="ident">is_null</span>() {
+                <span class="kw-2">&amp;</span>[]
+            } <span class="kw">else</span> {
+                <span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">field_ptr</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">num_fields</span> <span class="kw">as</span> <span class="ident">usize</span>)
+            }
         }
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">column_indices</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">column_indices</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">populate_column_indices</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">column_indices</span> <span class="op">=</span> <span class="self">self</span>
-            .<span class="ident">fields</span>()
-            .<span class="ident">iter</span>()
-            .<span class="ident">enumerate</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="ident">field</span>)<span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">c_name</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">field</span>.<span class="ident">name</span>) };
-                (<span class="ident">c_name</span>.<span class="ident">to_str</span>().<span class="ident">unwrap_or_default</span>(), <span class="ident">i</span>)
-            })
-            .<span class="ident">collect</span>()
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">StatementMetadata</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-        <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">mysql_free_result</span>(<span class="self">self</span>.<span class="ident">result</span>) };
+        <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">mysql_free_result</span>(<span class="self">self</span>.<span class="ident">result</span>.<span class="ident">as_mut</span>()) };
+    }
+}
+
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MysqlFieldMetadata</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">ffi</span>::<span class="ident">MYSQL_FIELD</span>, <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> ()<span class="op">&gt;</span>);
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">MysqlFieldMetadata</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">field_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">name</span>.<span class="ident">is_null</span>() {
+            <span class="prelude-val">None</span>
+        } <span class="kw">else</span> {
+            <span class="kw">unsafe</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">name</span>).<span class="ident">to_str</span>().<span class="ident">expect</span>(
+                    <span class="string">&quot;Expect mysql field names to be UTF-8, because we \
+                     requested UTF-8 encoding on connection setup&quot;</span>,
+                ))
+            }
+        }
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">field_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ffi</span>::<span class="ident">enum_field_types</span> {
+        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">type_</span>
+    }
+
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">flags</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Flags</span> {
+        <span class="ident">Flags</span>::<span class="ident">from</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">flags</span>)
     }
 }
 </pre></div>

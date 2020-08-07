@@ -59,10 +59,10 @@
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">RunQueryDsl</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">connection</span>::<span class="ident">Connection</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::<span class="ident">Queryable</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::<span class="ident">FromSqlRow</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">QueryMetadata</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">AsQuery</span>, <span class="ident">QueryFragment</span>, <span class="ident">QueryId</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">QueryResult</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">HasSqlType</span>;
 
 <span class="doccomment">/// The `load` method</span>
 <span class="doccomment">///</span>
@@ -79,13 +79,13 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Conn</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">LoadQuery</span><span class="op">&lt;</span><span class="ident">Conn</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span>
 <span class="kw">where</span>
     <span class="ident">Conn</span>: <span class="ident">Connection</span>,
-    <span class="ident">Conn</span>::<span class="ident">Backend</span>: <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
     <span class="ident">T</span>: <span class="ident">AsQuery</span> <span class="op">+</span> <span class="ident">RunQueryDsl</span><span class="op">&lt;</span><span class="ident">Conn</span><span class="op">&gt;</span>,
     <span class="ident">T</span>::<span class="ident">Query</span>: <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">Conn</span>::<span class="ident">Backend</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">QueryId</span>,
-    <span class="ident">U</span>: <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span>, <span class="ident">Conn</span>::<span class="ident">Backend</span><span class="op">&gt;</span>,
+    <span class="ident">U</span>: <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span>, <span class="ident">Conn</span>::<span class="ident">Backend</span><span class="op">&gt;</span>,
+    <span class="ident">Conn</span>::<span class="ident">Backend</span>: <span class="ident">QueryMetadata</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
 {
     <span class="kw">fn</span> <span class="ident">internal_load</span>(<span class="self">self</span>, <span class="ident">conn</span>: <span class="kw-2">&amp;</span><span class="ident">Conn</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">conn</span>.<span class="ident">query_by_index</span>(<span class="self">self</span>)
+        <span class="ident">conn</span>.<span class="ident">load</span>(<span class="self">self</span>)
     }
 }
 

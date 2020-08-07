@@ -239,33 +239,21 @@
 <span id="239">239</span>
 <span id="240">240</span>
 <span id="241">241</span>
-<span id="242">242</span>
-<span id="243">243</span>
-<span id="244">244</span>
-<span id="245">245</span>
-<span id="246">246</span>
-<span id="247">247</span>
-<span id="248">248</span>
-<span id="249">249</span>
-<span id="250">250</span>
-<span id="251">251</span>
-<span id="252">252</span>
-<span id="253">253</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">byteorder</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Write</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">num</span>::<span class="ident">NonZeroU32</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::{<span class="self">self</span>, <span class="ident">FromSql</span>, <span class="ident">FromSqlRow</span>, <span class="ident">Queryable</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::{<span class="self">self</span>, <span class="ident">FromSql</span>, <span class="ident">Queryable</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::{
-    <span class="ident">AppearsOnTable</span>, <span class="ident">AsExpression</span>, <span class="ident">Expression</span>, <span class="ident">SelectableExpression</span>, <span class="ident">ValidGrouping</span>,
+    <span class="ident">AppearsOnTable</span>, <span class="ident">AsExpression</span>, <span class="ident">Expression</span>, <span class="ident">SelectableExpression</span>, <span class="ident">TypedExpressionType</span>,
+    <span class="ident">ValidGrouping</span>,
 };
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">pg</span>::{<span class="ident">Pg</span>, <span class="ident">PgValue</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">AstPass</span>, <span class="ident">QueryFragment</span>, <span class="ident">QueryId</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">QueryResult</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">row</span>::<span class="ident">Row</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">serialize</span>::{<span class="self">self</span>, <span class="ident">IsNull</span>, <span class="ident">Output</span>, <span class="ident">ToSql</span>, <span class="ident">WriteTuple</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">HasSqlType</span>, <span class="ident">Record</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">HasSqlType</span>, <span class="ident">Record</span>, <span class="ident">SqlType</span>};
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">tuple_impls</span> {
     ($(
@@ -281,8 +269,7 @@
             <span class="comment">// but the only other option would be to use `mem::uninitialized`</span>
             <span class="comment">// and `ptr::write`.</span>
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">eval_order_dependence</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PgValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="macro">not_none</span><span class="macro">!</span>(<span class="ident">value</span>);
+            <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="ident">PgValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">as_bytes</span>();
                 <span class="kw">let</span> <span class="ident">num_elements</span> <span class="op">=</span> <span class="ident">bytes</span>.<span class="ident">read_i32</span>::<span class="op">&lt;</span><span class="ident">NetworkEndian</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
 
@@ -303,14 +290,14 @@
                     <span class="kw">let</span> <span class="ident">num_bytes</span> <span class="op">=</span> <span class="ident">bytes</span>.<span class="ident">read_i32</span>::<span class="op">&lt;</span><span class="ident">NetworkEndian</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
 
                     <span class="kw">if</span> <span class="ident">num_bytes</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
-                        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>::<span class="ident">from_sql</span>(<span class="prelude-val">None</span>)<span class="question-mark">?</span>
+                        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>::<span class="ident">from_nullable_sql</span>(<span class="prelude-val">None</span>)<span class="question-mark">?</span>
                     } <span class="kw">else</span> {
                         <span class="kw">let</span> (<span class="ident">elem_bytes</span>, <span class="ident">new_bytes</span>) <span class="op">=</span> <span class="ident">bytes</span>.<span class="ident">split_at</span>(<span class="ident">num_bytes</span> <span class="kw">as</span> <span class="ident">usize</span>);
                         <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">new_bytes</span>;
-                        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>::<span class="ident">from_sql</span>(<span class="prelude-val">Some</span>(<span class="ident">PgValue</span>::<span class="ident">new</span>(
+                        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>::<span class="ident">from_sql</span>(<span class="ident">PgValue</span>::<span class="ident">new</span>(
                             <span class="ident">elem_bytes</span>,
                             <span class="ident">oid</span>,
-                        )))<span class="question-mark">?</span>
+                        ))<span class="question-mark">?</span>
                     }
                 },)<span class="op">+</span>);
 
@@ -323,20 +310,8 @@
             }
         }
 
-        <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="op">+</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span><span class="op">&gt;</span> <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">Record</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span>)<span class="op">&gt;</span>, <span class="ident">Pg</span><span class="op">&gt;</span> <span class="kw">for</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="op">+</span>)
-        <span class="kw">where</span>
-            <span class="self">Self</span>: <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Record</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span>)<span class="op">&gt;</span>, <span class="ident">Pg</span><span class="op">&gt;</span>,
-        {
-            <span class="kw">const</span> <span class="ident">FIELDS_NEEDED</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1</span>;
-
-            <span class="kw">fn</span> <span class="ident">build_from_row</span><span class="op">&lt;</span><span class="ident">RowT</span>: <span class="ident">Row</span><span class="op">&lt;</span><span class="ident">Pg</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">RowT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-                <span class="self">Self</span>::<span class="ident">from_sql</span>(<span class="ident">row</span>.<span class="ident">take</span>())
-            }
-        }
-
         <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="op">+</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span><span class="op">&gt;</span> <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">Record</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span>)<span class="op">&gt;</span>, <span class="ident">Pg</span><span class="op">&gt;</span> <span class="kw">for</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="op">+</span>)
-        <span class="kw">where</span>
-            <span class="self">Self</span>: <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">Record</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span>)<span class="op">&gt;</span>, <span class="ident">Pg</span><span class="op">&gt;</span>,
+        <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Record</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span>)<span class="op">&gt;</span>, <span class="ident">Pg</span><span class="op">&gt;</span>
         {
             <span class="kw">type</span> <span class="ident">Row</span> <span class="op">=</span> <span class="self">Self</span>;
 
@@ -347,6 +322,7 @@
 
         <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="op">+</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span><span class="op">&gt;</span> <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="ident">Record</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span>)<span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="op">+</span>)
         <span class="kw">where</span>
+            $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>: <span class="ident">SqlType</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,)<span class="op">+</span>
             $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span><span class="op">&gt;</span>,)<span class="op">+</span>
             <span class="ident">PgTuple</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>::<span class="ident">Expression</span>,)<span class="op">+</span>)<span class="op">&gt;</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">Record</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="op">+</span>)<span class="op">&gt;</span><span class="op">&gt;</span>,
         {

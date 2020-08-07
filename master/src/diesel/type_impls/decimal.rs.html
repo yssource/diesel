@@ -24,7 +24,7 @@
     <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">AsExpression</span>;
     <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">Numeric</span>;
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;Numeric&quot;</span>]</span>
     <span class="kw">struct</span> <span class="ident">BigDecimalProxy</span>(<span class="ident">BigDecimal</span>);

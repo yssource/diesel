@@ -458,6 +458,127 @@
 <span id="458">458</span>
 <span id="459">459</span>
 <span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
+<span id="580">580</span>
+<span id="581">581</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#[<span class="ident">macro_export</span>(<span class="ident">local_inner_macros</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
@@ -466,7 +587,7 @@
         <span class="ident">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>:<span class="ident">ident</span>,
         <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>,
         <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>,
-        <span class="ident">return_ty</span> <span class="op">=</span> <span class="ident">ReturnBasedOnArgs</span>,
+        <span class="ident">return_ty</span> <span class="op">=</span> (<span class="ident">ReturnBasedOnArgs</span>),
         <span class="ident">ty_params</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>:<span class="ident">ident</span>,)<span class="op">+</span>),
         <span class="ident">field_names</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field_names</span>:<span class="ident">tt</span>,
         <span class="ident">backend_ty_params</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty_params</span>:<span class="ident">tt</span>,
@@ -476,7 +597,7 @@
             <span class="ident">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
-            <span class="ident">return_ty</span> <span class="op">=</span> <span class="ident">ST</span>,
+            <span class="ident">return_ty</span> <span class="op">=</span> (<span class="ident">ST</span>),
             <span class="ident">ty_params</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>,)<span class="op">+</span>),
             <span class="ident">field_names</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field_names</span>,
             <span class="ident">backend_ty_params</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty_params</span>,
@@ -490,7 +611,7 @@
         <span class="ident">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>:<span class="ident">ident</span>,
         <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>,
         <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>,
-        <span class="ident">return_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">ty</span>,
+        <span class="ident">return_ty</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">tt</span>)<span class="op">+</span>),
         <span class="ident">ty_params</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>:<span class="ident">ident</span>,)<span class="op">+</span>),
         <span class="ident">field_names</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field_names</span>:<span class="ident">tt</span>,
         <span class="ident">backend_ty_params</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty_params</span>:<span class="ident">tt</span>,
@@ -500,7 +621,7 @@
             <span class="ident">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
-            <span class="ident">return_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>,
+            <span class="ident">return_ty</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>)<span class="kw-2">*</span>),
             <span class="ident">ty_params</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>,)<span class="op">+</span>),
             <span class="ident">field_names</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field_names</span>,
             <span class="ident">backend_ty_params</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty_params</span>,
@@ -514,7 +635,7 @@
         <span class="ident">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>:<span class="ident">ident</span>,
         <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>,
         <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>,
-        <span class="ident">return_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">ty</span>,
+        <span class="ident">return_ty</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">tt</span>)<span class="op">+</span>),
         <span class="ident">ty_params</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>:<span class="ident">ident</span>,)<span class="op">+</span>),
         <span class="ident">field_names</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">field_name</span>:<span class="ident">ident</span>,)<span class="op">+</span>),
         <span class="ident">backend_ty_params</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty_param</span>:<span class="ident">ident</span>,)<span class="kw-2">*</span>),
@@ -546,7 +667,7 @@
         <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>,)<span class="op">+</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">expression_ty_params</span>,)<span class="kw-2">*</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>,)<span class="op">+</span><span class="op">&gt;</span> <span class="kw">where</span>
             $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">expression_bounds</span>)<span class="op">*</span>
         {
-            <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>;
+            <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>)<span class="kw-2">*</span>;
         }
 
         <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>,)<span class="op">+</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty_param</span>,)<span class="kw-2">*</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">query_builder</span>::<span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty</span><span class="op">&gt;</span>
@@ -648,6 +769,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```rust</span>
 <span class="doccomment">/// # include!(&quot;../doctest_setup.rs&quot;);</span>
+<span class="doccomment">/// # use diesel::sql_types::SqlType;</span>
+<span class="doccomment">/// # use diesel::expression::TypedExpressionType;</span>
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// # fn main() {</span>
 <span class="doccomment">/// #     use schema::users::dsl::*;</span>
@@ -657,9 +780,10 @@
 <span class="doccomment">/// use diesel::expression::AsExpression;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// // Normally you would put this on a trait instead</span>
-<span class="doccomment">/// fn my_eq&lt;T, U&gt;(left: T, right: U) -&gt; MyEq&lt;T, U::Expression&gt; where</span>
-<span class="doccomment">///     T: Expression,</span>
-<span class="doccomment">///     U: AsExpression&lt;T::SqlType&gt;,</span>
+<span class="doccomment">/// fn my_eq&lt;T, U, ST&gt;(left: T, right: U) -&gt; MyEq&lt;T, U::Expression&gt; where</span>
+<span class="doccomment">///     T: Expression&lt;SqlType = ST&gt;,</span>
+<span class="doccomment">///     U: AsExpression&lt;ST&gt;,</span>
+<span class="doccomment">///     ST: SqlType + TypedExpressionType,</span>
 <span class="doccomment">/// {</span>
 <span class="doccomment">///     MyEq::new(left, right.as_expression())</span>
 <span class="doccomment">/// }</span>
@@ -684,11 +808,37 @@
             <span class="ident">notation</span> <span class="op">=</span> <span class="ident">infix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
-            <span class="ident">return_ty</span> <span class="op">=</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>)::<span class="kw-2">*</span>,
+            <span class="ident">return_ty</span> <span class="op">=</span> (
+                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">MaybeNullable</span><span class="op">&lt;</span>
+                    <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">IsOneNullable</span><span class="op">&lt;</span>
+                        <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>,
+                        <span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>
+                    <span class="op">&gt;</span>,
+                    $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>)::<span class="op">*</span>
+                <span class="op">&gt;</span>
+            ),
             <span class="ident">ty_params</span> <span class="op">=</span> (<span class="ident">T</span>, <span class="ident">U</span>,),
             <span class="ident">field_names</span> <span class="op">=</span> (<span class="ident">left</span>, <span class="ident">right</span>,),
             <span class="ident">backend_ty_params</span> <span class="op">=</span> (<span class="ident">DB</span>,),
             <span class="ident">backend_ty</span> <span class="op">=</span> <span class="ident">DB</span>,
+            <span class="ident">expression_ty_params</span> <span class="op">=</span> (),
+            <span class="ident">expression_bounds</span> <span class="op">=</span> (
+                <span class="ident">T</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span>,
+                <span class="ident">U</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span>,
+                <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">SqlType</span>,
+                <span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">SqlType</span>,
+                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">IsSqlTypeNullable</span><span class="op">&lt;</span>
+                    <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>
+                <span class="op">&gt;</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">OneIsNullable</span><span class="op">&lt;</span>
+                    <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">IsSqlTypeNullable</span><span class="op">&lt;</span>
+                        <span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>
+                    <span class="op">&gt;</span>
+                <span class="op">&gt;</span>,
+                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">IsOneNullable</span><span class="op">&lt;</span>
+                    <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>,
+                    <span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>
+                <span class="op">&gt;</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">MaybeNullableType</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>)::<span class="kw-2">*</span><span class="op">&gt;</span>,
+            ),
         );
     };
 
@@ -697,11 +847,37 @@
             <span class="ident">notation</span> <span class="op">=</span> <span class="ident">infix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
-            <span class="ident">return_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>,
+            <span class="ident">return_ty</span> <span class="op">=</span> (
+                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">MaybeNullable</span><span class="op">&lt;</span>
+                    <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">IsOneNullable</span><span class="op">&lt;</span>
+                        <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>,
+                        <span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>
+                    <span class="op">&gt;</span>,
+                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>,
+                <span class="op">&gt;</span>
+            ),
             <span class="ident">ty_params</span> <span class="op">=</span> (<span class="ident">T</span>, <span class="ident">U</span>,),
             <span class="ident">field_names</span> <span class="op">=</span> (<span class="ident">left</span>, <span class="ident">right</span>,),
             <span class="ident">backend_ty_params</span> <span class="op">=</span> (),
             <span class="ident">backend_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>,
+            <span class="ident">expression_ty_params</span> <span class="op">=</span> (),
+            <span class="ident">expression_bounds</span> <span class="op">=</span> (
+                <span class="ident">T</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span>,
+                <span class="ident">U</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span>,
+                <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">SqlType</span>,
+                <span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">SqlType</span>,
+                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">IsSqlTypeNullable</span><span class="op">&lt;</span>
+                    <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>
+                <span class="op">&gt;</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">OneIsNullable</span><span class="op">&lt;</span>
+                    <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">IsSqlTypeNullable</span><span class="op">&lt;</span>
+                        <span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>
+                    <span class="op">&gt;</span>
+                <span class="op">&gt;</span>,
+                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">is_nullable</span>::<span class="ident">IsOneNullable</span><span class="op">&lt;</span>
+                    <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>,
+                    <span class="op">&lt;</span><span class="ident">U</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span><span class="op">&gt;</span>::<span class="ident">SqlType</span>
+                <span class="op">&gt;</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">MaybeNullableType</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span><span class="op">&gt;</span>,
+            ),
         );
     };
 }
@@ -739,7 +915,7 @@
             <span class="ident">notation</span> <span class="op">=</span> <span class="ident">postfix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
-            <span class="ident">return_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>,
+            <span class="ident">return_ty</span> <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>),
             <span class="ident">ty_params</span> <span class="op">=</span> (<span class="ident">Expr</span>,),
             <span class="ident">field_names</span> <span class="op">=</span> (<span class="ident">expr</span>,),
             <span class="ident">backend_ty_params</span> <span class="op">=</span> (<span class="ident">DB</span>,),
@@ -752,7 +928,7 @@
             <span class="ident">notation</span> <span class="op">=</span> <span class="ident">postfix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
-            <span class="ident">return_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>,
+            <span class="ident">return_ty</span> <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>),
             <span class="ident">ty_params</span> <span class="op">=</span> (<span class="ident">Expr</span>,),
             <span class="ident">field_names</span> <span class="op">=</span> (<span class="ident">expr</span>,),
             <span class="ident">backend_ty_params</span> <span class="op">=</span> (),
@@ -794,7 +970,7 @@
             <span class="ident">notation</span> <span class="op">=</span> <span class="ident">prefix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
-            <span class="ident">return_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>,
+            <span class="ident">return_ty</span> <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>),
             <span class="ident">ty_params</span> <span class="op">=</span> (<span class="ident">Expr</span>,),
             <span class="ident">field_names</span> <span class="op">=</span> (<span class="ident">expr</span>,),
             <span class="ident">backend_ty_params</span> <span class="op">=</span> (<span class="ident">DB</span>,),
@@ -807,7 +983,7 @@
             <span class="ident">notation</span> <span class="op">=</span> <span class="ident">prefix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
-            <span class="ident">return_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>,
+            <span class="ident">return_ty</span> <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>),
             <span class="ident">ty_params</span> <span class="op">=</span> (<span class="ident">Expr</span>,),
             <span class="ident">field_names</span> <span class="op">=</span> (<span class="ident">expr</span>,),
             <span class="ident">backend_ty_params</span> <span class="op">=</span> (),
@@ -838,20 +1014,30 @@
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">NotBetween</span>, <span class="string">&quot; NOT BETWEEN &quot;</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">NotEq</span>, <span class="string">&quot; != &quot;</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">NotLike</span>, <span class="string">&quot; NOT LIKE &quot;</span>);
-<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">Or</span>, <span class="string">&quot; OR &quot;</span>);
 
 <span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="ident">IsNull</span>, <span class="string">&quot; IS NULL&quot;</span>);
 <span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="ident">IsNotNull</span>, <span class="string">&quot; IS NOT NULL&quot;</span>);
-<span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="ident">Asc</span>, <span class="string">&quot; ASC&quot;</span>, ());
-<span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="ident">Desc</span>, <span class="string">&quot; DESC&quot;</span>, ());
+<span class="macro">postfix_operator</span><span class="macro">!</span>(
+    <span class="ident">Asc</span>,
+    <span class="string">&quot; ASC &quot;</span>,
+    <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">expression_types</span>::<span class="ident">NotSelectable</span>
+);
+<span class="macro">postfix_operator</span><span class="macro">!</span>(
+    <span class="ident">Desc</span>,
+    <span class="string">&quot; DESC &quot;</span>,
+    <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">expression_types</span>::<span class="ident">NotSelectable</span>
+);
 
 <span class="macro">prefix_operator</span><span class="macro">!</span>(<span class="ident">Not</span>, <span class="string">&quot;NOT &quot;</span>);
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">ValidGrouping</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::{<span class="ident">TypedExpressionType</span>, <span class="ident">ValidGrouping</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">insertable</span>::{<span class="ident">ColumnInsertValue</span>, <span class="ident">Insertable</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">QueryId</span>, <span class="ident">ValuesClause</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_source</span>::<span class="ident">Column</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">DieselNumericOps</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{
+    <span class="ident">is_nullable</span>, <span class="ident">AllAreNullable</span>, <span class="ident">Bool</span>, <span class="ident">DieselNumericOps</span>, <span class="ident">MaybeNullableType</span>, <span class="ident">SqlType</span>,
+};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Expression</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Insertable</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">Table</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Eq</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -893,6 +1079,7 @@
 <span class="kw">where</span>
     <span class="ident">L</span>: <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
     <span class="ident">R</span>: <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
+    <span class="ident">ST</span>: <span class="ident">SqlType</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
 {
     <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span>;
 }
@@ -916,6 +1103,61 @@
         <span class="ident">out</span>.<span class="ident">push_sql</span>(<span class="string">&quot; || &quot;</span>);
         <span class="self">self</span>.<span class="ident">right</span>.<span class="ident">walk_ast</span>(<span class="ident">out</span>.<span class="ident">reborrow</span>())<span class="question-mark">?</span>;
         <span class="ident">out</span>.<span class="ident">push_sql</span>(<span class="string">&quot;)&quot;</span>);
+        <span class="prelude-val">Ok</span>(())
+    }
+}
+
+<span class="comment">// or is different</span>
+<span class="comment">// it only evaluates to null if both sides are null</span>
+<span class="attribute">#[<span class="ident">derive</span>(
+    <span class="ident">Debug</span>,
+    <span class="ident">Clone</span>,
+    <span class="ident">Copy</span>,
+    <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">QueryId</span>,
+    <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">DieselNumericOps</span>,
+    <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">ValidGrouping</span>,
+)]</span>
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Or</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">left</span>: <span class="ident">T</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">right</span>: <span class="ident">U</span>,
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Or</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">left</span>: <span class="ident">T</span>, <span class="ident">right</span>: <span class="ident">U</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">Or</span> { <span class="ident">left</span>, <span class="ident">right</span> }
+    }
+}
+
+<span class="macro">impl_selectable_expression</span><span class="macro">!</span>(<span class="ident">Or</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>);
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">Expression</span> <span class="kw">for</span> <span class="ident">Or</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">T</span>: <span class="ident">Expression</span>,
+    <span class="ident">U</span>: <span class="ident">Expression</span>,
+    <span class="ident">T</span>::<span class="ident">SqlType</span>: <span class="ident">SqlType</span>,
+    <span class="ident">U</span>::<span class="ident">SqlType</span>: <span class="ident">SqlType</span>,
+    <span class="ident">is_nullable</span>::<span class="ident">IsSqlTypeNullable</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>:
+        <span class="ident">AllAreNullable</span><span class="op">&lt;</span><span class="ident">is_nullable</span>::<span class="ident">IsSqlTypeNullable</span><span class="op">&lt;</span><span class="ident">U</span>::<span class="ident">SqlType</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">is_nullable</span>::<span class="ident">AreAllNullable</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span>, <span class="ident">U</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>: <span class="ident">MaybeNullableType</span><span class="op">&lt;</span><span class="ident">Bool</span><span class="op">&gt;</span>,
+{
+    <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span>
+        <span class="ident">is_nullable</span>::<span class="ident">MaybeNullable</span><span class="op">&lt;</span><span class="ident">is_nullable</span>::<span class="ident">AreAllNullable</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span>, <span class="ident">U</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>, <span class="ident">Bool</span><span class="op">&gt;</span>;
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Or</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">DB</span>: <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>,
+    <span class="ident">T</span>: <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="ident">U</span>: <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
+{
+    <span class="kw">fn</span> <span class="ident">walk_ast</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="kw-2">mut</span> <span class="ident">out</span>: <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">AstPass</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">QueryResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">left</span>.<span class="ident">walk_ast</span>(<span class="ident">out</span>.<span class="ident">reborrow</span>())<span class="question-mark">?</span>;
+        <span class="ident">out</span>.<span class="ident">push_sql</span>(<span class="string">&quot; OR &quot;</span>);
+        <span class="self">self</span>.<span class="ident">right</span>.<span class="ident">walk_ast</span>(<span class="ident">out</span>.<span class="ident">reborrow</span>())<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 }

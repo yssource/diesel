@@ -361,6 +361,10 @@
 <span id="361">361</span>
 <span id="362">362</span>
 <span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">ToTokens</span>;
@@ -505,7 +509,7 @@
 
                 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">sqlite</span>::{<span class="ident">Sqlite</span>, <span class="ident">SqliteConnection</span>};
                 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">serialize</span>::<span class="ident">ToSql</span>;
-                <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">deserialize</span>::<span class="ident">Queryable</span>;
+                <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">deserialize</span>::{<span class="ident">FromSqlRow</span>, <span class="ident">StaticallySizedRow</span>};
                 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">sqlite</span>::<span class="ident">SqliteAggregateFunction</span>;
                 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">sql_types</span>::<span class="ident">IntoNullable</span>;
             };
@@ -527,7 +531,8 @@
                             <span class="kw">where</span>
                             <span class="ident">A</span>: <span class="ident">SqliteAggregateFunction</span><span class="op">&lt;</span>(#(#<span class="ident">arg_name</span>,)<span class="kw-2">*</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
                             <span class="ident">A</span>::<span class="ident">Output</span>: <span class="ident">ToSql</span><span class="op">&lt;</span>#<span class="ident">return_type</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
-                            (#(#<span class="ident">arg_name</span>,)<span class="kw-2">*</span>): <span class="ident">Queryable</span><span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), <span class="ident">Sqlite</span><span class="op">&gt;</span>,
+                            (#(#<span class="ident">arg_name</span>,)<span class="kw-2">*</span>): <span class="ident">FromSqlRow</span><span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), <span class="ident">Sqlite</span><span class="op">&gt;</span> <span class="op">+</span>
+                                <span class="ident">StaticallySizedRow</span><span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), <span class="ident">Sqlite</span><span class="op">&gt;</span>,
                         {
                             <span class="ident">conn</span>.<span class="ident">register_aggregate_function</span>::<span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), #<span class="ident">return_type</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="ident">A</span><span class="op">&gt;</span>(#<span class="ident">sql_name</span>)
                         }
@@ -552,7 +557,8 @@
                             <span class="kw">where</span>
                             <span class="ident">A</span>: <span class="ident">SqliteAggregateFunction</span><span class="op">&lt;</span>#<span class="ident">arg_name</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
                             <span class="ident">A</span>::<span class="ident">Output</span>: <span class="ident">ToSql</span><span class="op">&lt;</span>#<span class="ident">return_type</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
-                            #<span class="ident">arg_name</span>: <span class="ident">Queryable</span><span class="op">&lt;</span>#<span class="ident">arg_type</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
+                            #<span class="ident">arg_name</span>: <span class="ident">FromSqlRow</span><span class="op">&lt;</span>#<span class="ident">arg_type</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span> <span class="op">+</span>
+                                <span class="ident">StaticallySizedRow</span><span class="op">&lt;</span>#<span class="ident">arg_type</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
                             {
                                 <span class="ident">conn</span>.<span class="ident">register_aggregate_function</span>::<span class="op">&lt;</span>#<span class="ident">arg_type</span>, #<span class="ident">return_type</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="ident">A</span><span class="op">&gt;</span>(#<span class="ident">sql_name</span>)
                             }
@@ -583,7 +589,7 @@
 
                 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">sqlite</span>::{<span class="ident">Sqlite</span>, <span class="ident">SqliteConnection</span>};
                 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">serialize</span>::<span class="ident">ToSql</span>;
-                <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">deserialize</span>::<span class="ident">Queryable</span>;
+                <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">deserialize</span>::{<span class="ident">FromSqlRow</span>, <span class="ident">StaticallySizedRow</span>};
 
                 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
                 <span class="doccomment">/// Registers an implementation for this function on the given connection</span>
@@ -599,7 +605,8 @@
                 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
                 <span class="kw">where</span>
                     <span class="ident">F</span>: <span class="ident">Fn</span>(#(#<span class="ident">arg_name</span>,)<span class="kw-2">*</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ret</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-                    (#(#<span class="ident">arg_name</span>,)<span class="kw-2">*</span>): <span class="ident">Queryable</span><span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), <span class="ident">Sqlite</span><span class="op">&gt;</span>,
+                    (#(#<span class="ident">arg_name</span>,)<span class="kw-2">*</span>): <span class="ident">FromSqlRow</span><span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), <span class="ident">Sqlite</span><span class="op">&gt;</span> <span class="op">+</span>
+                        <span class="ident">StaticallySizedRow</span><span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), <span class="ident">Sqlite</span><span class="op">&gt;</span>,
                     <span class="ident">Ret</span>: <span class="ident">ToSql</span><span class="op">&lt;</span>#<span class="ident">return_type</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
                 {
                     <span class="ident">conn</span>.<span class="ident">register_sql_function</span>::<span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), #<span class="ident">return_type</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span>(
@@ -624,7 +631,8 @@
                 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
                 <span class="kw">where</span>
                     <span class="ident">F</span>: <span class="ident">FnMut</span>(#(#<span class="ident">arg_name</span>,)<span class="kw-2">*</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ret</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-                    (#(#<span class="ident">arg_name</span>,)<span class="kw-2">*</span>): <span class="ident">Queryable</span><span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), <span class="ident">Sqlite</span><span class="op">&gt;</span>,
+                    (#(#<span class="ident">arg_name</span>,)<span class="kw-2">*</span>): <span class="ident">FromSqlRow</span><span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), <span class="ident">Sqlite</span><span class="op">&gt;</span> <span class="op">+</span>
+                        <span class="ident">StaticallySizedRow</span><span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), <span class="ident">Sqlite</span><span class="op">&gt;</span>,
                     <span class="ident">Ret</span>: <span class="ident">ToSql</span><span class="op">&lt;</span>#<span class="ident">return_type</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
                 {
                     <span class="ident">conn</span>.<span class="ident">register_sql_function</span>::<span class="op">&lt;</span>(#(#<span class="ident">arg_type</span>,)<span class="kw-2">*</span>), #<span class="ident">return_type</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span>(
@@ -683,7 +691,7 @@
         <span class="kw">let</span> <span class="ident">return_type</span> <span class="op">=</span> <span class="kw">if</span> <span class="prelude-ty">Option</span>::<span class="op">&lt;</span><span class="macro">Token</span><span class="macro">!</span>[<span class="op">-</span><span class="op">&gt;</span>]<span class="op">&gt;</span>::<span class="ident">parse</span>(<span class="ident">input</span>)<span class="question-mark">?</span>.<span class="ident">is_some</span>() {
             <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">parse</span>(<span class="ident">input</span>)<span class="question-mark">?</span>
         } <span class="kw">else</span> {
-            <span class="macro">parse_quote</span><span class="macro">!</span>(())
+            <span class="macro">parse_quote</span><span class="macro">!</span>(<span class="ident">diesel</span>::<span class="ident">expression</span>::<span class="ident">expression_types</span>::<span class="ident">NotSelectable</span>)
         };
         <span class="kw">let</span> <span class="ident">_semi</span> <span class="op">=</span> <span class="prelude-ty">Option</span>::<span class="op">&lt;</span><span class="macro">Token</span><span class="macro">!</span>[;]<span class="op">&gt;</span>::<span class="ident">parse</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
 

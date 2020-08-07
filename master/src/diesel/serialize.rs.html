@@ -200,6 +200,9 @@
 <span id="200">200</span>
 <span id="201">201</span>
 <span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Types and traits related to serializing values for the database</span>
 
@@ -348,7 +351,7 @@
 <span class="doccomment">/// database, you should use `i32::to_sql(x, out)` instead of writing to `out`</span>
 <span class="doccomment">/// yourself.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Any types which implement this trait should also `#[derive(AsExpression)]`.</span>
+<span class="doccomment">/// Any types which implement this trait should also [`#[derive(AsExpression)]`].</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ### Backend specific details</span>
 <span class="doccomment">///</span>
@@ -360,6 +363,7 @@
 <span class="doccomment">/// - For third party backends, consult that backend&#39;s documentation.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`MysqlType`]: ../mysql/enum.MysqlType.html</span>
+<span class="doccomment">/// [`#[derive(AsExpression)]`]: ../expression/derive.AsExpression.html;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ### Examples</span>
 <span class="doccomment">///</span>
@@ -368,12 +372,14 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```rust</span>
 <span class="doccomment">/// # use diesel::backend::Backend;</span>
+<span class="doccomment">/// # use diesel::expression::AsExpression;</span>
 <span class="doccomment">/// # use diesel::sql_types::*;</span>
 <span class="doccomment">/// # use diesel::serialize::{self, ToSql, Output};</span>
 <span class="doccomment">/// # use std::io::Write;</span>
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// #[repr(i32)]</span>
-<span class="doccomment">/// #[derive(Debug, Clone, Copy)]</span>
+<span class="doccomment">/// #[derive(Debug, Clone, Copy, AsExpression)]</span>
+<span class="doccomment">/// #[sql_type = &quot;Integer&quot;]</span>
 <span class="doccomment">/// pub enum MyEnum {</span>
 <span class="doccomment">///     A = 1,</span>
 <span class="doccomment">///     B = 2,</span>

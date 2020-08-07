@@ -455,7 +455,7 @@
     }
 
     <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Numeric</span>, <span class="ident">Pg</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BigDecimal</span> {
-        <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">numeric</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PgValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">numeric</span>: <span class="ident">PgValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
             <span class="ident">PgNumeric</span>::<span class="ident">from_sql</span>(<span class="ident">numeric</span>)<span class="question-mark">?</span>.<span class="ident">try_into</span>()
         }
     }

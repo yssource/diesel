@@ -400,7 +400,7 @@
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">functions</span>::{<span class="ident">build_sql_function_args</span>, <span class="ident">process_sql_function_result</span>};
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">serialized_value</span>::<span class="ident">SerializedValue</span>;
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Sqlite</span>, <span class="ident">SqliteAggregateFunction</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::<span class="ident">Queryable</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::<span class="ident">FromSqlRow</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">Error</span>::<span class="ident">DatabaseError</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">serialize</span>::<span class="ident">ToSql</span>;
@@ -507,7 +507,7 @@
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">SqliteAggregateFunction</span><span class="op">&lt;</span><span class="ident">Args</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Ret</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> <span class="op">+</span> <span class="ident">Send</span>,
-        <span class="ident">Args</span>: <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">ArgsSqlType</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
+        <span class="ident">Args</span>: <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">ArgsSqlType</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
         <span class="ident">Ret</span>: <span class="ident">ToSql</span><span class="op">&lt;</span><span class="ident">RetSqlType</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
         <span class="ident">Sqlite</span>: <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">RetSqlType</span><span class="op">&gt;</span>,
     {
@@ -657,7 +657,7 @@
     <span class="ident">value_ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">sqlite3_value</span>,
 ) <span class="kw">where</span>
     <span class="ident">A</span>: <span class="ident">SqliteAggregateFunction</span><span class="op">&lt;</span><span class="ident">Args</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Ret</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> <span class="op">+</span> <span class="ident">Send</span>,
-    <span class="ident">Args</span>: <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">ArgsSqlType</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
+    <span class="ident">Args</span>: <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">ArgsSqlType</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
     <span class="ident">Ret</span>: <span class="ident">ToSql</span><span class="op">&lt;</span><span class="ident">RetSqlType</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
     <span class="ident">Sqlite</span>: <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">RetSqlType</span><span class="op">&gt;</span>,
 {
@@ -727,7 +727,7 @@
     <span class="ident">ctx</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">sqlite3_context</span>,
 ) <span class="kw">where</span>
     <span class="ident">A</span>: <span class="ident">SqliteAggregateFunction</span><span class="op">&lt;</span><span class="ident">Args</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Ret</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> <span class="op">+</span> <span class="ident">Send</span>,
-    <span class="ident">Args</span>: <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">ArgsSqlType</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
+    <span class="ident">Args</span>: <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">ArgsSqlType</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
     <span class="ident">Ret</span>: <span class="ident">ToSql</span><span class="op">&lt;</span><span class="ident">RetSqlType</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span>,
     <span class="ident">Sqlite</span>: <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">RetSqlType</span><span class="op">&gt;</span>,
 {

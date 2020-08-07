@@ -332,6 +332,20 @@
 <span id="332">332</span>
 <span id="333">333</span>
 <span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
 
@@ -340,7 +354,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="ident">RunQueryDsl</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">QueryResult</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">DieselNumericOps</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">DieselNumericOps</span>, <span class="ident">SqlType</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">DieselNumericOps</span>)]</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;Queries are only executed when calling `load`, `get_result`, or similar.&quot;</span>]</span>
@@ -353,7 +367,10 @@
     <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">ST</span>: <span class="ident">TypedExpressionType</span>,
+{
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">sql</span>: <span class="ident">String</span>, <span class="ident">inner</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">SqlLiteral</span> {
@@ -386,11 +403,11 @@
     <span class="doccomment">/// # fn main() {</span>
     <span class="doccomment">/// #     use self::users::dsl::*;</span>
     <span class="doccomment">/// #     use diesel::dsl::sql;</span>
-    <span class="doccomment">/// #     use diesel::sql_types::{Integer, Text};</span>
+    <span class="doccomment">/// #     use diesel::sql_types::{Integer, Text, Bool};</span>
     <span class="doccomment">/// #     let connection = establish_connection();</span>
     <span class="doccomment">/// let seans_id = users</span>
     <span class="doccomment">///     .select(id)</span>
-    <span class="doccomment">///     .filter(sql(&quot;name = &quot;).bind::&lt;Text, _&gt;(&quot;Sean&quot;))</span>
+    <span class="doccomment">///     .filter(sql::&lt;Bool&gt;(&quot;name = &quot;).bind::&lt;Text, _&gt;(&quot;Sean&quot;))</span>
     <span class="doccomment">///     .get_result(&amp;connection);</span>
     <span class="doccomment">/// assert_eq!(Ok(1), seans_id);</span>
     <span class="doccomment">///</span>
@@ -416,14 +433,14 @@
     <span class="doccomment">/// # fn main() {</span>
     <span class="doccomment">/// #     use self::users::dsl::*;</span>
     <span class="doccomment">/// #     use diesel::dsl::sql;</span>
-    <span class="doccomment">/// #     use diesel::sql_types::{Integer, Text};</span>
+    <span class="doccomment">/// #     use diesel::sql_types::{Integer, Text, Bool};</span>
     <span class="doccomment">/// #     let connection = establish_connection();</span>
     <span class="doccomment">/// #     diesel::insert_into(users).values(name.eq(&quot;Ryan&quot;))</span>
     <span class="doccomment">/// #           .execute(&amp;connection).unwrap();</span>
     <span class="doccomment">/// let query = users</span>
     <span class="doccomment">///     .select(name)</span>
     <span class="doccomment">///     .filter(</span>
-    <span class="doccomment">///         sql(&quot;id &gt; &quot;)</span>
+    <span class="doccomment">///         sql::&lt;Bool&gt;(&quot;id &gt; &quot;)</span>
     <span class="doccomment">///         .bind::&lt;Integer,_&gt;(1)</span>
     <span class="doccomment">///         .sql(&quot; AND name &lt;&gt; &quot;)</span>
     <span class="doccomment">///         .bind::&lt;Text, _&gt;(&quot;Ryan&quot;)</span>
@@ -435,6 +452,7 @@
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind</span><span class="op">&lt;</span><span class="ident">BindST</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">bind_value</span>: <span class="ident">U</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">UncheckedBind</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">U</span>::<span class="ident">Expression</span><span class="op">&gt;</span>
     <span class="kw">where</span>
+        <span class="ident">BindST</span>: <span class="ident">SqlType</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
         <span class="ident">U</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="ident">BindST</span><span class="op">&gt;</span>,
     {
         <span class="ident">UncheckedBind</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">bind_value</span>.<span class="ident">as_expression</span>())
@@ -467,14 +485,14 @@
     <span class="doccomment">/// # fn main() {</span>
     <span class="doccomment">/// #     use self::users::dsl::*;</span>
     <span class="doccomment">/// #     use diesel::dsl::sql;</span>
-    <span class="doccomment">/// #     use diesel::sql_types::{Integer, Text};</span>
+    <span class="doccomment">/// #     use diesel::sql_types::Bool;</span>
     <span class="doccomment">/// #     let connection = establish_connection();</span>
     <span class="doccomment">/// #     diesel::insert_into(users).values(name.eq(&quot;Ryan&quot;))</span>
     <span class="doccomment">/// #           .execute(&amp;connection).unwrap();</span>
     <span class="doccomment">/// let query = users</span>
     <span class="doccomment">///     .select(name)</span>
     <span class="doccomment">///     .filter(</span>
-    <span class="doccomment">///         sql(&quot;id &gt; 1&quot;)</span>
+    <span class="doccomment">///         sql::&lt;Bool&gt;(&quot;id &gt; 1&quot;)</span>
     <span class="doccomment">///         .sql(&quot; AND name &lt;&gt; &#39;Ryan&#39;&quot;)</span>
     <span class="doccomment">///     )</span>
     <span class="doccomment">///     .get_results(&amp;connection);</span>
@@ -487,7 +505,10 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Expression</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Expression</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">ST</span>: <span class="ident">TypedExpressionType</span>,
+{
     <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span>;
 }
 
@@ -510,15 +531,18 @@
     <span class="kw">const</span> <span class="ident">HAS_STATIC_QUERY_ID</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">false</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Query</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Query</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="self">Self</span>: <span class="ident">Expression</span>,
+{
     <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span>, <span class="ident">Conn</span><span class="op">&gt;</span> <span class="ident">RunQueryDsl</span><span class="op">&lt;</span><span class="ident">Conn</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">QS</span>, <span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">SelectableExpression</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">QS</span>, <span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">SelectableExpression</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Expression</span> {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">QS</span>, <span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">AppearsOnTable</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">QS</span>, <span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">AppearsOnTable</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Expression</span> {}
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span>, <span class="ident">GB</span><span class="op">&gt;</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span><span class="ident">GB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">IsAggregate</span> <span class="op">=</span> <span class="ident">is_aggregate</span>::<span class="ident">Never</span>;
@@ -550,15 +574,19 @@
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// # fn run_test() -&gt; QueryResult&lt;()&gt; {</span>
 <span class="doccomment">/// #     use schema::users::dsl::*;</span>
+<span class="doccomment">/// #     use diesel::sql_types::Bool;</span>
 <span class="doccomment">/// use diesel::dsl::sql;</span>
 <span class="doccomment">/// #     let connection = establish_connection();</span>
-<span class="doccomment">/// let user = users.filter(sql(&quot;name = &#39;Sean&#39;&quot;)).first(&amp;connection)?;</span>
+<span class="doccomment">/// let user = users.filter(sql::&lt;Bool&gt;(&quot;name = &#39;Sean&#39;&quot;)).first(&amp;connection)?;</span>
 <span class="doccomment">/// let expected = (1, String::from(&quot;Sean&quot;));</span>
 <span class="doccomment">/// assert_eq!(expected, user);</span>
 <span class="doccomment">/// #     Ok(())</span>
 <span class="doccomment">/// # }</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sql</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span>(<span class="ident">sql</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sql</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span>(<span class="ident">sql</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SqlLiteral</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">ST</span>: <span class="ident">TypedExpressionType</span>,
+{
     <span class="ident">SqlLiteral</span>::<span class="ident">new</span>(<span class="ident">sql</span>.<span class="ident">into</span>(), ())
 }
 
@@ -607,14 +635,14 @@
     <span class="doccomment">/// # fn main() {</span>
     <span class="doccomment">/// #     use self::users::dsl::*;</span>
     <span class="doccomment">/// #     use diesel::dsl::sql;</span>
-    <span class="doccomment">/// #     use diesel::sql_types::{Integer, Text};</span>
+    <span class="doccomment">/// #     use diesel::sql_types::{Integer, Bool};</span>
     <span class="doccomment">/// #     let connection = establish_connection();</span>
     <span class="doccomment">/// #     diesel::insert_into(users).values(name.eq(&quot;Ryan&quot;))</span>
     <span class="doccomment">/// #           .execute(&amp;connection).unwrap();</span>
     <span class="doccomment">/// let query = users</span>
     <span class="doccomment">///     .select(name)</span>
     <span class="doccomment">///     .filter(</span>
-    <span class="doccomment">///         sql(&quot;id &gt; &quot;)</span>
+    <span class="doccomment">///         sql::&lt;Bool&gt;(&quot;id &gt; &quot;)</span>
     <span class="doccomment">///         .bind::&lt;Integer,_&gt;(1)</span>
     <span class="doccomment">///         .sql(&quot; AND name &lt;&gt; &#39;Ryan&#39;&quot;)</span>
     <span class="doccomment">///     )</span>

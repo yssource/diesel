@@ -279,7 +279,6 @@
 <span id="279">279</span>
 <span id="280">280</span>
 <span id="281">281</span>
-<span id="282">282</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">chrono</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">mysqlclient_sys</span> <span class="kw">as</span> <span class="ident">ffi</span>;
@@ -307,9 +306,8 @@
         }
 
         <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>, <span class="ident">Mysql</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MYSQL_TIME</span> {
-            <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="macro">not_none</span><span class="macro">!</span>(<span class="ident">value</span>);
-                <span class="ident">data</span>.<span class="ident">time_value</span>()
+            <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+                <span class="ident">value</span>.<span class="ident">time_value</span>()
             }
         }
     };
@@ -327,7 +325,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Datetime</span>, <span class="ident">Mysql</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">NaiveDateTime</span> {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="op">&lt;</span><span class="ident">NaiveDateTime</span> <span class="kw">as</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Timestamp</span>, <span class="ident">Mysql</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">bytes</span>)
     }
 }
@@ -352,7 +350,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Timestamp</span>, <span class="ident">Mysql</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">NaiveDateTime</span> {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">mysql_time</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">MYSQL_TIME</span> <span class="kw">as</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Timestamp</span>, <span class="ident">Mysql</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">bytes</span>)<span class="question-mark">?</span>;
 
         <span class="ident">NaiveDate</span>::<span class="ident">from_ymd_opt</span>(
@@ -392,7 +390,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Time</span>, <span class="ident">Mysql</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">NaiveTime</span> {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">mysql_time</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">MYSQL_TIME</span> <span class="kw">as</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Time</span>, <span class="ident">Mysql</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">bytes</span>)<span class="question-mark">?</span>;
         <span class="ident">NaiveTime</span>::<span class="ident">from_hms_opt</span>(
             <span class="ident">mysql_time</span>.<span class="ident">hour</span> <span class="kw">as</span> <span class="ident">u32</span>,
@@ -423,7 +421,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Date</span>, <span class="ident">Mysql</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">NaiveDate</span> {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">MysqlValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">mysql_time</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">MYSQL_TIME</span> <span class="kw">as</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Date</span>, <span class="ident">Mysql</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">bytes</span>)<span class="question-mark">?</span>;
         <span class="ident">NaiveDate</span>::<span class="ident">from_ymd_opt</span>(
             <span class="ident">mysql_time</span>.<span class="ident">year</span> <span class="kw">as</span> <span class="ident">i32</span>,

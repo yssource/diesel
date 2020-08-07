@@ -56,15 +56,18 @@
 <span id="56">56</span>
 <span id="57">57</span>
 <span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">deserialize</span>::<span class="ident">FromSql</span>;
 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">expression</span>::<span class="ident">bound</span>::<span class="ident">Bound</span>;
+<span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">expression</span>::<span class="ident">QueryMetadata</span>;
 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">helper_types</span>::{<span class="ident">max</span>, <span class="ident">Limit</span>, <span class="ident">Select</span>};
 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">insertable</span>::<span class="ident">ColumnInsertValue</span>;
 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">query_builder</span>::{<span class="ident">InsertStatement</span>, <span class="ident">QueryFragment</span>, <span class="ident">ValuesClause</span>};
 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">query_dsl</span>::<span class="ident">methods</span>::{<span class="self">self</span>, <span class="ident">ExecuteDsl</span>, <span class="ident">LoadQuery</span>};
-<span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">sql_types</span>::<span class="ident">VarChar</span>;
+<span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">sql_types</span>::{<span class="ident">Nullable</span>, <span class="ident">VarChar</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashSet</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">FromIterator</span>;
 
@@ -95,6 +98,7 @@
     <span class="ident">__diesel_schema_migrations</span>: <span class="ident">methods</span>::<span class="ident">SelectDsl</span><span class="op">&lt;</span><span class="ident">version</span><span class="op">&gt;</span>,
     <span class="ident">Select</span><span class="op">&lt;</span><span class="ident">__diesel_schema_migrations</span>, <span class="ident">version</span><span class="op">&gt;</span>: <span class="ident">LoadQuery</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">String</span><span class="op">&gt;</span>,
     <span class="ident">Limit</span><span class="op">&lt;</span><span class="ident">Select</span><span class="op">&lt;</span><span class="ident">__diesel_schema_migrations</span>, <span class="ident">max</span><span class="op">&lt;</span><span class="ident">version</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>: <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">Backend</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>::<span class="ident">Backend</span>: <span class="ident">QueryMetadata</span><span class="op">&lt;</span><span class="ident">Nullable</span><span class="op">&lt;</span><span class="ident">VarChar</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 {
     <span class="kw">fn</span> <span class="ident">previously_run_migration_versions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="ident">__diesel_schema_migrations</span>

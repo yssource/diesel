@@ -125,21 +125,21 @@
     <span class="ident">Exists</span>(<span class="ident">Subselect</span>::<span class="ident">new</span>(<span class="ident">query</span>))
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">QueryId</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Exists</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span>);
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">QueryId</span>, <span class="ident">Debug</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Exists</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Bool</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Expression</span> <span class="kw">for</span> <span class="ident">Exists</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span>: <span class="ident">Expression</span>,
+    <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Bool</span><span class="op">&gt;</span>: <span class="ident">Expression</span>,
 {
     <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">Bool</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">GB</span><span class="op">&gt;</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span><span class="ident">GB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Exists</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span>: <span class="ident">ValidGrouping</span><span class="op">&lt;</span><span class="ident">GB</span><span class="op">&gt;</span>,
+    <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Bool</span><span class="op">&gt;</span>: <span class="ident">ValidGrouping</span><span class="op">&lt;</span><span class="ident">GB</span><span class="op">&gt;</span>,
 {
-    <span class="kw">type</span> <span class="ident">IsAggregate</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span><span class="ident">GB</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">IsAggregate</span>;
+    <span class="kw">type</span> <span class="ident">IsAggregate</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Bool</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span><span class="ident">GB</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">IsAggregate</span>;
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unstable&quot;</span>))]</span>
@@ -173,14 +173,14 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">QS</span><span class="op">&gt;</span> <span class="ident">SelectableExpression</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Exists</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="self">Self</span>: <span class="ident">AppearsOnTable</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span>,
-    <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span>: <span class="ident">SelectableExpression</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span>,
+    <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Bool</span><span class="op">&gt;</span>: <span class="ident">SelectableExpression</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span>,
 {
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">QS</span><span class="op">&gt;</span> <span class="ident">AppearsOnTable</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Exists</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="self">Self</span>: <span class="ident">Expression</span>,
-    <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span>: <span class="ident">AppearsOnTable</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span>,
+    <span class="ident">Subselect</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Bool</span><span class="op">&gt;</span>: <span class="ident">AppearsOnTable</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span>,
 {
 }
 </pre></div>

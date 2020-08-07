@@ -275,57 +275,48 @@
 <span id="275">275</span>
 <span id="276">276</span>
 <span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
-<span id="285">285</span>
-<span id="286">286</span>
-<span id="287">287</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">error</span>::<span class="ident">Error</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Write</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::{<span class="self">self</span>, <span class="ident">Backend</span>, <span class="ident">BinaryRawValue</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::{<span class="self">self</span>, <span class="ident">FromSql</span>, <span class="ident">FromSqlRow</span>, <span class="ident">Queryable</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::{<span class="self">self</span>, <span class="ident">FromSql</span>, <span class="ident">Queryable</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">serialize</span>::{<span class="self">self</span>, <span class="ident">IsNull</span>, <span class="ident">Output</span>, <span class="ident">ToSql</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{
-    <span class="self">self</span>, <span class="ident">BigInt</span>, <span class="ident">Binary</span>, <span class="ident">Bool</span>, <span class="ident">Double</span>, <span class="ident">Float</span>, <span class="ident">Integer</span>, <span class="ident">NotNull</span>, <span class="ident">SmallInt</span>, <span class="ident">Text</span>,
+    <span class="self">self</span>, <span class="ident">BigInt</span>, <span class="ident">Binary</span>, <span class="ident">Bool</span>, <span class="ident">Double</span>, <span class="ident">Float</span>, <span class="ident">Integer</span>, <span class="ident">SingleValue</span>, <span class="ident">SmallInt</span>, <span class="ident">Text</span>,
 };
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
 <span class="kw">mod</span> <span class="ident">foreign_impls</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::<span class="ident">FromSqlRow</span>;
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;Bool&quot;</span>]</span>
     <span class="kw">struct</span> <span class="ident">BoolProxy</span>(<span class="ident">bool</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>, <span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;crate::sql_types::TinyInt&quot;</span>)]</span>
     <span class="kw">struct</span> <span class="ident">I8Proxy</span>(<span class="ident">i8</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;SmallInt&quot;</span>]</span>
     <span class="kw">struct</span> <span class="ident">I16Proxy</span>(<span class="ident">i16</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;Integer&quot;</span>]</span>
     <span class="kw">struct</span> <span class="ident">I32Proxy</span>(<span class="ident">i32</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;BigInt&quot;</span>]</span>
     <span class="kw">struct</span> <span class="ident">I64Proxy</span>(<span class="ident">i64</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(
         <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>,
@@ -333,33 +324,33 @@
     )]</span>
     <span class="kw">struct</span> <span class="ident">U8Proxy</span>(<span class="ident">u8</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>, <span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;crate::sql_types::Unsigned&lt;SmallInt&gt;&quot;</span>)]</span>
     <span class="kw">struct</span> <span class="ident">U16Proxy</span>(<span class="ident">u16</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>, <span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;crate::sql_types::Unsigned&lt;Integer&gt;&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;postgres&quot;</span>, <span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;crate::sql_types::Oid&quot;</span>)]</span>
     <span class="kw">struct</span> <span class="ident">U32Proxy</span>(<span class="ident">u32</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>, <span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;crate::sql_types::Unsigned&lt;BigInt&gt;&quot;</span>)]</span>
     <span class="kw">struct</span> <span class="ident">U64Proxy</span>(<span class="ident">u64</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;Float&quot;</span>]</span>
     <span class="kw">struct</span> <span class="ident">F32Proxy</span>(<span class="ident">f32</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;Double&quot;</span>]</span>
     <span class="kw">struct</span> <span class="ident">F64Proxy</span>(<span class="ident">f64</span>);
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">AsExpression</span>, <span class="ident">FromSqlRow</span>)]</span>
     <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">foreign_derive</span>)]</span>
     <span class="attribute">#[<span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;Text&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;sqlite&quot;</span>, <span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;crate::sql_types::Date&quot;</span>)]</span>
@@ -390,14 +381,12 @@
     <span class="kw">struct</span> <span class="ident">BinarySliceProxy</span>([<span class="ident">u8</span>]);
 }
 
-<span class="kw">impl</span> <span class="ident">NotNull</span> <span class="kw">for</span> () {}
-
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">String</span>
 <span class="kw">where</span>
     <span class="ident">DB</span>: <span class="ident">Backend</span>,
     <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">str</span>: <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">str_ptr</span> <span class="op">=</span> <span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> <span class="ident">str</span> <span class="kw">as</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">bytes</span>)<span class="question-mark">?</span>;
         <span class="comment">// We know that the pointer impl will never return null</span>
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">str_ptr</span> };
@@ -415,9 +404,8 @@
 <span class="kw">where</span>
     <span class="ident">DB</span>: <span class="ident">Backend</span> <span class="op">+</span> <span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">BinaryRawValue</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">str</span>;
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="macro">not_none</span><span class="macro">!</span>(<span class="ident">value</span>);
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="ident">DB</span>::<span class="ident">as_bytes</span>(<span class="ident">value</span>))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">string</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>)
     }
@@ -428,9 +416,8 @@
 <span class="kw">where</span>
     <span class="ident">DB</span>: <span class="ident">Backend</span> <span class="op">+</span> <span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">BinaryRawValue</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
 {
-    <span class="ident">default</span> <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="ident">default</span> <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">value</span>: <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">str</span>;
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="macro">not_none</span><span class="macro">!</span>(<span class="ident">value</span>);
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="ident">DB</span>::<span class="ident">as_bytes</span>(<span class="ident">value</span>))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">string</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>)
     }
@@ -459,7 +446,7 @@
     <span class="ident">DB</span>: <span class="ident">Backend</span>,
     <span class="kw-2">*</span><span class="kw">const</span> [<span class="ident">u8</span>]: <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">slice_ptr</span> <span class="op">=</span> <span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> [<span class="ident">u8</span>] <span class="kw">as</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">bytes</span>)<span class="question-mark">?</span>;
         <span class="comment">// We know that the pointer impl will never return null</span>
         <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">slice_ptr</span> };
@@ -476,8 +463,8 @@
 <span class="kw">where</span>
     <span class="ident">DB</span>: <span class="ident">Backend</span> <span class="op">+</span> <span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">BinaryRawValue</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">DB</span>::<span class="ident">as_bytes</span>(<span class="macro">not_none</span><span class="macro">!</span>(<span class="ident">bytes</span>)) <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>)
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">DB</span>::<span class="ident">as_bytes</span>(<span class="ident">bytes</span>) <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>)
     }
 }
 
@@ -518,27 +505,17 @@
     <span class="ident">DB</span>: <span class="ident">Backend</span>,
     <span class="ident">T</span>::<span class="ident">Owned</span>: <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">backend</span>::<span class="ident">RawValue</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="ident">T</span>::<span class="ident">Owned</span>::<span class="ident">from_sql</span>(<span class="ident">bytes</span>).<span class="ident">map</span>(<span class="ident">Cow</span>::<span class="ident">Owned</span>)
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span>, <span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ToOwned</span>,
-    <span class="ident">DB</span>: <span class="ident">Backend</span>,
-    <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
-{
-    <span class="kw">fn</span> <span class="ident">build_from_row</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="kw">crate</span>::<span class="ident">row</span>::<span class="ident">Row</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="ident">FromSql</span>::<span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">row</span>.<span class="ident">take</span>())
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span>, <span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ToOwned</span>,
+    <span class="ident">ST</span>: <span class="ident">SingleValue</span>,
     <span class="ident">DB</span>: <span class="ident">Backend</span>,
-    <span class="self">Self</span>: <span class="ident">FromSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="self">Self</span>: <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
 {
     <span class="kw">type</span> <span class="ident">Row</span> <span class="op">=</span> <span class="self">Self</span>;
 
@@ -548,12 +525,14 @@
 }
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">bound</span>::<span class="ident">Bound</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::{<span class="ident">AsExpression</span>, <span class="ident">Expression</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::{<span class="ident">AsExpression</span>, <span class="ident">Expression</span>, <span class="ident">TypedExpressionType</span>};
+<span class="kw">use</span> <span class="ident">sql_types</span>::<span class="ident">SqlType</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span>, <span class="ident">ST</span><span class="op">&gt;</span> <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ToOwned</span>,
     <span class="ident">Bound</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
+    <span class="ident">ST</span>: <span class="ident">SqlType</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
 {
     <span class="kw">type</span> <span class="ident">Expression</span> <span class="op">=</span> <span class="ident">Bound</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="self">Self</span><span class="op">&gt;</span>;
 
@@ -566,6 +545,7 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">ToOwned</span>,
     <span class="ident">Bound</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
+    <span class="ident">ST</span>: <span class="ident">SqlType</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
 {
     <span class="kw">type</span> <span class="ident">Expression</span> <span class="op">=</span> <span class="ident">Bound</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">T</span><span class="op">&gt;</span>;
 

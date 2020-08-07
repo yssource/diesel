@@ -13,14 +13,10 @@
 <span id="13">13</span>
 <span id="14">14</span>
 <span id="15">15</span>
-<span id="16">16</span>
-<span id="17">17</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bigdecimal&quot;</span>)]</span>
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">bigdecimal</span>;
-
-<span class="kw">use</span> <span class="self">self</span>::<span class="ident">bigdecimal</span>::<span class="ident">BigDecimal</span>;
+<span class="kw">use</span> <span class="ident">bigdecimal</span>::<span class="ident">BigDecimal</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::{<span class="self">self</span>, <span class="ident">FromSql</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">Double</span>, <span class="ident">Numeric</span>};
@@ -28,7 +24,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sqlite</span>::<span class="ident">Sqlite</span>;
 
 <span class="kw">impl</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Numeric</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BigDecimal</span> {
-    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">SqliteValue</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_sql</span>(<span class="ident">bytes</span>: <span class="ident">SqliteValue</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">f64</span> <span class="kw">as</span> <span class="ident">FromSql</span><span class="op">&lt;</span><span class="ident">Double</span>, <span class="ident">Sqlite</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from_sql</span>(<span class="ident">bytes</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">data</span>.<span class="ident">into</span>())
     }

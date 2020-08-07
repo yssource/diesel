@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["NamedRow","Represents a row of a SQL query, where the values are accessed by name rather than by index."],["Row","Represents a single database row. Apps should not need to concern themselves with this trait."]]});
+initSidebarItems({"trait":[["Field","Represents a single field in a database row."],["NamedRow","Represents a row of a SQL query, where the values are accessed by name rather than by index."],["Row","Represents a single database row."],["RowIndex","Representing a way to index into database rows"]]});

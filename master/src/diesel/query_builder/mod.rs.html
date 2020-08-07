@@ -325,6 +325,10 @@
 <span id="325">325</span>
 <span id="326">326</span>
 <span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Contains traits responsible for the actual construction of SQL statements</span>
 <span class="doccomment">//!</span>
@@ -354,7 +358,7 @@
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">offset_clause</span>;
 <span class="kw">mod</span> <span class="ident">order_clause</span>;
 <span class="kw">mod</span> <span class="ident">returning_clause</span>;
-<span class="kw">mod</span> <span class="ident">select_clause</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">select_clause</span>;
 <span class="kw">mod</span> <span class="ident">select_statement</span>;
 <span class="kw">mod</span> <span class="ident">sql_query</span>;
 <span class="kw">mod</span> <span class="ident">update_statement</span>;
@@ -370,6 +374,10 @@
     <span class="ident">IncompleteInsertStatement</span>, <span class="ident">InsertStatement</span>, <span class="ident">UndecoratedInsertRecord</span>, <span class="ident">ValuesClause</span>,
 };
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">query_id</span>::<span class="ident">QueryId</span>;
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">select_clause</span>::{
+    <span class="ident">IntoBoxedSelectClause</span>, <span class="ident">SelectClauseExpression</span>, <span class="ident">SelectClauseQueryFragment</span>,
+};
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">select_statement</span>::{<span class="ident">BoxedSelectStatement</span>, <span class="ident">SelectStatement</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">sql_query</span>::{<span class="ident">BoxedSqlQuery</span>, <span class="ident">SqlQuery</span>};

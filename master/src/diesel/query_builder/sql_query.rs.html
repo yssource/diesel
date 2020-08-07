@@ -254,35 +254,17 @@
 <span id="254">254</span>
 <span id="255">255</span>
 <span id="256">256</span>
-<span id="257">257</span>
-<span id="258">258</span>
-<span id="259">259</span>
-<span id="260">260</span>
-<span id="261">261</span>
-<span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
 
+<span class="kw">use</span> <span class="kw">super</span>::<span class="ident">Query</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">connection</span>::<span class="ident">Connection</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">deserialize</span>::<span class="ident">QueryableByName</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">AstPass</span>, <span class="ident">QueryFragment</span>, <span class="ident">QueryId</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::{<span class="ident">LoadQuery</span>, <span class="ident">RunQueryDsl</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="ident">RunQueryDsl</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">QueryResult</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">serialize</span>::<span class="ident">ToSql</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">HasSqlType</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">HasSqlType</span>, <span class="ident">Untyped</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;Queries are only executed when calling `load`, `get_result` or similar.&quot;</span>]</span>
@@ -391,15 +373,8 @@
     <span class="kw">const</span> <span class="ident">HAS_STATIC_QUERY_ID</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">false</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Inner</span>, <span class="ident">Conn</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">LoadQuery</span><span class="op">&lt;</span><span class="ident">Conn</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SqlQuery</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">Conn</span>: <span class="ident">Connection</span>,
-    <span class="ident">T</span>: <span class="ident">QueryableByName</span><span class="op">&lt;</span><span class="ident">Conn</span>::<span class="ident">Backend</span><span class="op">&gt;</span>,
-    <span class="self">Self</span>: <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">Conn</span>::<span class="ident">Backend</span><span class="op">&gt;</span>,
-{
-    <span class="kw">fn</span> <span class="ident">internal_load</span>(<span class="self">self</span>, <span class="ident">conn</span>: <span class="kw-2">&amp;</span><span class="ident">Conn</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">conn</span>.<span class="ident">query_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>)
-    }
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span> <span class="ident">Query</span> <span class="kw">for</span> <span class="ident">SqlQuery</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">Untyped</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Inner</span>, <span class="ident">Conn</span><span class="op">&gt;</span> <span class="ident">RunQueryDsl</span><span class="op">&lt;</span><span class="ident">Conn</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SqlQuery</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span> {}
@@ -457,15 +432,8 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Conn</span>, <span class="ident">Query</span>, <span class="ident">Value</span>, <span class="ident">ST</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">LoadQuery</span><span class="op">&lt;</span><span class="ident">Conn</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UncheckedBind</span><span class="op">&lt;</span><span class="ident">Query</span>, <span class="ident">Value</span>, <span class="ident">ST</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">Conn</span>: <span class="ident">Connection</span>,
-    <span class="ident">T</span>: <span class="ident">QueryableByName</span><span class="op">&lt;</span><span class="ident">Conn</span>::<span class="ident">Backend</span><span class="op">&gt;</span>,
-    <span class="self">Self</span>: <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">Conn</span>::<span class="ident">Backend</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">QueryId</span>,
-{
-    <span class="kw">fn</span> <span class="ident">internal_load</span>(<span class="self">self</span>, <span class="ident">conn</span>: <span class="kw-2">&amp;</span><span class="ident">Conn</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">conn</span>.<span class="ident">query_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>)
-    }
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Q</span>, <span class="ident">Value</span>, <span class="ident">ST</span><span class="op">&gt;</span> <span class="ident">Query</span> <span class="kw">for</span> <span class="ident">UncheckedBind</span><span class="op">&lt;</span><span class="ident">Q</span>, <span class="ident">Value</span>, <span class="ident">ST</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">Untyped</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Conn</span>, <span class="ident">Query</span>, <span class="ident">Value</span>, <span class="ident">ST</span><span class="op">&gt;</span> <span class="ident">RunQueryDsl</span><span class="op">&lt;</span><span class="ident">Conn</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UncheckedBind</span><span class="op">&lt;</span><span class="ident">Query</span>, <span class="ident">Value</span>, <span class="ident">ST</span><span class="op">&gt;</span> {}
@@ -535,15 +503,11 @@
     <span class="kw">const</span> <span class="ident">HAS_STATIC_QUERY_ID</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">false</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Conn</span>, <span class="ident">T</span>, <span class="ident">Query</span><span class="op">&gt;</span> <span class="ident">LoadQuery</span><span class="op">&lt;</span><span class="ident">Conn</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BoxedSqlQuery</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">Conn</span>::<span class="ident">Backend</span>, <span class="ident">Query</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">DB</span>, <span class="ident">Q</span><span class="op">&gt;</span> <span class="ident">Query</span> <span class="kw">for</span> <span class="ident">BoxedSqlQuery</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">DB</span>, <span class="ident">Q</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">Conn</span>: <span class="ident">Connection</span>,
-    <span class="ident">T</span>: <span class="ident">QueryableByName</span><span class="op">&lt;</span><span class="ident">Conn</span>::<span class="ident">Backend</span><span class="op">&gt;</span>,
-    <span class="self">Self</span>: <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">Conn</span>::<span class="ident">Backend</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">QueryId</span>,
+    <span class="ident">DB</span>: <span class="ident">Backend</span>,
 {
-    <span class="kw">fn</span> <span class="ident">internal_load</span>(<span class="self">self</span>, <span class="ident">conn</span>: <span class="kw-2">&amp;</span><span class="ident">Conn</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">conn</span>.<span class="ident">query_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>)
-    }
+    <span class="kw">type</span> <span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">Untyped</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Conn</span>: <span class="ident">Connection</span>, <span class="ident">Query</span><span class="op">&gt;</span> <span class="ident">RunQueryDsl</span><span class="op">&lt;</span><span class="ident">Conn</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BoxedSqlQuery</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">Conn</span>::<span class="ident">Backend</span>, <span class="ident">Query</span><span class="op">&gt;</span> {}
