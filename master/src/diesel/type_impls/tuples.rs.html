@@ -414,6 +414,38 @@
 <span id="414">414</span>
 <span id="415">415</span>
 <span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">associations</span>::<span class="ident">BelongsTo</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>;
@@ -812,13 +844,45 @@
 }
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_sql_type</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>: <span class="ident">ident</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>: <span class="ident">ident</span>,)<span class="op">+</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="op">+</span><span class="op">&gt;</span> <span class="ident">SqlType</span> <span class="kw">for</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="kw-2">*</span>)
-        <span class="kw">where</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>: <span class="ident">SqlType</span>,
-              ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="kw-2">*</span>): <span class="ident">SqlType</span>,
-              <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>::<span class="ident">IsNull</span>: <span class="ident">OneIsNullable</span><span class="op">&lt;</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="kw-2">*</span>) <span class="kw">as</span> <span class="ident">SqlType</span><span class="op">&gt;</span>::<span class="ident">IsNull</span><span class="op">&gt;</span>,
+    (
+        @<span class="ident">build</span>
+        <span class="ident">start_ts</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>: <span class="ident">ident</span>,)<span class="kw-2">*</span>],
+        <span class="ident">ts</span> <span class="op">=</span> [<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>: <span class="ident">ident</span>,],
+        <span class="ident">bounds</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds</span>: <span class="ident">tt</span>)<span class="kw-2">*</span>],
+        <span class="ident">is_null</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">is_null</span>: <span class="ident">tt</span>)<span class="kw-2">*</span>],
+    )<span class="op">=</span><span class="op">&gt;</span> {
+        <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">SqlType</span> <span class="kw">for</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="kw-2">*</span>)
+        <span class="kw">where</span>
+            $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>: <span class="ident">SqlType</span>,)<span class="op">*</span>
+            $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds</span>)<span class="op">*</span>
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>::<span class="ident">IsNull</span>: <span class="ident">OneIsNullable</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">is_null</span>)<span class="kw-2">*</span><span class="op">&gt;</span>,
         {
-            <span class="kw">type</span> <span class="ident">IsNull</span> <span class="op">=</span> <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>::<span class="ident">IsNull</span> <span class="kw">as</span> <span class="ident">OneIsNullable</span><span class="op">&lt;</span><span class="op">&lt;</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="kw-2">*</span>) <span class="kw">as</span> <span class="ident">SqlType</span><span class="op">&gt;</span>::<span class="ident">IsNull</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Out</span>;
+            <span class="kw">type</span> <span class="ident">IsNull</span> <span class="op">=</span> <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>::<span class="ident">IsNull</span> <span class="kw">as</span> <span class="ident">OneIsNullable</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">is_null</span>)<span class="kw-2">*</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Out</span>;
+        }
+
+    };
+    (
+        @<span class="ident">build</span>
+        <span class="ident">start_ts</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>: <span class="ident">ident</span>,)<span class="kw-2">*</span>],
+        <span class="ident">ts</span> <span class="op">=</span> [<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>: <span class="ident">ident</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>: <span class="ident">ident</span>,)<span class="op">+</span>],
+        <span class="ident">bounds</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds</span>: <span class="ident">tt</span>)<span class="kw-2">*</span>],
+        <span class="ident">is_null</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">is_null</span>: <span class="ident">tt</span>)<span class="kw-2">*</span>],
+    )<span class="op">=</span><span class="op">&gt;</span> {
+        <span class="macro">impl_sql_type</span><span class="macro">!</span>{
+            @<span class="ident">build</span>
+            <span class="ident">start_ts</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ST</span>,)<span class="kw-2">*</span>],
+            <span class="ident">ts</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="kw-2">*</span>],
+            <span class="ident">bounds</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">bounds</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>::<span class="ident">IsNull</span>: <span class="ident">OneIsNullable</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">is_null</span>)<span class="kw-2">*</span><span class="op">&gt;</span>,],
+            <span class="ident">is_null</span> <span class="op">=</span> [<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>::<span class="ident">IsNull</span> <span class="kw">as</span> <span class="ident">OneIsNullable</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">is_null</span>)<span class="kw-2">*</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Out</span>],
+        }
+    };
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>: <span class="ident">ident</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>: <span class="ident">ident</span>,)<span class="op">+</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="macro">impl_sql_type</span><span class="macro">!</span>{
+            @<span class="ident">build</span>
+            <span class="ident">start_ts</span> <span class="op">=</span> [<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="kw-2">*</span>],
+            <span class="ident">ts</span> <span class="op">=</span> [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="kw-2">*</span>],
+            <span class="ident">bounds</span> <span class="op">=</span> [],
+            <span class="ident">is_null</span> <span class="op">=</span> [<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>::<span class="ident">IsNull</span>],
         }
     };
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T1</span>: <span class="ident">ident</span>,) <span class="op">=</span><span class="op">&gt;</span> {
