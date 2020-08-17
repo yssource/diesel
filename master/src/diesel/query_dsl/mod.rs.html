@@ -1301,6 +1301,9 @@
 <span id="1301">1301</span>
 <span id="1302">1302</span>
 <span id="1303">1303</span>
+<span id="1304">1304</span>
+<span id="1305">1305</span>
+<span id="1306">1306</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Traits that construct SELECT statements</span>
 <span class="doccomment">//!</span>
@@ -2503,6 +2506,9 @@
     <span class="doccomment">/// When this method is called on an insert, update, or delete statement,</span>
     <span class="doccomment">/// it will implicitly add a `RETURNING *` to the query,</span>
     <span class="doccomment">/// unless a returning clause was already specified.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This method only returns the first row that was affected, even if more</span>
+    <span class="doccomment">/// rows are affected.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Example</span>
     <span class="doccomment">///</span>
