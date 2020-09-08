@@ -3,7 +3,7 @@
 }</pre></div><div class='docblock'><p>Additional methods for RwLocks which support atomically downgrading an
 exclusive lock to a shared lock.</p>
 </div>
-            <h2 id='required-methods' class='small-section-header'>Required methods<a href='#required-methods' class='anchor'></a></h2><div class='methods'><h3 id='tymethod.downgrade' class='method'><code id='downgrade.v'>unsafe fn <a href='#tymethod.downgrade' class='fnname'>downgrade</a>(&amp;self)</code></h3><div class='docblock'><p>Atomically downgrades an exclusive lock into a shared lock without
+            <h2 id='required-methods' class='small-section-header'>Required methods<a href='#required-methods' class='anchor'></a></h2><div class='methods'><h3 id='tymethod.downgrade' class='method'><code>unsafe fn <a href='#tymethod.downgrade' class='fnname'>downgrade</a>(&amp;self)</code></h3><div class='docblock'><p>Atomically downgrades an exclusive lock into a shared lock without
 allowing any thread to take an exclusive lock in the meantime.</p>
 <h1 id="safety" class="section-header"><a href="#safety">Safety</a></h1>
 <p>This method may only be called if an exclusive lock is held in the current context.</p>

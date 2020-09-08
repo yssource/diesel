@@ -310,6 +310,35 @@
 <span id="310">310</span>
 <span id="311">311</span>
 <span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">AppearsInFromClause</span>, <span class="ident">Plus</span>, <span class="ident">QuerySource</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>;
@@ -318,6 +347,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">SelectableExpression</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="ident">InternalJoinDsl</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">QueryResult</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">BoolOrNullableBool</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">TupleAppend</span>;
@@ -585,6 +615,34 @@
         (<span class="ident">rhs</span>.<span class="ident">source</span>, <span class="ident">rhs</span>.<span class="ident">on</span>)
     }
 }
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span>, <span class="ident">On</span><span class="op">&gt;</span> <span class="ident">JoinTo</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OnClauseWrapper</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">On</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">Lhs</span>: <span class="ident">JoinTo</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>,
+{
+    <span class="kw">type</span> <span class="ident">FromClause</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Lhs</span> <span class="kw">as</span> <span class="ident">JoinTo</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">FromClause</span>;
+    <span class="kw">type</span> <span class="ident">OnClause</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Lhs</span> <span class="kw">as</span> <span class="ident">JoinTo</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">OnClause</span>;
+
+    <span class="kw">fn</span> <span class="ident">join_target</span>(<span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="self">Self</span>::<span class="ident">FromClause</span>, <span class="self">Self</span>::<span class="ident">OnClause</span>) {
+        <span class="op">&lt;</span><span class="ident">Lhs</span> <span class="kw">as</span> <span class="ident">JoinTo</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">join_target</span>(<span class="ident">rhs</span>)
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Kind</span>, <span class="ident">On1</span>, <span class="ident">On2</span>, <span class="ident">Lhs</span><span class="op">&gt;</span> <span class="ident">InternalJoinDsl</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Kind</span>, <span class="ident">On1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OnClauseWrapper</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">On2</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">Lhs</span>: <span class="ident">InternalJoinDsl</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Kind</span>, <span class="ident">On1</span><span class="op">&gt;</span>,
+{
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">OnClauseWrapper</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Lhs</span> <span class="kw">as</span> <span class="ident">InternalJoinDsl</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">Kind</span>, <span class="ident">On1</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>, <span class="ident">On2</span><span class="op">&gt;</span>;
+
+    <span class="kw">fn</span> <span class="ident">join</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>, <span class="ident">kind</span>: <span class="ident">Kind</span>, <span class="ident">on</span>: <span class="ident">On1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+        <span class="ident">OnClauseWrapper</span> {
+            <span class="ident">source</span>: <span class="self">self</span>.<span class="ident">source</span>.<span class="ident">join</span>(<span class="ident">rhs</span>, <span class="ident">kind</span>, <span class="ident">on</span>),
+            <span class="ident">on</span>: <span class="self">self</span>.<span class="ident">on</span>,
+        }
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Qs</span>, <span class="ident">On</span><span class="op">&gt;</span> <span class="ident">QueryDsl</span> <span class="kw">for</span> <span class="ident">OnClauseWrapper</span><span class="op">&lt;</span><span class="ident">Qs</span>, <span class="ident">On</span><span class="op">&gt;</span> {}
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="doccomment">/// Convert any joins in a `FROM` clause into an inner join.</span>
