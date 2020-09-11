@@ -371,13 +371,34 @@
 <span id="371">371</span>
 <span id="372">372</span>
 <span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
 </pre><div class="example-wrap"><pre class="rust ">
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">Expression</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">upsert</span>::<span class="ident">into_conflict_clause</span>::<span class="ident">IntoConflictValueClause</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">upsert</span>::<span class="ident">on_conflict_actions</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">upsert</span>::<span class="ident">on_conflict_clause</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">upsert</span>::<span class="ident">on_conflict_target</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">upsert</span>::<span class="ident">on_conflict_target_decorations</span>::<span class="ident">DecoratableTarget</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">AsChangeset</span>, <span class="ident">InsertStatement</span>, <span class="ident">UndecoratedInsertRecord</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_source</span>::<span class="ident">QuerySource</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">BoolOrNullableBool</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">Op</span>, <span class="ident">Ret</span><span class="op">&gt;</span> <span class="ident">InsertStatement</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">Op</span>, <span class="ident">Ret</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -569,6 +590,21 @@
         <span class="ident">IncompleteOnConflict</span> {
             <span class="ident">stmt</span>: <span class="self">self</span>.<span class="ident">replace_values</span>(<span class="ident">IntoConflictValueClause</span>::<span class="ident">into_value_clause</span>),
             <span class="ident">target</span>: <span class="ident">ConflictTarget</span>(<span class="ident">target</span>),
+        }
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Stmt</span>, <span class="ident">T</span>, <span class="ident">P</span><span class="op">&gt;</span> <span class="ident">DecoratableTarget</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IncompleteOnConflict</span><span class="op">&lt;</span><span class="ident">Stmt</span>, <span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">P</span>: <span class="ident">Expression</span>,
+    <span class="ident">P</span>::<span class="ident">SqlType</span>: <span class="ident">BoolOrNullableBool</span>,
+    <span class="ident">T</span>: <span class="ident">DecoratableTarget</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>,
+{
+    <span class="kw">type</span> <span class="ident">FilterOutput</span> <span class="op">=</span> <span class="ident">IncompleteOnConflict</span><span class="op">&lt;</span><span class="ident">Stmt</span>, <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">DecoratableTarget</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">FilterOutput</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">filter_target</span>(<span class="self">self</span>, <span class="ident">predicate</span>: <span class="ident">P</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">FilterOutput</span> {
+        <span class="ident">IncompleteOnConflict</span> {
+            <span class="ident">stmt</span>: <span class="self">self</span>.<span class="ident">stmt</span>,
+            <span class="ident">target</span>: <span class="self">self</span>.<span class="ident">target</span>.<span class="ident">filter_target</span>(<span class="ident">predicate</span>),
         }
     }
 }

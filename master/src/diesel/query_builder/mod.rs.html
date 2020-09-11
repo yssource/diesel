@@ -329,6 +329,7 @@
 <span id="329">329</span>
 <span id="330">330</span>
 <span id="331">331</span>
+<span id="332">332</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Contains traits responsible for the actual construction of SQL statements</span>
 <span class="doccomment">//!</span>
@@ -385,6 +386,7 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">update_statement</span>::{
     <span class="ident">AsChangeset</span>, <span class="ident">BoxedUpdateStatement</span>, <span class="ident">IntoUpdateTarget</span>, <span class="ident">UpdateStatement</span>, <span class="ident">UpdateTarget</span>,
 };
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">upsert</span>::<span class="ident">on_conflict_target_decorations</span>::<span class="ident">DecoratableTarget</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">limit_clause</span>::{<span class="ident">LimitClause</span>, <span class="ident">NoLimitClause</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">limit_offset_clause</span>::{<span class="ident">BoxedLimitOffsetClause</span>, <span class="ident">LimitOffsetClause</span>};

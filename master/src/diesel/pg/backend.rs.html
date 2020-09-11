@@ -47,6 +47,7 @@
 <span id="47">47</span>
 <span id="48">48</span>
 <span id="49">49</span>
+<span id="50">50</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! The PostgreSQL backend</span>
 
@@ -95,6 +96,7 @@
 
 <span class="kw">impl</span> <span class="ident">SupportsReturningClause</span> <span class="kw">for</span> <span class="ident">Pg</span> {}
 <span class="kw">impl</span> <span class="ident">SupportsOnConflictClause</span> <span class="kw">for</span> <span class="ident">Pg</span> {}
+<span class="kw">impl</span> <span class="ident">SupportsOnConflictTargetDecorations</span> <span class="kw">for</span> <span class="ident">Pg</span> {}
 <span class="kw">impl</span> <span class="ident">SupportsDefaultKeyword</span> <span class="kw">for</span> <span class="ident">Pg</span> {}
 <span class="kw">impl</span> <span class="ident">UsesAnsiSavepointSyntax</span> <span class="kw">for</span> <span class="ident">Pg</span> {}
 </pre></div>

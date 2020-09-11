@@ -24,6 +24,7 @@
 <span id="24">24</span>
 <span id="25">25</span>
 <span id="26">26</span>
+<span id="27">27</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Types and functions related to PG&#39;s and Sqlite&#39;s `ON CONFLICT` clause</span>
 <span class="doccomment">//!</span>
@@ -43,6 +44,7 @@
 
 <span class="kw">mod</span> <span class="ident">on_conflict_extension</span>;
 
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">on_conflict_extension</span>::<span class="ident">DecoratableTarget</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">on_conflict_extension</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;postgres&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">pg</span>::<span class="ident">query_builder</span>::<span class="ident">on_constraint</span>::<span class="kw-2">*</span>;

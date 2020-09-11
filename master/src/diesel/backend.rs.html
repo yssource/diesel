@@ -78,6 +78,8 @@
 <span id="78">78</span>
 <span id="79">79</span>
 <span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Types which represent various database backends</span>
 
@@ -155,6 +157,8 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SupportsReturningClause</span> {}
 <span class="doccomment">/// Does this backend support &#39;ON CONFLICT&#39; clause?</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SupportsOnConflictClause</span> {}
+<span class="doccomment">/// Does this backend support &#39;WHERE&#39; clauses on &#39;ON CONFLICT&#39; clauses?</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SupportsOnConflictTargetDecorations</span> {}
 <span class="doccomment">/// Does this backend support the bare `DEFAULT` keyword?</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SupportsDefaultKeyword</span> {}
 <span class="doccomment">/// Does this backend use the standard `SAVEPOINT` syntax?</span>
