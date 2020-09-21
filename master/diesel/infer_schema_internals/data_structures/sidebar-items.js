@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["ColumnDefinition",""],["ColumnInformation",""],["ColumnType",""],["ForeignKeyConstraint",""]]});

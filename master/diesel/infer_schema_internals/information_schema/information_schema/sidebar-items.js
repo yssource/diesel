@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["columns",""],["key_column_usage",""],["referential_constraints",""],["table_constraints",""],["tables",""]]});

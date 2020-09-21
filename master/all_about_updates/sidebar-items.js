@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["hide_everything",""],["increment_visit_counts",""],["publish_all_posts",""],["publish_pending_posts",""],["publish_post",""],["update_from_post_fields",""],["update_with_option",""]],"mod":[["posts",""]],"struct":[["Post",""]]});

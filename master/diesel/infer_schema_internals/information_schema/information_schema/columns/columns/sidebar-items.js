@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["column_name",""],["column_type",""],["is_nullable",""],["ordinal_position",""],["star","Represents `table_name.*`, which is sometimes needed for efficient count queries. It cannot be used in place of `all_columns`, and has a `SqlType` of `()` to prevent it being used that way"],["table_name",""],["table_schema",""],["udt_name",""]]});

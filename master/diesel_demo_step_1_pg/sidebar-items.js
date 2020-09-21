@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["establish_connection",""]],"mod":[["models",""],["schema",""]]});

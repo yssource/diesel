@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["create_post",""],["establish_connection",""]],"mod":[["models",""],["schema",""]]});
