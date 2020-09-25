@@ -1,3 +1,4 @@
 (function() {var implementors = {};
 implementors["diesel"] = [];
+implementors["diesel_dynamic_schema"] = [{"text":"impl <a class=\"trait\" href=\"diesel/expression/trait.QueryMetadata.html\" title=\"trait diesel::expression::QueryMetadata\">QueryMetadata</a>&lt;<a class=\"struct\" href=\"diesel_dynamic_schema/dynamic_value/struct.Any.html\" title=\"struct diesel_dynamic_schema::dynamic_value::Any\">Any</a>&gt; for <a class=\"struct\" href=\"diesel/mysql/backend/struct.Mysql.html\" title=\"struct diesel::mysql::backend::Mysql\">Mysql</a>","synthetic":false,"types":["diesel::mysql::backend::Mysql"]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
