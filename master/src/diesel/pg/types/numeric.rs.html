@@ -299,6 +299,35 @@
 <span id="299">299</span>
 <span id="300">300</span>
 <span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bigdecimal&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">bigdecimal</span> {
@@ -391,7 +420,17 @@
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">assign_op_pattern</span>, <span class="ident">clippy</span>::<span class="ident">redundant_closure</span>)]</span>
         <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">decimal</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">BigDecimal</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">integer</span>, <span class="ident">scale</span>) <span class="op">=</span> <span class="ident">decimal</span>.<span class="ident">as_bigint_and_exponent</span>();
-            <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="ident">scale</span> <span class="kw">as</span> <span class="ident">u16</span>;
+
+            <span class="comment">// Handling of negative scale</span>
+            <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">scale</span> <span class="op">&lt;</span> <span class="number">0</span> {
+                <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..(<span class="op">-</span><span class="ident">scale</span>) {
+                    <span class="ident">integer</span> <span class="op">=</span> <span class="ident">integer</span> <span class="op">*</span> <span class="number">10</span>;
+                }
+                <span class="number">0</span>
+            } <span class="kw">else</span> {
+                <span class="ident">scale</span> <span class="kw">as</span> <span class="ident">u16</span>
+            };
+
             <span class="ident">integer</span> <span class="op">=</span> <span class="ident">integer</span>.<span class="ident">abs</span>();
 
             <span class="comment">// Ensure that the decimal will always lie on a digit boundary</span>
@@ -402,7 +441,7 @@
 
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">digits</span> <span class="op">=</span> <span class="ident">ToBase10000</span>(<span class="prelude-val">Some</span>(<span class="ident">integer</span>)).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
             <span class="ident">digits</span>.<span class="ident">reverse</span>();
-            <span class="kw">let</span> <span class="ident">digits_after_decimal</span> <span class="op">=</span> <span class="ident">scale</span> <span class="kw">as</span> <span class="ident">u16</span> <span class="op">/</span> <span class="number">4</span> <span class="op">+</span> <span class="number">1</span>;
+            <span class="kw">let</span> <span class="ident">digits_after_decimal</span> <span class="op">=</span> <span class="ident">scale</span> <span class="op">/</span> <span class="number">4</span> <span class="op">+</span> <span class="number">1</span>;
             <span class="kw">let</span> <span class="ident">weight</span> <span class="op">=</span> <span class="ident">digits</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i16</span> <span class="op">-</span> <span class="ident">digits_after_decimal</span> <span class="kw">as</span> <span class="ident">i16</span> <span class="op">-</span> <span class="number">1</span>;
 
             <span class="kw">let</span> <span class="ident">unnecessary_zeroes</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">weight</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span> {
@@ -574,6 +613,25 @@
                 <span class="ident">weight</span>: <span class="number">0</span>,
                 <span class="ident">scale</span>: <span class="number">3</span>,
                 <span class="ident">digits</span>: <span class="macro">vec</span><span class="macro">!</span>[<span class="number">123</span>, <span class="number">4560</span>],
+            };
+            <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">expected</span>, <span class="ident">decimal</span>.<span class="ident">into</span>());
+        }
+
+        <span class="attribute">#[<span class="ident">test</span>]</span>
+        <span class="kw">fn</span> <span class="ident">bigdecimal_with_negative_scale_to_pg_numeric_works</span>() {
+            <span class="kw">let</span> <span class="ident">decimal</span> <span class="op">=</span> <span class="ident">BigDecimal</span>::<span class="ident">new</span>(<span class="number">50</span>.<span class="ident">into</span>(), <span class="op">-</span><span class="number">2</span>);
+            <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">PgNumeric</span>::<span class="ident">Positive</span> {
+                <span class="ident">weight</span>: <span class="number">0</span>,
+                <span class="ident">scale</span>: <span class="number">0</span>,
+                <span class="ident">digits</span>: <span class="macro">vec</span><span class="macro">!</span>[<span class="number">5000</span>],
+            };
+            <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">expected</span>, <span class="ident">decimal</span>.<span class="ident">into</span>());
+
+            <span class="kw">let</span> <span class="ident">decimal</span> <span class="op">=</span> <span class="ident">BigDecimal</span>::<span class="ident">new</span>(<span class="number">1</span>.<span class="ident">into</span>(), <span class="op">-</span><span class="number">4</span>);
+            <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">PgNumeric</span>::<span class="ident">Positive</span> {
+                <span class="ident">weight</span>: <span class="number">1</span>,
+                <span class="ident">scale</span>: <span class="number">0</span>,
+                <span class="ident">digits</span>: <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>, <span class="number">0</span>],
             };
             <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">expected</span>, <span class="ident">decimal</span>.<span class="ident">into</span>());
         }
