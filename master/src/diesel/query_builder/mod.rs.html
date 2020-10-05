@@ -643,17 +643,17 @@
 <span class="doccomment">/// let debug = debug_query::&lt;DB, _&gt;(&amp;query);</span>
 <span class="doccomment">/// # if cfg!(feature = &quot;postgres&quot;) {</span>
 <span class="doccomment">/// #     assert_eq!(debug.to_string(), &quot;SELECT \&quot;users\&quot;.\&quot;id\&quot;, \&quot;users\&quot;.\&quot;name\&quot; \</span>
-<span class="doccomment">/// #         FROM \&quot;users\&quot; WHERE \&quot;users\&quot;.\&quot;id\&quot; = $1 -- binds: [1]&quot;);</span>
+<span class="doccomment">/// #         FROM \&quot;users\&quot; WHERE (\&quot;users\&quot;.\&quot;id\&quot; = $1) -- binds: [1]&quot;);</span>
 <span class="doccomment">/// # } else {</span>
 <span class="doccomment">/// assert_eq!(debug.to_string(), &quot;SELECT `users`.`id`, `users`.`name` FROM `users` \</span>
-<span class="doccomment">///     WHERE `users`.`id` = ? -- binds: [1]&quot;);</span>
+<span class="doccomment">///     WHERE (`users`.`id` = ?) -- binds: [1]&quot;);</span>
 <span class="doccomment">/// # }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let debug = format!(&quot;{:?}&quot;, debug);</span>
 <span class="doccomment">/// # if !cfg!(feature = &quot;postgres&quot;) { // Escaping that string is a pain</span>
 <span class="doccomment">/// let expected = &quot;Query { \</span>
 <span class="doccomment">///     sql: \&quot;SELECT `users`.`id`, `users`.`name` FROM `users` WHERE \</span>
-<span class="doccomment">///         `users`.`id` = ?\&quot;, \</span>
+<span class="doccomment">///         (`users`.`id` = ?)\&quot;, \</span>
 <span class="doccomment">///     binds: [1] \</span>
 <span class="doccomment">/// }&quot;;</span>
 <span class="doccomment">/// assert_eq!(debug, expected);</span>

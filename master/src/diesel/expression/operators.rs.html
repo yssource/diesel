@@ -579,6 +579,11 @@
 <span id="579">579</span>
 <span id="580">580</span>
 <span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#[<span class="ident">macro_export</span>(<span class="ident">local_inner_macros</span>)]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
@@ -1003,7 +1008,6 @@
 }
 
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">And</span>, <span class="string">&quot; AND &quot;</span>);
-<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">Between</span>, <span class="string">&quot; BETWEEN &quot;</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">Escape</span>, <span class="string">&quot; ESCAPE &quot;</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">Eq</span>, <span class="string">&quot; = &quot;</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">Gt</span>, <span class="string">&quot; &gt; &quot;</span>);
@@ -1011,9 +1015,10 @@
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">Like</span>, <span class="string">&quot; LIKE &quot;</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">Lt</span>, <span class="string">&quot; &lt; &quot;</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">LtEq</span>, <span class="string">&quot; &lt;= &quot;</span>);
-<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">NotBetween</span>, <span class="string">&quot; NOT BETWEEN &quot;</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">NotEq</span>, <span class="string">&quot; != &quot;</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">NotLike</span>, <span class="string">&quot; NOT LIKE &quot;</span>);
+<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">Between</span>, <span class="string">&quot; BETWEEN &quot;</span>);
+<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">NotBetween</span>, <span class="string">&quot; NOT BETWEEN &quot;</span>);
 
 <span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="ident">IsNull</span>, <span class="string">&quot; IS NULL&quot;</span>);
 <span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="ident">IsNotNull</span>, <span class="string">&quot; IS NOT NULL&quot;</span>);
@@ -1028,11 +1033,16 @@
     <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">expression_types</span>::<span class="ident">NotSelectable</span>
 );
 
-<span class="macro">prefix_operator</span><span class="macro">!</span>(<span class="ident">Not</span>, <span class="string">&quot;NOT &quot;</span>);
+<span class="macro">prefix_operator</span><span class="macro">!</span>(
+    <span class="ident">Not</span>,
+    <span class="string">&quot; NOT &quot;</span>,
+    <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">Nullable</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">Bool</span><span class="op">&gt;</span>
+);
 
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::{<span class="ident">TypedExpressionType</span>, <span class="ident">ValidGrouping</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">insertable</span>::{<span class="ident">ColumnInsertValue</span>, <span class="ident">Insertable</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">QueryId</span>, <span class="ident">ValuesClause</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">QueryFragment</span>, <span class="ident">QueryId</span>, <span class="ident">ValuesClause</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_source</span>::<span class="ident">Column</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{
     <span class="ident">is_nullable</span>, <span class="ident">AllAreNullable</span>, <span class="ident">Bool</span>, <span class="ident">DieselNumericOps</span>, <span class="ident">MaybeNullableType</span>, <span class="ident">SqlType</span>,
@@ -1086,11 +1096,11 @@
 
 <span class="macro">impl_selectable_expression</span><span class="macro">!</span>(<span class="ident">Concat</span><span class="op">&lt;</span><span class="ident">L</span>, <span class="ident">R</span><span class="op">&gt;</span>);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">L</span>, <span class="ident">R</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Concat</span><span class="op">&lt;</span><span class="ident">L</span>, <span class="ident">R</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">L</span>, <span class="ident">R</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Concat</span><span class="op">&lt;</span><span class="ident">L</span>, <span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">L</span>: <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
-    <span class="ident">R</span>: <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
-    <span class="ident">DB</span>: <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>,
+    <span class="ident">L</span>: <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="ident">R</span>: <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="ident">DB</span>: <span class="ident">Backend</span>,
 {
     <span class="kw">fn</span> <span class="ident">walk_ast</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,

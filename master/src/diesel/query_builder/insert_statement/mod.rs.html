@@ -609,6 +609,14 @@
 <span id="609">609</span>
 <span id="610">610</span>
 <span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">mod</span> <span class="ident">column_list</span>;
 <span class="kw">mod</span> <span class="ident">insert_from_select</span>;
@@ -623,6 +631,7 @@
 
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">returning_clause</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">grouped</span>::<span class="ident">Grouped</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">operators</span>::<span class="ident">Eq</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::{<span class="ident">Expression</span>, <span class="ident">NonAggregate</span>, <span class="ident">SelectableExpression</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">insertable</span>::<span class="kw-2">*</span>;
@@ -1120,6 +1129,13 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="ident">UndecoratedInsertRecord</span><span class="op">&lt;</span><span class="ident">Lhs</span>::<span class="ident">Table</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Eq</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">Lhs</span>: <span class="ident">Column</span> {}
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span>, <span class="ident">Tab</span><span class="op">&gt;</span> <span class="ident">UndecoratedInsertRecord</span><span class="op">&lt;</span><span class="ident">Tab</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Eq</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">where</span>
+    <span class="ident">Eq</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>: <span class="ident">UndecoratedInsertRecord</span><span class="op">&lt;</span><span class="ident">Tab</span><span class="op">&gt;</span>
+{
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span><span class="op">&gt;</span> <span class="ident">UndecoratedInsertRecord</span><span class="op">&lt;</span><span class="ident">Lhs</span>::<span class="ident">Table</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Grouped</span><span class="op">&lt;</span><span class="ident">Eq</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">Lhs</span>: <span class="ident">Column</span> {}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span>, <span class="ident">Tab</span><span class="op">&gt;</span> <span class="ident">UndecoratedInsertRecord</span><span class="op">&lt;</span><span class="ident">Tab</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Grouped</span><span class="op">&lt;</span><span class="ident">Eq</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">where</span>
     <span class="ident">Eq</span><span class="op">&lt;</span><span class="ident">Lhs</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>: <span class="ident">UndecoratedInsertRecord</span><span class="op">&lt;</span><span class="ident">Tab</span><span class="op">&gt;</span>
 {
 }

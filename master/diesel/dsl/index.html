@@ -34,12 +34,16 @@ Foldable.</p>
 </td></tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table><tr class='module-item'><td><a class="type" href="type.And.html" title='diesel::dsl::And type'>And</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.BoolExpressionMethods.html#method.and"><code>lhs.and(rhs)</code></a></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.ArrayContains.html" title='diesel::dsl::ArrayContains type'>ArrayContains</a></td><td class='docblock-short'><p>The return type of <code>lhs.contains(rhs)</code> for array expressions</p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.AsExpr.html" title='diesel::dsl::AsExpr type'>AsExpr</a></td><td class='docblock-short'><p>The type of <code>Item</code> when converted to an expression with the same type as <code>TargetExpr</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.AsExprOf.html" title='diesel::dsl::AsExprOf type'>AsExprOf</a></td><td class='docblock-short'><p>The type of <code>Item</code> when converted to an expression of <code>Type</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Asc.html" title='diesel::dsl::Asc type'>Asc</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.ExpressionMethods.html#method.asc"><code>expr.asc()</code></a></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.AtTimeZone.html" title='diesel::dsl::AtTimeZone type'>AtTimeZone</a></td><td class='docblock-short'><p>The return type of <code>expr.at_time_zone(tz)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Between.html" title='diesel::dsl::Between type'>Between</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.ExpressionMethods.html#method.between"><code>lhs.between(lower, upper)</code></a></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.Concat.html" title='diesel::dsl::Concat type'>Concat</a></td><td class='docblock-short'><p>The return type of
+<a href="../expression_methods/trait.TextExpressionMethods.html#method.concat"><code>lhs.concat(rhs)</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Desc.html" title='diesel::dsl::Desc type'>Desc</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.ExpressionMethods.html#method.desc"><code>expr.desc()</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Distinct.html" title='diesel::dsl::Distinct type'>Distinct</a></td><td class='docblock-short'><p>Represents the return type of <code>.distinct()</code></p>
@@ -61,9 +65,13 @@ Foldable.</p>
 <a href="../expression_methods/trait.ExpressionMethods.html#method.gt"><code>lhs.gt(rhs)</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.GtEq.html" title='diesel::dsl::GtEq type'>GtEq</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.ExpressionMethods.html#method.ge"><code>lhs.ge(rhs)</code></a></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.ILike.html" title='diesel::dsl::ILike type'>ILike</a></td><td class='docblock-short'><p>The return type of <code>lhs.ilike(rhs)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.InnerJoin.html" title='diesel::dsl::InnerJoin type'>InnerJoin</a></td><td class='docblock-short'><p>Represents the return type of <code>.inner_join(rhs)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.InnerJoinOn.html" title='diesel::dsl::InnerJoinOn type'>InnerJoinOn</a></td><td class='docblock-short'><p>Represents the return type of <code>.inner_join(rhs.on(on))</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.IntoBoxed.html" title='diesel::dsl::IntoBoxed type'>IntoBoxed</a></td><td class='docblock-short'><p>Represents the return type of <code>.into_boxed::&lt;'a, DB&gt;()</code></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.IsContainedBy.html" title='diesel::dsl::IsContainedBy type'>IsContainedBy</a></td><td class='docblock-short'><p>The return type of <code>lhs.is_contained_by(rhs)</code></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.IsDistinctFrom.html" title='diesel::dsl::IsDistinctFrom type'>IsDistinctFrom</a></td><td class='docblock-short'><p>The return type of <code>lhs.is_distinct_from(rhs)</code></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.IsNotDistinctFrom.html" title='diesel::dsl::IsNotDistinctFrom type'>IsNotDistinctFrom</a></td><td class='docblock-short'><p>The return type of <code>lhs.is_not_distinct_from(rhs)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.IsNotNull.html" title='diesel::dsl::IsNotNull type'>IsNotNull</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.ExpressionMethods.html#method.is_not_null"><code>expr.is_not_null()</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.IsNull.html" title='diesel::dsl::IsNull type'>IsNull</a></td><td class='docblock-short'><p>The return type of
@@ -84,16 +92,21 @@ Foldable.</p>
 <a href="../expression_methods/trait.ExpressionMethods.html#method.not_between"><code>lhs.not_between(lower, upper)</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.NotEq.html" title='diesel::dsl::NotEq type'>NotEq</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.ExpressionMethods.html#method.ne"><code>lhs.ne(rhs)</code></a></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.NotILike.html" title='diesel::dsl::NotILike type'>NotILike</a></td><td class='docblock-short'><p>The return type of <code>lhs.not_ilike(rhs)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.NotLike.html" title='diesel::dsl::NotLike type'>NotLike</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.TextExpressionMethods.html#method.not_like"><code>lhs.not_like(rhs)</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Nullable.html" title='diesel::dsl::Nullable type'>Nullable</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.NullableExpressionMethods.html#method.nullable"><code>expr.nullable()</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.NullableSelect.html" title='diesel::dsl::NullableSelect type'>NullableSelect</a></td><td class='docblock-short'><p>Represents the return type of <code>.nullable()</code></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.NullsFirst.html" title='diesel::dsl::NullsFirst type'>NullsFirst</a></td><td class='docblock-short'><p>The return type of <code>expr.nulls_first()</code></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.NullsLast.html" title='diesel::dsl::NullsLast type'>NullsLast</a></td><td class='docblock-short'><p>The return type of <code>expr.nulls_last()</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Offset.html" title='diesel::dsl::Offset type'>Offset</a></td><td class='docblock-short'><p>Represents the return type of <code>.offset()</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Or.html" title='diesel::dsl::Or type'>Or</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.BoolExpressionMethods.html#method.or"><code>lhs.or(rhs)</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.OrFilter.html" title='diesel::dsl::OrFilter type'>OrFilter</a></td><td class='docblock-short'><p>Represents the return type of <code>.or_filter(predicate)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Order.html" title='diesel::dsl::Order type'>Order</a></td><td class='docblock-short'><p>Represents the return type of <code>.order(ordering)</code></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.OverlapsWith.html" title='diesel::dsl::OverlapsWith type'>OverlapsWith</a></td><td class='docblock-short'><p>The return type of <code>lhs.overlaps_with(rhs)</code></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.RangeContains.html" title='diesel::dsl::RangeContains type'>RangeContains</a></td><td class='docblock-short'><p>The return type of <code>lhs.contains(rhs)</code> for range expressions</p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Select.html" title='diesel::dsl::Select type'>Select</a></td><td class='docblock-short'><p>Represents the return type of <code>.select(selection)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.SingleValue.html" title='diesel::dsl::SingleValue type'>SingleValue</a></td><td class='docblock-short'><p>Represents the return type of <code>.single_value()</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.SkipLocked.html" title='diesel::dsl::SkipLocked type'>SkipLocked</a></td><td class='docblock-short'><p>Represents the return type of <code>.skip_locked()</code></p>

@@ -567,6 +567,93 @@
 <span id="567">567</span>
 <span id="568">568</span>
 <span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
+<span id="580">580</span>
+<span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
+<span id="650">650</span>
+<span id="651">651</span>
+<span id="652">652</span>
+<span id="653">653</span>
+<span id="654">654</span>
+<span id="655">655</span>
+<span id="656">656</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! AST types representing various typed SQL expressions.</span>
 <span class="doccomment">//!</span>
@@ -652,7 +739,7 @@
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">dsl</span>::<span class="ident">AsExprOf</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">HasSqlType</span>, <span class="ident">SingleValue</span>, <span class="ident">SqlType</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">HasSqlType</span>, <span class="ident">IntoNotNullable</span>, <span class="ident">SingleValue</span>, <span class="ident">SqlType</span>};
 
 <span class="doccomment">/// Represents a typed fragment of SQL.</span>
 <span class="doccomment">///</span>
@@ -778,14 +865,101 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ST</span><span class="op">&gt;</span> <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span>
 <span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
-    <span class="ident">ST</span>: <span class="ident">SqlType</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
+    <span class="ident">ST</span>: <span class="ident">SqlType</span> <span class="op">+</span> <span class="ident">IntoNotNullable</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
+    <span class="ident">ST</span>::<span class="ident">NotNullable</span>: <span class="ident">SingleValue</span>,
+    <span class="self">self</span>::<span class="ident">as_expression_impl</span>::<span class="ident">ExpressionImplHelper</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ST</span>::<span class="ident">IsNull</span>, <span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span> <span class="kw">as</span> <span class="ident">SqlType</span><span class="op">&gt;</span>::<span class="ident">IsNull</span><span class="op">&gt;</span>:
+        <span class="self">self</span>::<span class="ident">as_expression_impl</span>::<span class="ident">AsExpressionHelper</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>: <span class="ident">Expression</span>,
+    <span class="ident">T</span>::<span class="ident">SqlType</span>: <span class="ident">SqlType</span>,
 {
-    <span class="kw">type</span> <span class="ident">Expression</span> <span class="op">=</span> <span class="self">Self</span>;
+    <span class="kw">type</span> <span class="ident">Expression</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">self</span>::<span class="ident">as_expression_impl</span>::<span class="ident">ExpressionImplHelper</span><span class="op">&lt;</span>
+        <span class="ident">T</span>,
+        <span class="ident">ST</span>::<span class="ident">IsNull</span>,
+        <span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span> <span class="kw">as</span> <span class="ident">SqlType</span><span class="op">&gt;</span>::<span class="ident">IsNull</span>,
+    <span class="op">&gt;</span> <span class="kw">as</span> <span class="self">self</span>::<span class="ident">as_expression_impl</span>::<span class="ident">AsExpressionHelper</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Expression</span>;
 
-    <span class="kw">fn</span> <span class="ident">as_expression</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>
+    <span class="kw">fn</span> <span class="ident">as_expression</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Expression</span> {
+        <span class="kw">use</span> <span class="self">self</span>::<span class="ident">as_expression_impl</span>::<span class="ident">AsExpressionHelper</span>;
+
+        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="self">self</span>::<span class="ident">as_expression_impl</span>::<span class="ident">ExpressionImplHelper</span>::<span class="op">&lt;</span>
+            <span class="kw">_</span>,
+            <span class="ident">ST</span>::<span class="ident">IsNull</span>,
+            <span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">SqlType</span> <span class="kw">as</span> <span class="ident">SqlType</span><span class="op">&gt;</span>::<span class="ident">IsNull</span>,
+        <span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>);
+        <span class="ident">t</span>.<span class="ident">as_expression</span>()
     }
+}
+
+<span class="kw">mod</span> <span class="ident">as_expression_impl</span> {
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::<span class="ident">is_nullable</span>;
+
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_debug_implementations</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExpressionImplHelper</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">IsNullExpr</span>, <span class="ident">IsNullAsExpr</span><span class="op">&gt;</span>(
+        <span class="kw">pub</span> <span class="ident">T</span>,
+        <span class="kw">pub</span> <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span><span class="op">&lt;</span>(<span class="ident">IsNullExpr</span>, <span class="ident">IsNullAsExpr</span>)<span class="op">&gt;</span>,
+    );
+
+    <span class="comment">// We could use `AsExpression` here instead of defining a new trait in theory</span>
+    <span class="comment">// in practice we hit https://github.com/rust-lang/rust/issues/77446 then</span>
+    <span class="comment">// when defining a custom type in a third party crate</span>
+    <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">AsExpressionHelper</span><span class="op">&lt;</span><span class="ident">ST</span>: <span class="ident">TypedExpressionType</span><span class="op">&gt;</span> {
+        <span class="kw">type</span> <span class="ident">Expression</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>;
+
+        <span class="kw">fn</span> <span class="ident">as_expression</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Expression</span>;
+    }
+
+    <span class="comment">// This impl is for accepting a not nullable expression in a position where</span>
+    <span class="comment">// a not nullable expression is expected</span>
+    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ST</span><span class="op">&gt;</span> <span class="ident">AsExpressionHelper</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span>
+        <span class="kw">for</span> <span class="ident">ExpressionImplHelper</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">is_nullable</span>::<span class="ident">NotNull</span>, <span class="ident">is_nullable</span>::<span class="ident">NotNull</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">ST</span>: <span class="ident">SqlType</span><span class="op">&lt;</span><span class="ident">IsNull</span> <span class="op">=</span> <span class="ident">is_nullable</span>::<span class="ident">NotNull</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
+        <span class="ident">T</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
+    {
+        <span class="kw">type</span> <span class="ident">Expression</span> <span class="op">=</span> <span class="ident">T</span>;
+
+        <span class="kw">fn</span> <span class="ident">as_expression</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Expression</span> {
+            <span class="self">self</span>.<span class="number">0</span>
+        }
+    }
+
+    <span class="comment">// This impl is for accepting a not nullable expression in a position where</span>
+    <span class="comment">// a nullable expression is expected</span>
+    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ST</span><span class="op">&gt;</span> <span class="ident">AsExpressionHelper</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span>
+        <span class="kw">for</span> <span class="ident">ExpressionImplHelper</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">is_nullable</span>::<span class="ident">IsNullable</span>, <span class="ident">is_nullable</span>::<span class="ident">NotNull</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">ST</span>: <span class="ident">SqlType</span><span class="op">&lt;</span><span class="ident">IsNull</span> <span class="op">=</span> <span class="ident">is_nullable</span>::<span class="ident">IsNullable</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IntoNotNullable</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
+        <span class="ident">ST</span>::<span class="ident">NotNullable</span>: <span class="ident">TypedExpressionType</span> <span class="op">+</span> <span class="ident">SqlType</span>,
+        <span class="ident">T</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span>::<span class="ident">NotNullable</span><span class="op">&gt;</span>,
+        <span class="kw">super</span>::<span class="ident">nullable</span>::<span class="ident">Nullable</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
+    {
+        <span class="kw">type</span> <span class="ident">Expression</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">nullable</span>::<span class="ident">Nullable</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
+
+        <span class="kw">fn</span> <span class="ident">as_expression</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Expression</span> {
+            <span class="kw">super</span>::<span class="ident">nullable</span>::<span class="ident">Nullable</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="number">0</span>)
+        }
+    }
+
+    <span class="comment">// This impl is for accepting a nullable expression in a position where</span>
+    <span class="comment">// a nullable expression is expected</span>
+    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">ST</span><span class="op">&gt;</span> <span class="ident">AsExpressionHelper</span><span class="op">&lt;</span><span class="ident">ST</span><span class="op">&gt;</span>
+        <span class="kw">for</span> <span class="ident">ExpressionImplHelper</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">is_nullable</span>::<span class="ident">IsNullable</span>, <span class="ident">is_nullable</span>::<span class="ident">IsNullable</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">ST</span>: <span class="ident">SqlType</span><span class="op">&lt;</span><span class="ident">IsNull</span> <span class="op">=</span> <span class="ident">is_nullable</span>::<span class="ident">IsNullable</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
+        <span class="ident">T</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
+    {
+        <span class="kw">type</span> <span class="ident">Expression</span> <span class="op">=</span> <span class="ident">T</span>;
+
+        <span class="kw">fn</span> <span class="ident">as_expression</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Expression</span> {
+            <span class="self">self</span>.<span class="number">0</span>
+        }
+    }
+
+    <span class="comment">// impl&lt;T, ST&gt; AsExpressionHelper&lt;ST&gt; for</span>
+    <span class="comment">//     ExpressionImplHelper&lt;T, is_nullable::NotNull, is_nullable::IsNullable&gt;</span>
+    <span class="comment">// is missing because we don&#39;t want to accept a nullable expression in possition where</span>
+    <span class="comment">// where a not nullable expression is expected</span>
 }
 
 <span class="doccomment">/// Converts a type to its representation for use in Diesel&#39;s query builder.</span>
@@ -836,7 +1010,7 @@
         <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">Self</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
         <span class="ident">T</span>: <span class="ident">SqlType</span> <span class="op">+</span> <span class="ident">TypedExpressionType</span>,
     {
-        <span class="self">self</span>.<span class="ident">as_expression</span>()
+        <span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">Self</span> <span class="kw">as</span> <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">as_expression</span>(<span class="self">self</span>)
     }
 }
 
