@@ -140,6 +140,19 @@
 <span id="140">140</span>
 <span id="141">141</span>
 <span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">associations</span>::<span class="ident">HasTable</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;sqlite&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>))]</span>
@@ -149,12 +162,16 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">dsl</span>::<span class="ident">Find</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;sqlite&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;postgres&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>))]</span>
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">dsl</span>::<span class="ident">Update</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;sqlite&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;postgres&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>))]</span>
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::{<span class="ident">is_aggregate</span>, <span class="ident">MixedAggregates</span>, <span class="ident">ValidGrouping</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">AsChangeset</span>, <span class="ident">IntoUpdateTarget</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;sqlite&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>))]</span>
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="ident">methods</span>::{<span class="ident">ExecuteDsl</span>, <span class="ident">FindDsl</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;sqlite&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;postgres&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>))]</span>
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::{<span class="ident">LoadQuery</span>, <span class="ident">RunQueryDsl</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">QueryResult</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;sqlite&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;postgres&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;mysql&quot;</span>))]</span>
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Table</span>;
 
 <span class="doccomment">/// A trait defining how to update a record and fetch the updated entry</span>
 <span class="doccomment">/// on a certain backend.</span>
@@ -179,6 +196,9 @@
 <span class="kw">where</span>
     <span class="ident">Changes</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">AsChangeset</span><span class="op">&lt;</span><span class="ident">Target</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Changes</span> <span class="kw">as</span> <span class="ident">HasTable</span><span class="op">&gt;</span>::<span class="ident">Table</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">IntoUpdateTarget</span>,
     <span class="ident">Update</span><span class="op">&lt;</span><span class="ident">Changes</span>, <span class="ident">Changes</span><span class="op">&gt;</span>: <span class="ident">LoadQuery</span><span class="op">&lt;</span><span class="ident">PgConnection</span>, <span class="ident">Output</span><span class="op">&gt;</span>,
+    <span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Table</span> <span class="kw">as</span> <span class="ident">Table</span><span class="op">&gt;</span>::<span class="ident">AllColumns</span>: <span class="ident">ValidGrouping</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
+    <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Table</span> <span class="kw">as</span> <span class="ident">Table</span><span class="op">&gt;</span>::<span class="ident">AllColumns</span> <span class="kw">as</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span>()<span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">IsAggregate</span>:
+        <span class="ident">MixedAggregates</span><span class="op">&lt;</span><span class="ident">is_aggregate</span>::<span class="ident">No</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">is_aggregate</span>::<span class="ident">No</span><span class="op">&gt;</span>,
 {
     <span class="kw">fn</span> <span class="ident">update_and_fetch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">changeset</span>: <span class="ident">Changes</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span><span class="ident">Output</span><span class="op">&gt;</span> {
         <span class="kw">crate</span>::<span class="ident">update</span>(<span class="ident">changeset</span>).<span class="ident">set</span>(<span class="ident">changeset</span>).<span class="ident">get_result</span>(<span class="self">self</span>)
@@ -196,6 +216,9 @@
     <span class="ident">Changes</span>::<span class="ident">Table</span>: <span class="ident">FindDsl</span><span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Id</span><span class="op">&gt;</span>,
     <span class="ident">Update</span><span class="op">&lt;</span><span class="ident">Changes</span>, <span class="ident">Changes</span><span class="op">&gt;</span>: <span class="ident">ExecuteDsl</span><span class="op">&lt;</span><span class="ident">SqliteConnection</span><span class="op">&gt;</span>,
     <span class="ident">Find</span><span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Table</span>, <span class="ident">Changes</span>::<span class="ident">Id</span><span class="op">&gt;</span>: <span class="ident">LoadQuery</span><span class="op">&lt;</span><span class="ident">SqliteConnection</span>, <span class="ident">Output</span><span class="op">&gt;</span>,
+    <span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Table</span> <span class="kw">as</span> <span class="ident">Table</span><span class="op">&gt;</span>::<span class="ident">AllColumns</span>: <span class="ident">ValidGrouping</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
+    <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Table</span> <span class="kw">as</span> <span class="ident">Table</span><span class="op">&gt;</span>::<span class="ident">AllColumns</span> <span class="kw">as</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span>()<span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">IsAggregate</span>:
+        <span class="ident">MixedAggregates</span><span class="op">&lt;</span><span class="ident">is_aggregate</span>::<span class="ident">No</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">is_aggregate</span>::<span class="ident">No</span><span class="op">&gt;</span>,
 {
     <span class="kw">fn</span> <span class="ident">update_and_fetch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">changeset</span>: <span class="ident">Changes</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span><span class="ident">Output</span><span class="op">&gt;</span> {
         <span class="kw">crate</span>::<span class="ident">update</span>(<span class="ident">changeset</span>).<span class="ident">set</span>(<span class="ident">changeset</span>).<span class="ident">execute</span>(<span class="self">self</span>)<span class="question-mark">?</span>;
@@ -214,6 +237,9 @@
     <span class="ident">Changes</span>::<span class="ident">Table</span>: <span class="ident">FindDsl</span><span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Id</span><span class="op">&gt;</span>,
     <span class="ident">Update</span><span class="op">&lt;</span><span class="ident">Changes</span>, <span class="ident">Changes</span><span class="op">&gt;</span>: <span class="ident">ExecuteDsl</span><span class="op">&lt;</span><span class="ident">MysqlConnection</span><span class="op">&gt;</span>,
     <span class="ident">Find</span><span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Table</span>, <span class="ident">Changes</span>::<span class="ident">Id</span><span class="op">&gt;</span>: <span class="ident">LoadQuery</span><span class="op">&lt;</span><span class="ident">MysqlConnection</span>, <span class="ident">Output</span><span class="op">&gt;</span>,
+    <span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Table</span> <span class="kw">as</span> <span class="ident">Table</span><span class="op">&gt;</span>::<span class="ident">AllColumns</span>: <span class="ident">ValidGrouping</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
+    <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">Changes</span>::<span class="ident">Table</span> <span class="kw">as</span> <span class="ident">Table</span><span class="op">&gt;</span>::<span class="ident">AllColumns</span> <span class="kw">as</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span>()<span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">IsAggregate</span>:
+        <span class="ident">MixedAggregates</span><span class="op">&lt;</span><span class="ident">is_aggregate</span>::<span class="ident">No</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">is_aggregate</span>::<span class="ident">No</span><span class="op">&gt;</span>,
 {
     <span class="kw">fn</span> <span class="ident">update_and_fetch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">changeset</span>: <span class="ident">Changes</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span><span class="ident">Output</span><span class="op">&gt;</span> {
         <span class="kw">crate</span>::<span class="ident">update</span>(<span class="ident">changeset</span>).<span class="ident">set</span>(<span class="ident">changeset</span>).<span class="ident">execute</span>(<span class="self">self</span>)<span class="question-mark">?</span>;
