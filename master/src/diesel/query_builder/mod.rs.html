@@ -331,6 +331,10 @@
 <span id="330">330</span>
 <span id="331">331</span>
 <span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Contains traits responsible for the actual construction of SQL statements</span>
 <span class="doccomment">//!</span>
@@ -424,6 +428,10 @@
     <span class="doccomment">/// Add a placeholder for a bind parameter to the end of the query being</span>
     <span class="doccomment">/// constructed.</span>
     <span class="kw">fn</span> <span class="ident">push_bind_param</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>);
+
+    <span class="doccomment">/// Increases the internal counter for bind parameters without adding the</span>
+    <span class="doccomment">/// bind parameter itself to the query</span>
+    <span class="kw">fn</span> <span class="ident">push_bind_param_value_only</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {}
 
     <span class="doccomment">/// Returns the constructed SQL query.</span>
     <span class="kw">fn</span> <span class="ident">finish</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">String</span>;
