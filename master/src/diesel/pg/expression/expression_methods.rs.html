@@ -606,6 +606,84 @@
 <span id="605">605</span>
 <span id="606">606</span>
 <span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
+<span id="650">650</span>
+<span id="651">651</span>
+<span id="652">652</span>
+<span id="653">653</span>
+<span id="654">654</span>
+<span id="655">655</span>
+<span id="656">656</span>
+<span id="657">657</span>
+<span id="658">658</span>
+<span id="659">659</span>
+<span id="660">660</span>
+<span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
+<span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! PostgreSQL specific expression methods</span>
 
@@ -1092,6 +1170,62 @@
     {
         <span class="ident">Grouped</span>(<span class="ident">NotILike</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>.<span class="ident">as_expression</span>()))
     }
+
+    <span class="doccomment">/// Creates a PostgreSQL `SIMILAR TO` expression</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Example</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// # include!(&quot;../../doctest_setup.rs&quot;);</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # fn main() {</span>
+    <span class="doccomment">/// #     run_test().unwrap();</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # fn run_test() -&gt; QueryResult&lt;()&gt; {</span>
+    <span class="doccomment">/// #     use schema::animals::dsl::*;</span>
+    <span class="doccomment">/// #     let connection = establish_connection();</span>
+    <span class="doccomment">/// let starts_with_s = animals</span>
+    <span class="doccomment">///     .select(species)</span>
+    <span class="doccomment">///     .filter(name.similar_to(&quot;s%&quot;).or(species.similar_to(&quot;s%&quot;)))</span>
+    <span class="doccomment">///     .get_results::&lt;String&gt;(&amp;connection)?;</span>
+    <span class="doccomment">/// assert_eq!(vec![&quot;spider&quot;], starts_with_s);</span>
+    <span class="doccomment">/// #     Ok(())</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">similar_to</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">dsl</span>::<span class="ident">SimilarTo</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">T</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="ident">Text</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">Grouped</span>(<span class="ident">SimilarTo</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>.<span class="ident">as_expression</span>()))
+    }
+
+    <span class="doccomment">/// Creates a PostgreSQL `NOT SIMILAR TO` expression</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Example</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// # include!(&quot;../../doctest_setup.rs&quot;);</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # fn main() {</span>
+    <span class="doccomment">/// #     run_test().unwrap();</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # fn run_test() -&gt; QueryResult&lt;()&gt; {</span>
+    <span class="doccomment">/// #     use schema::animals::dsl::*;</span>
+    <span class="doccomment">/// #     let connection = establish_connection();</span>
+    <span class="doccomment">/// let doesnt_start_with_s = animals</span>
+    <span class="doccomment">///     .select(species)</span>
+    <span class="doccomment">///     .filter(name.not_similar_to(&quot;s%&quot;).and(species.not_similar_to(&quot;s%&quot;)))</span>
+    <span class="doccomment">///     .get_results::&lt;String&gt;(&amp;connection)?;</span>
+    <span class="doccomment">/// assert_eq!(vec![&quot;dog&quot;], doesnt_start_with_s);</span>
+    <span class="doccomment">/// #     Ok(())</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">not_similar_to</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">dsl</span>::<span class="ident">NotSimilarTo</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">T</span>: <span class="ident">AsExpression</span><span class="op">&lt;</span><span class="ident">Text</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">Grouped</span>(<span class="ident">NotSimilarTo</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">other</span>.<span class="ident">as_expression</span>()))
+    }
 }
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
@@ -1123,6 +1257,28 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">EscapeExpressionMethods</span> <span class="kw">for</span> <span class="ident">Grouped</span><span class="op">&lt;</span><span class="ident">NotILike</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;&gt;</span> {
     <span class="kw">type</span> <span class="ident">TextExpression</span> <span class="op">=</span> <span class="ident">NotILike</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+
+    <span class="kw">fn</span> <span class="ident">escape</span>(<span class="self">self</span>, <span class="ident">character</span>: <span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">dsl</span>::<span class="ident">Escape</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="ident">Grouped</span>(<span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">operators</span>::<span class="ident">Escape</span>::<span class="ident">new</span>(
+            <span class="self">self</span>.<span class="number">0</span>,
+            <span class="ident">character</span>.<span class="ident">to_string</span>().<span class="ident">into_sql</span>::<span class="op">&lt;</span><span class="ident">VarChar</span><span class="op">&gt;</span>(),
+        ))
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">EscapeExpressionMethods</span> <span class="kw">for</span> <span class="ident">Grouped</span><span class="op">&lt;</span><span class="ident">SimilarTo</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;&gt;</span> {
+    <span class="kw">type</span> <span class="ident">TextExpression</span> <span class="op">=</span> <span class="ident">SimilarTo</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>;
+
+    <span class="kw">fn</span> <span class="ident">escape</span>(<span class="self">self</span>, <span class="ident">character</span>: <span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">dsl</span>::<span class="ident">Escape</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="ident">Grouped</span>(<span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">operators</span>::<span class="ident">Escape</span>::<span class="ident">new</span>(
+            <span class="self">self</span>.<span class="number">0</span>,
+            <span class="ident">character</span>.<span class="ident">to_string</span>().<span class="ident">into_sql</span>::<span class="op">&lt;</span><span class="ident">VarChar</span><span class="op">&gt;</span>(),
+        ))
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">EscapeExpressionMethods</span> <span class="kw">for</span> <span class="ident">Grouped</span><span class="op">&lt;</span><span class="ident">NotSimilarTo</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;&gt;</span> {
+    <span class="kw">type</span> <span class="ident">TextExpression</span> <span class="op">=</span> <span class="ident">NotSimilarTo</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">escape</span>(<span class="self">self</span>, <span class="ident">character</span>: <span class="ident">char</span>) <span class="op">-&gt;</span> <span class="ident">dsl</span>::<span class="ident">Escape</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="ident">Grouped</span>(<span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">operators</span>::<span class="ident">Escape</span>::<span class="ident">new</span>(

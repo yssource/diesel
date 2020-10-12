@@ -11,6 +11,8 @@
 <span id="10">10</span>
 <span id="11">11</span>
 <span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">expression_types</span>::<span class="ident">NotSelectable</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">pg</span>::<span class="ident">Pg</span>;
@@ -22,6 +24,8 @@
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">IsContainedBy</span>, <span class="string">&quot; &lt;@ &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">ILike</span>, <span class="string">&quot; ILIKE &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">NotILike</span>, <span class="string">&quot; NOT ILIKE &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
+<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">SimilarTo</span>, <span class="string">&quot; SIMILAR TO &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
+<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">NotSimilarTo</span>, <span class="string">&quot; NOT SIMILAR TO &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
 <span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="ident">NullsFirst</span>, <span class="string">&quot; NULLS FIRST&quot;</span>, <span class="ident">NotSelectable</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
 <span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="ident">NullsLast</span>, <span class="string">&quot; NULLS LAST&quot;</span>, <span class="ident">NotSelectable</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
 </pre></div>
