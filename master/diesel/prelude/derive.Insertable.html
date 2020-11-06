@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `Insertable` derive in crate `diesel`."><meta name="keywords" content="rust, rustlang, rust-lang, Insertable"><title>diesel::prelude::Insertable - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc derive"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../diesel/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><p class='location'><a href='../index.html'>diesel</a>::<wbr><a href='index.html'>prelude</a></p><script>window.sidebarCurrent = {name: 'Insertable', ty: 'derive', relpath: ''};</script><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
-                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../../src/diesel_derives/lib.rs.html#257-259' title='goto source code'>[src]</a></span><span class='in-band'>Derive Macro <a href='../index.html'>diesel</a>::<wbr><a href='index.html'>prelude</a>::<wbr><a class="derive" href=''>Insertable</a></span></h1><pre class='rust derive'>#[derive(Insertable)]
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../../src/diesel_derives/lib.rs.html#340-342' title='goto source code'>[src]</a></span><span class='in-band'>Derive Macro <a href='../index.html'>diesel</a>::<wbr><a href='index.html'>prelude</a>::<wbr><a class="derive" href=''>Insertable</a></span></h1><pre class='rust derive'>#[derive(Insertable)]
 {
     // Attributes available to this derive:
     #[table_name]
@@ -19,6 +19,17 @@ you can annotate the field with <code>#[column_name = &quot;some_column_name&quo
 useful when you want to have one field map to more than one column (for
 example, an enum that maps to a label and a value column). Add
 <code>#[diesel(embed)]</code> to any such fields.</p>
+<p>To provide custom serialization behavior for a field, you can use
+<code>#[diesel(serialize_as = &quot;SomeType&quot;)]</code>. If this attribute is present, Diesel
+will call <code>.into</code> on the corresponding field and serialize the instance of <code>SomeType</code>,
+rather than the actual field on your struct. This can be used to add custom behavior for a
+single field, or use types that are otherwise unsupported by Diesel.
+Using <code>#[diesel(serialize_as)]</code> is <strong>incompatible</strong> with <code>#[diesel(embed)]</code>.
+Normally, Diesel produces two implementations of the <code>Insertable</code> trait for your
+struct using this derive: one for an owned version and one for a borrowed version.
+Using <code>#[diesel(serialize_as)]</code> implies a conversion using <code>.into</code> which consumes the underlying value.
+Hence, once you use <code>#[diesel(serialize_as)]</code>, Diesel can no longer insert borrowed
+versions of your struct.</p>
 <h1 id="attributes" class="section-header"><a href="#attributes">Attributes</a></h1><h2 id="optional-type-attributes" class="section-header"><a href="#optional-type-attributes">Optional type attributes</a></h2>
 <ul>
 <li><code>#[table_name = &quot;some_table_name&quot;]</code>, specifies the table this type
@@ -33,5 +44,55 @@ field maps to <code>some_table_name</code>. By default the field name is used
 as column name</li>
 <li><code>#[diesel(embed)]</code>, specifies that the current field maps not only
 to single database field, but is a struct that implements <code>Insertable</code></li>
+<li><code>#[diesel(serialize_as = &quot;SomeType&quot;)]</code>, instead of serializing the actual
+field type, Diesel will convert the field into <code>SomeType</code> using <code>.into</code> and
+serialize that instead. By default this derive will serialize directly using
+the actual field type.</li>
 </ul>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<p>If we want to customize the serialization during insert, we can use <code>#[diesel(serialize_as)]</code>.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">FromSqlRow</span>, <span class="ident">AsExpression</span>)]</span>
+<span class="attribute">#[<span class="ident">sql_type</span> <span class="op">=</span> <span class="string">&quot;sql_types::Text&quot;</span>]</span>
+<span class="kw">struct</span> <span class="ident">UppercaseString</span>(<span class="kw">pub</span> <span class="ident">String</span>);
+
+<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">UppercaseString</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">String</span> {
+    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">UppercaseString</span> {
+        <span class="ident">UppercaseString</span>(<span class="self">self</span>.<span class="ident">to_uppercase</span>())
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span> <span class="ident">ToSql</span><span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Text</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UppercaseString</span>
+    <span class="kw">where</span>
+        <span class="ident">DB</span>: <span class="ident">Backend</span>,
+        <span class="ident">String</span>: <span class="ident">ToSql</span><span class="op">&lt;</span><span class="ident">sql_types</span>::<span class="ident">Text</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
+{
+    <span class="kw">fn</span> <span class="ident">to_sql</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Output</span><span class="op">&lt;</span><span class="ident">W</span>, <span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">serialize</span>::<span class="prelude-ty">Result</span> {
+        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">to_sql</span>(<span class="ident">out</span>)
+    }
+}
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Insertable</span>, <span class="ident">PartialEq</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">table_name</span> <span class="op">=</span> <span class="string">&quot;users&quot;</span>]</span>
+<span class="kw">struct</span> <span class="ident">InsertableUser</span> {
+    <span class="ident">id</span>: <span class="ident">i32</span>,
+    <span class="attribute">#[<span class="ident">diesel</span>(<span class="ident">serialize_as</span> <span class="op">=</span> <span class="string">&quot;UppercaseString&quot;</span>)]</span>
+    <span class="ident">name</span>: <span class="ident">String</span>,
+}
+
+<span class="kw">let</span> <span class="ident">user</span> <span class="op">=</span> <span class="ident">InsertableUser</span> {
+    <span class="ident">id</span>: <span class="number">1</span>,
+    <span class="ident">name</span>: <span class="string">&quot;thomas&quot;</span>.<span class="ident">to_string</span>(),
+};
+
+<span class="ident">diesel</span>::<span class="ident">insert_into</span>(<span class="ident">users</span>)
+    .<span class="ident">values</span>(<span class="ident">user</span>)
+    .<span class="ident">execute</span>(<span class="kw-2">&amp;</span><span class="ident">connection</span>)
+    .<span class="ident">unwrap</span>();
+
+<span class="macro">assert_eq</span><span class="macro">!</span>(
+    <span class="prelude-val">Ok</span>(<span class="string">&quot;THOMAS&quot;</span>.<span class="ident">to_string</span>()),
+    <span class="ident">users</span>.<span class="ident">select</span>(<span class="ident">name</span>).<span class="ident">first</span>(<span class="kw-2">&amp;</span><span class="ident">connection</span>)
+);</pre></div>
 </div></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "diesel";</script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

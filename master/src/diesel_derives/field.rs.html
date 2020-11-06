@@ -115,6 +115,15 @@
 <span id="114">114</span>
 <span id="115">115</span>
 <span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="self">self</span>, <span class="ident">Ident</span>, <span class="ident">Span</span>};
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">ToTokens</span>;
@@ -130,8 +139,8 @@
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">FieldName</span>,
     <span class="kw">pub</span> <span class="ident">span</span>: <span class="ident">Span</span>,
     <span class="kw">pub</span> <span class="ident">sql_type</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Type</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">flags</span>: <span class="ident">MetaItem</span>,
     <span class="ident">column_name_from_attribute</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Ident</span><span class="op">&gt;</span>,
-    <span class="ident">flags</span>: <span class="ident">MetaItem</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Field</span> {
@@ -185,6 +194,15 @@
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_flag</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">flag</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">flags</span>.<span class="ident">has_flag</span>(<span class="ident">flag</span>)
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ty_for_serialize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Type</span><span class="op">&gt;</span>, <span class="ident">Diagnostic</span><span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">flags</span>.<span class="ident">nested_item</span>(<span class="string">&quot;serialize_as&quot;</span>)<span class="question-mark">?</span> {
+            <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">meta</span>.<span class="ident">ty_value</span>()<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">ty</span>))
+        } <span class="kw">else</span> {
+            <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
+        }
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ty_for_deserialize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Type</span><span class="op">&gt;</span>, <span class="ident">Diagnostic</span><span class="op">&gt;</span> {

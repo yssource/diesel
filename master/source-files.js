@@ -10,6 +10,7 @@ sourcesIndex["diesel_derives"] = {"name":"","files":["as_changeset.rs","as_expre
 sourcesIndex["diesel_dynamic_schema"] = {"name":"","files":["column.rs","dummy_expression.rs","dynamic_select.rs","dynamic_value.rs","lib.rs","schema.rs","table.rs"]};
 sourcesIndex["diesel_migrations"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["env_logger"] = {"name":"","dirs":[{"name":"filter","files":["mod.rs","regex.rs"]},{"name":"fmt","dirs":[{"name":"humantime","files":["mod.rs","shim_impl.rs"]},{"name":"writer","dirs":[{"name":"termcolor","files":["mod.rs","shim_impl.rs"]}],"files":["atty.rs","mod.rs"]}],"files":["mod.rs"]}],"files":["lib.rs"]};
+sourcesIndex["form_urlencoded"] = {"name":"","files":["lib.rs","query_encoding.rs"]};
 sourcesIndex["getrandom"] = {"name":"","files":["error.rs","error_impls.rs","lib.rs","linux_android.rs","use_file.rs","util.rs","util_libc.rs"]};
 sourcesIndex["idna"] = {"name":"","files":["lib.rs","punycode.rs","uts46.rs"]};
 sourcesIndex["instant"] = {"name":"","files":["lib.rs","native.rs"]};
@@ -56,6 +57,6 @@ sourcesIndex["tinyvec"] = {"name":"","files":["array.rs","arrayvec.rs","lib.rs",
 sourcesIndex["unicode_bidi"] = {"name":"","dirs":[{"name":"char_data","files":["mod.rs","tables.rs"]}],"files":["deprecated.rs","explicit.rs","format_chars.rs","implicit.rs","level.rs","lib.rs","prepare.rs"]};
 sourcesIndex["unicode_normalization"] = {"name":"","files":["__test_api.rs","decompose.rs","lib.rs","lookups.rs","no_std_prelude.rs","normalize.rs","perfect_hash.rs","quick_check.rs","recompose.rs","stream_safe.rs","tables.rs"]};
 sourcesIndex["unicode_xid"] = {"name":"","files":["lib.rs","tables.rs"]};
-sourcesIndex["url"] = {"name":"","files":["form_urlencoded.rs","host.rs","lib.rs","origin.rs","parser.rs","path_segments.rs","query_encoding.rs","quirks.rs","slicing.rs"]};
+sourcesIndex["url"] = {"name":"","files":["host.rs","lib.rs","origin.rs","parser.rs","path_segments.rs","quirks.rs","slicing.rs"]};
 sourcesIndex["uuid"] = {"name":"","dirs":[{"name":"adapter","files":["mod.rs"]},{"name":"builder","files":["error.rs","mod.rs"]},{"name":"parser","files":["error.rs","mod.rs"]}],"files":["error.rs","lib.rs","prelude.rs"]};
 createSourceSidebar();
