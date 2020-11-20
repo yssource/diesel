@@ -17,7 +17,6 @@ implementors["regex_syntax"] = [{"text":"impl Error for Error","synthetic":false
 implementors["serde"] = [{"text":"impl Error for Error","synthetic":false,"types":[]}];
 implementors["serde_json"] = [{"text":"impl Error for Error","synthetic":false,"types":[]}];
 implementors["syn"] = [{"text":"impl Error for Error","synthetic":false,"types":[]}];
-implementors["time"] = [{"text":"impl Error for OutOfRangeError","synthetic":false,"types":[]},{"text":"impl Error for ParseError","synthetic":false,"types":[]}];
 implementors["url"] = [{"text":"impl Error for ParseError","synthetic":false,"types":[]}];
 implementors["uuid"] = [{"text":"impl Error for Error","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/mysqlclient-sys-0.2.4/src/bindings_macos.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>bindings_macos.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../mysqlclient_sys/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/mysqlclient-sys-0.2.4/src/bindings_macos.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>bindings_macos.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../mysqlclient_sys/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
@@ -1429,33 +1431,33 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">__BindgenUnionField</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(::<span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">__BindgenUnionField</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">__BindgenUnionField</span>(::<span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>)
     }
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">T</span> {
         ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>)
     }
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
         ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>)
     }
 }
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">default</span>::<span class="ident">Default</span> <span class="kw">for</span> <span class="ident">__BindgenUnionField</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span>::<span class="ident">new</span>()
     }
 }
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">clone</span>::<span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">__BindgenUnionField</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span>::<span class="ident">new</span>()
     }
 }
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">__BindgenUnionField</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">__BindgenUnionField</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">fmt</span>.<span class="ident">write_str</span>(<span class="string">&quot;__BindgenUnionField&quot;</span>)
     }
 }
@@ -1606,7 +1608,7 @@
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_errno_to_sqlstate</span>(<span class="ident">mysql_errno</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>)
-                                   <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+                                   <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">i32</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>)]</span>
@@ -1637,7 +1639,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_mysql_time</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mysql_time</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -1655,7 +1657,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_list</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_list</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -1676,11 +1678,11 @@
                                                          <span class="ident">arg2</span>: <span class="ident">usize</span>,
                                                          <span class="ident">arg3</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>,
                                                          <span class="ident">arg4</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">__va_list_tag</span>)
-                                                         <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">deinit</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>() <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
+                                                         <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">deinit</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">options</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">option</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                                             <span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-                                                            <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
+                                                            <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
 }
 <span class="attribute">#[<span class="ident">test</span>]</span>
 <span class="kw">fn</span> <span class="ident">bindgen_test_layout_st_mysql_client_plugin</span>() {
@@ -1688,7 +1690,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_mysql_client_plugin</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mysql_client_plugin</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -1777,7 +1779,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_plugin_vio_info</span><span class="op">&gt;</span>(), <span class="number">4usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_plugin_vio_info</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -1796,7 +1798,7 @@
     <span class="kw">pub</span> <span class="ident">read_packet</span>:
         ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">vio</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_plugin_vio</span>,
                                                    <span class="ident">buf</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uchar</span>)
-                                                   <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
+                                                   <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="doccomment">/**
     Plugin provides a buffer with data and the length and this
     function sends it as a packet. Returns 0 on success, 1 on failure.
@@ -1805,7 +1807,7 @@
         ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">vio</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_plugin_vio</span>,
                                                    <span class="ident">packet</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uchar</span>,
                                                    <span class="ident">packet_len</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>)
-                                                   <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
+                                                   <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="doccomment">/**
     Fills in a st_plugin_vio_info structure, providing the information
     about the connection.
@@ -1819,7 +1821,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_plugin_vio</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_plugin_vio</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -1843,7 +1845,7 @@
                              <span class="ident">type_</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>,
                              <span class="ident">argc</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>,
                              ...)
-                             <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>;
+                             <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/**
@@ -1867,7 +1869,7 @@
                                <span class="ident">type_</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>,
                                <span class="ident">argc</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>,
                                <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">__va_list_tag</span>)
-                               <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>;
+                               <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/**
@@ -1883,7 +1885,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_client_find_plugin</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql</span>,
                                     <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                     <span class="ident">type_</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>)
-                                    <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>;
+                                    <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/**
@@ -1902,7 +1904,7 @@
 */</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_client_register_plugin</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql</span>,
                                         <span class="ident">plugin</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>)
-                                        <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>;
+                                        <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/**
@@ -1920,7 +1922,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_plugin_options</span>(<span class="ident">plugin</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_client_plugin</span>,
                                 <span class="ident">option</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                 <span class="ident">value</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-                                <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                                <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>)]</span>
@@ -1953,7 +1955,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_mysql_field</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mysql_field</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -1980,7 +1982,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_used_mem</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_used_mem</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -2007,7 +2009,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_mem_root</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mem_root</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -2025,7 +2027,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_mysql_rows</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mysql_rows</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -2050,7 +2052,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_mysql_data</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mysql_data</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -2146,19 +2148,19 @@
         ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
                                                    <span class="ident">arg2</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                                    <span class="ident">arg3</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-                                                   <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
+                                                   <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">local_infile_read</span>:
         ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
                                                    <span class="ident">arg2</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                                    <span class="ident">arg3</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>)
-                                                   <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
+                                                   <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">local_infile_end</span>:
         ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)<span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">local_infile_error</span>:
         ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
                                                    <span class="ident">arg2</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                                    <span class="ident">arg3</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>)
-                                                   <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
+                                                   <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">local_infile_userdata</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
     <span class="kw">pub</span> <span class="ident">extension</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_options_extention</span>,
 }
@@ -2180,7 +2182,7 @@
                <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mysql_options__bindgen_ty_1</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -2190,7 +2192,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_mysql_options</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mysql_options</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -2238,7 +2240,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">character_set</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">character_set</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -2259,7 +2261,7 @@
     <span class="kw">pub</span> <span class="ident">read_row_func</span>:
         ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">st_mysql_stmt</span>,
                                                    <span class="ident">row</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uchar</span>)
-                                                   <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
+                                                   <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">affected_rows</span>: <span class="ident">my_ulonglong</span>,
     <span class="kw">pub</span> <span class="ident">insert_id</span>: <span class="ident">my_ulonglong</span>,
     <span class="kw">pub</span> <span class="ident">stmt_id</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>,
@@ -2310,7 +2312,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_mysql_res</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mysql_res</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -2319,77 +2321,77 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_server_init</span>(<span class="ident">argc</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>,
                              <span class="ident">argv</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                              <span class="ident">groups</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                             <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                             <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_server_end</span>();
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_thread_init</span>() <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_thread_init</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_thread_end</span>();
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_num_rows</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-&gt;</span> <span class="ident">my_ulonglong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_num_rows</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_ulonglong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_num_fields</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_num_fields</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_eof</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_eof</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_fetch_field_direct</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>,
                                     <span class="ident">fieldnr</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>)
-                                    <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_FIELD</span>;
+                                    <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_FIELD</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_fetch_fields</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_FIELD</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_fetch_fields</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_FIELD</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_row_tell</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-&gt;</span> <span class="ident">MYSQL_ROW_OFFSET</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_row_tell</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MYSQL_ROW_OFFSET</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_field_tell</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-&gt;</span> <span class="ident">MYSQL_FIELD_OFFSET</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_field_tell</span>(<span class="ident">res</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MYSQL_FIELD_OFFSET</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_field_count</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_field_count</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_affected_rows</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="ident">my_ulonglong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_affected_rows</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_ulonglong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_insert_id</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="ident">my_ulonglong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_insert_id</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_ulonglong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_errno</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_errno</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_error</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_error</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_sqlstate</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_sqlstate</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_warning_count</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_warning_count</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_thread_id</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_thread_id</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_character_set_name</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_character_set_name</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_set_character_set</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                                    <span class="ident">csname</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                                   <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                                   <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_init</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_init</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_ssl_set</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
@@ -2398,17 +2400,17 @@
                          <span class="ident">ca</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                          <span class="ident">capath</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                          <span class="ident">cipher</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                         <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+                         <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_ssl_cipher</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_ssl_cipher</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_change_user</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                              <span class="ident">user</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                              <span class="ident">passwd</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                              <span class="ident">db</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                             <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+                             <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_real_connect</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
@@ -2419,35 +2421,35 @@
                               <span class="ident">port</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
                               <span class="ident">unix_socket</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                               <span class="ident">clientflag</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>)
-                              <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>;
+                              <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_select_db</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                            <span class="ident">db</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                           <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                           <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_query</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                        <span class="ident">q</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                       <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                       <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_send_query</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                             <span class="ident">q</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                             <span class="ident">length</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>)
-                            <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                            <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_real_query</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                             <span class="ident">q</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                             <span class="ident">length</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>)
-                            <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                            <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_store_result</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_store_result</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_use_result</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_use_result</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_character_set_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>, <span class="ident">charset</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MY_CHARSET_INFO</span>);
@@ -2457,14 +2459,14 @@
                                          <span class="ident">type_</span>: <span class="ident">enum_session_state_type</span>,
                                          <span class="ident">data</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                          <span class="ident">length</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">usize</span>)
-                                         <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                                         <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_session_track_get_next</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                                         <span class="ident">type_</span>: <span class="ident">enum_session_state_type</span>,
                                         <span class="ident">data</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                         <span class="ident">length</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">usize</span>)
-                                        <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                                        <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_set_local_infile_handler</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
@@ -2475,7 +2477,7 @@
                                                                                              <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                                                                          <span class="ident">arg3</span>:
                                                                                              <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-                                                                        <span class="op">-&gt;</span>
+                                                                        <span class="op">-</span><span class="op">&gt;</span>
                                                                             ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
                                           <span class="ident">local_infile_read</span>:
                                               ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg1</span>:
@@ -2484,7 +2486,7 @@
                                                                                              <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                                                                          <span class="ident">arg3</span>:
                                                                                              ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>)
-                                                                        <span class="op">-&gt;</span>
+                                                                        <span class="op">-</span><span class="op">&gt;</span>
                                                                             ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
                                           <span class="ident">local_infile_end</span>:
                                               ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg1</span>:
@@ -2496,7 +2498,7 @@
                                                                                              <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                                                                          <span class="ident">arg3</span>:
                                                                                              ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>)
-                                                                        <span class="op">-&gt;</span>
+                                                                        <span class="op">-</span><span class="op">&gt;</span>
                                                                             ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>,
 <span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>);
 }
@@ -2506,79 +2508,79 @@
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_shutdown</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                           <span class="ident">shutdown_level</span>: <span class="ident">mysql_enum_shutdown_level</span>)
-                          <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                          <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_dump_debug_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_dump_debug_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_refresh</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                          <span class="ident">refresh_options</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>)
-                         <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                         <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_kill</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>, <span class="ident">pid</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_kill</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>, <span class="ident">pid</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_set_server_option</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                                    <span class="ident">option</span>: <span class="ident">enum_mysql_set_option</span>)
-                                   <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                                   <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_ping</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_ping</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stat</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stat</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_server_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_server_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_client_info</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_client_info</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_client_version</span>() <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_client_version</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_host_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_host_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_server_version</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_server_version</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_proto_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_proto_info</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_list_dbs</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                           <span class="ident">wild</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                          <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
+                          <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_list_tables</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                              <span class="ident">wild</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                             <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
+                             <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_list_processes</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_list_processes</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_options</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                          <span class="ident">option</span>: <span class="ident">mysql_option</span>,
                          <span class="ident">arg</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-                         <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                         <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_options4</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                           <span class="ident">option</span>: <span class="ident">mysql_option</span>,
                           <span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
                           <span class="ident">arg2</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-                          <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                          <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_get_option</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                             <span class="ident">option</span>: <span class="ident">mysql_option</span>,
                             <span class="ident">arg</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-                            <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                            <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_free_result</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>);
@@ -2587,46 +2589,46 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_data_seek</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>, <span class="ident">offset</span>: <span class="ident">my_ulonglong</span>);
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_row_seek</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>, <span class="ident">offset</span>: <span class="ident">MYSQL_ROW_OFFSET</span>) <span class="op">-&gt;</span> <span class="ident">MYSQL_ROW_OFFSET</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_row_seek</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>, <span class="ident">offset</span>: <span class="ident">MYSQL_ROW_OFFSET</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MYSQL_ROW_OFFSET</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_field_seek</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>,
                             <span class="ident">offset</span>: <span class="ident">MYSQL_FIELD_OFFSET</span>)
-                            <span class="op">-&gt;</span> <span class="ident">MYSQL_FIELD_OFFSET</span>;
+                            <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MYSQL_FIELD_OFFSET</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_fetch_row</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-&gt;</span> <span class="ident">MYSQL_ROW</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_fetch_row</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MYSQL_ROW</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_fetch_lengths</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_fetch_lengths</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_fetch_field</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_FIELD</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_fetch_field</span>(<span class="ident">result</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_FIELD</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_list_fields</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                              <span class="ident">table</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                              <span class="ident">wild</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                             <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
+                             <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_escape_string</span>(<span class="ident">to</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                <span class="ident">from</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                <span class="ident">from_length</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>)
-                               <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
+                               <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_hex_string</span>(<span class="ident">to</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                             <span class="ident">from</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                             <span class="ident">from_length</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>)
-                            <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
+                            <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_real_escape_string</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
                                     <span class="ident">to</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                     <span class="ident">from</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                     <span class="ident">length</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>)
-                                    <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
+                                    <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_real_escape_string_quote</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>,
@@ -2634,22 +2636,22 @@
                                           <span class="ident">from</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                           <span class="ident">length</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>,
                                           <span class="ident">quote</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>)
-                                          <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
+                                          <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_debug</span>(<span class="ident">debug</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>);
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_thread_safe</span>() <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_thread_safe</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_embedded</span>() <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_embedded</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_read_query_result</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_read_query_result</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_reset_connection</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_reset_connection</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u32</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>)]</span>
@@ -2695,7 +2697,7 @@
     <span class="macro">assert_eq</span><span class="macro">!</span>(::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">st_mysql_bind</span><span class="op">&gt;</span>(), <span class="number">8usize</span>);
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">st_mysql_bind</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }
@@ -2712,122 +2714,122 @@
     <span class="ident">STMT_ATTR_PREFETCH_ROWS</span> <span class="op">=</span> <span class="number">2</span>,
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_init</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_init</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_prepare</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>,
                               <span class="ident">query</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                               <span class="ident">length</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>)
-                              <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                              <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_execute</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_execute</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_fetch</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_fetch</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_fetch_column</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>,
                                    <span class="ident">bind_arg</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_BIND</span>,
                                    <span class="ident">column</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
                                    <span class="ident">offset</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>)
-                                   <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+                                   <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_store_result</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_store_result</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_param_count</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_param_count</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_attr_set</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>,
                                <span class="ident">attr_type</span>: <span class="ident">enum_stmt_attr_type</span>,
                                <span class="ident">attr</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-                               <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+                               <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_attr_get</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>,
                                <span class="ident">attr_type</span>: <span class="ident">enum_stmt_attr_type</span>,
                                <span class="ident">attr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-                               <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+                               <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_bind_param</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>, <span class="ident">bnd</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_BIND</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_bind_param</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>, <span class="ident">bnd</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_BIND</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_bind_result</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>, <span class="ident">bnd</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_BIND</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_bind_result</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>, <span class="ident">bnd</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_BIND</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_close</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_close</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_reset</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_reset</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_free_result</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_free_result</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_send_long_data</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>,
                                      <span class="ident">param_number</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
                                      <span class="ident">data</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
                                      <span class="ident">length</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_ulong</span>)
-                                     <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+                                     <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_result_metadata</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_result_metadata</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_param_metadata</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_param_metadata</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_RES</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_errno</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_errno</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_error</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_error</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_sqlstate</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_sqlstate</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_row_seek</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>,
                                <span class="ident">offset</span>: <span class="ident">MYSQL_ROW_OFFSET</span>)
-                               <span class="op">-&gt;</span> <span class="ident">MYSQL_ROW_OFFSET</span>;
+                               <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MYSQL_ROW_OFFSET</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_row_tell</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="ident">MYSQL_ROW_OFFSET</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_row_tell</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MYSQL_ROW_OFFSET</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_data_seek</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>, <span class="ident">offset</span>: <span class="ident">my_ulonglong</span>);
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_num_rows</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="ident">my_ulonglong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_num_rows</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_ulonglong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_affected_rows</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="ident">my_ulonglong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_affected_rows</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_ulonglong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_insert_id</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> <span class="ident">my_ulonglong</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_insert_id</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_ulonglong</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_field_count</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_field_count</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_commit</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_commit</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_rollback</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_rollback</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_autocommit</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>, <span class="ident">auto_mode</span>: <span class="ident">my_bool</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_autocommit</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>, <span class="ident">auto_mode</span>: <span class="ident">my_bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_more_results</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> <span class="ident">my_bool</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_more_results</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">my_bool</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_next_result</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_next_result</span>(<span class="ident">mysql</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_next_result</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_stmt_next_result</span>(<span class="ident">stmt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL_STMT</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mysql_close</span>(<span class="ident">sock</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MYSQL</span>);
@@ -2841,7 +2843,7 @@
     <span class="kw">pub</span> <span class="ident">reg_save_area</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
 }
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">__va_list_tag</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw-2">*</span><span class="self">self</span>
     }
 }

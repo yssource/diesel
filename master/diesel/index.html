@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `diesel` crate."><meta name="keywords" content="rust, rustlang, rust-lang, diesel"><title>diesel - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../diesel/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate diesel</p><div class='block version'><p>Version 2.0.0</p></div><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all diesel's items</p></a><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'diesel', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `diesel` crate."><meta name="keywords" content="rust, rustlang, rust-lang, diesel"><title>diesel - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../diesel/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate diesel</p><div class='block version'><p>Version 2.0.0</p></div><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all diesel's items</p></a><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'diesel', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/diesel/lib.rs.html#1-366' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>diesel</a></span></h1><div class='docblock'><h1 id="diesel" class="section-header"><a href="#diesel">Diesel</a></h1>
 <p>Diesel is an ORM and query builder designed to reduce the boilerplate for database interactions.
 If this is your first time reading this documentation,
@@ -14,7 +16,7 @@ to automatically generate these macro calls
 <h2 id="getting-started" class="section-header"><a href="#getting-started">Getting started</a></h2>
 <p>Queries usually start from either a table, or a function like <a href="fn.update.html"><code>update</code></a>.
 Those functions can be found <a href="#functions">here</a>.</p>
-<p>Diesel provides a <a href="prelude"><code>prelude</code> module</a>,
+<p>Diesel provides a <a href="../diesel/prelude/index.html"><code>prelude</code> module</a>,
 which exports most of the typically used traits and types.
 We are conservative about what goes in this module,
 and avoid anything which has a generic name.
@@ -26,10 +28,10 @@ Files which use Diesel are expected to have <code>use diesel::prelude::*;</code>
 (such as <code>ORDER</code> and <code>WHERE</code>). These methods usually have the same name
 as the SQL they map to, except for <code>WHERE</code> which is called <code>filter</code> in Diesel
 (To not conflict with the Rust keyword).
-These methods live in <a href="query_dsl">the <code>query_dsl</code> module</a>.</li>
+These methods live in <a href="../diesel/query_dsl/index.html">the <code>query_dsl</code> module</a>.</li>
 <li>&quot;Expression methods&quot; are things you would call on columns
 or other individual values.
-These methods live in <a href="expression_methods">the <code>expression_methods</code> module</a>
+These methods live in <a href="../diesel/expression_methods/index.html">the <code>expression_methods</code> module</a>
 You can often find these by thinking &quot;what would this be called&quot;
 if it were a method
 and typing that into the search bar
@@ -39,7 +41,7 @@ operator in <a href="//doc.rust-lang.org/stable/std/ops/index.html"><code>std::o
 (For example <code>==</code> is called <code>.eq</code>, and <code>!=</code> is called <code>.ne</code>).</li>
 <li>&quot;Bare functions&quot; are normal SQL functions
 such as <code>sum</code>.
-They live in <a href="dsl">the <code>dsl</code> module</a>.
+They live in <a href="../diesel/dsl/index.html">the <code>dsl</code> module</a>.
 Diesel only supports a very small number of these functions.
 You can declare additional functions you want to use
 with <a href="macro.sql_function.html">the <code>sql_function!</code> macro</a>.</li>
@@ -49,7 +51,7 @@ with <a href="macro.sql_function.html">the <code>sql_function!</code> macro</a>.
 a trait called <a href="deserialize/trait.Queryable.html"><code>Queryable</code></a>.</p>
 <p>Diesel maps &quot;Rust types&quot; (e.g. <code>i32</code>) to and from &quot;SQL types&quot;
 (e.g. <a href="sql_types/struct.Integer.html"><code>diesel::sql_types::Integer</code></a>).
-You can find all the types supported by Diesel in <a href="sql_types">the <code>sql_types</code> module</a>.
+You can find all the types supported by Diesel in <a href="../diesel/sql_types/index.html">the <code>sql_types</code> module</a>.
 These types are only used to represent a SQL type.
 You should never put them on your <code>Queryable</code> structs.</p>
 <p>To find all the Rust types which can be used with a given SQL type,
@@ -106,7 +108,7 @@ in a query.</p>
 need to call this.</p>
 </td></tr><tr class='module-item'><td><a class="macro" href="macro.joinable.html" title='diesel::joinable macro'>joinable</a></td><td class='docblock-short'><p>Allow two tables to be referenced in a join query without providing an
 explicit <code>ON</code> clause.</p>
-</td></tr><tr class='module-item'><td><a class="macro" href="macro.no_arg_sql_function.html" title='diesel::no_arg_sql_function macro'>no_arg_sql_function</a></td><td class='docblock-short'><span class="stab deprecated">Deprecated</span><p>Declare a 0 argument SQL function for use in your code. This will generate a
+</td></tr><tr class='module-item'><td><a class="macro" href="macro.no_arg_sql_function.html" title='diesel::no_arg_sql_function macro'>no_arg_sql_function</a></td><td class='docblock-short'><span class="stab deprecated" title="">Deprecated</span><p>Declare a 0 argument SQL function for use in your code. This will generate a
 unit struct, which is an expression representing calling this function. See
 <a href="expression/dsl/struct.now.html"><code>now</code></a> for example output. <code>now</code> was
 generated using:</p>
