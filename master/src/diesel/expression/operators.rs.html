@@ -588,7 +588,7 @@
 <span id="585">585</span>
 <span id="586">586</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="attribute">#[<span class="ident">macro_export</span>(<span class="ident">local_inner_macros</span>)]</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">__diesel_operator_body</span> {
     (
@@ -601,8 +601,8 @@
         <span class="ident">backend_ty_params</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty_params</span>:<span class="ident">tt</span>,
         <span class="ident">backend_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty</span>:<span class="ident">ty</span>,
     ) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">__diesel_operator_body</span><span class="macro">!</span> {
-            <span class="ident">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>,
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_operator_body</span><span class="macro">!</span> {
+            <span class="macro-nonterminal">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
             <span class="ident">return_ty</span> <span class="op">=</span> (<span class="ident">ST</span>),
@@ -625,8 +625,8 @@
         <span class="ident">backend_ty_params</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty_params</span>:<span class="ident">tt</span>,
         <span class="ident">backend_ty</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty</span>:<span class="ident">ty</span>,
     ) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">__diesel_operator_body</span><span class="macro">!</span> {
-            <span class="ident">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>,
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_operator_body</span><span class="macro">!</span> {
+            <span class="macro-nonterminal">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
             <span class="ident">return_ty</span> <span class="op">=</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>)<span class="kw-2">*</span>),
@@ -670,7 +670,7 @@
             }
         }
 
-        <span class="macro">impl_selectable_expression</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>),<span class="op">+</span><span class="op">&gt;</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">impl_selectable_expression</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>),<span class="op">+</span><span class="op">&gt;</span>);
 
         <span class="kw">impl</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>,)<span class="op">+</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">expression_ty_params</span>,)<span class="kw-2">*</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">Expression</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty_param</span>,)<span class="op">+</span><span class="op">&gt;</span> <span class="kw">where</span>
             $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">expression_bounds</span>)<span class="op">*</span>
@@ -684,8 +684,8 @@
                 $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty_param</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">backend</span>::<span class="ident">Backend</span>,)<span class="op">*</span>
         {
             <span class="kw">fn</span> <span class="ident">walk_ast</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">out</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">query_builder</span>::<span class="ident">AstPass</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend_ty</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">result</span>::<span class="ident">QueryResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-                <span class="macro">__diesel_operator_to_sql</span><span class="macro">!</span>(
-                    <span class="ident">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>,
+                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_operator_to_sql</span><span class="macro">!</span>(
+                    <span class="macro-nonterminal">notation</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">notation</span>,
                     <span class="ident">operator_expr</span> <span class="op">=</span> <span class="ident">out</span>.<span class="ident">push_sql</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>),
                     <span class="ident">field_exprs</span> <span class="op">=</span> ($(<span class="self">self</span>.<span class="macro-nonterminal">$</span><span class="macro-nonterminal">field_name</span>.<span class="ident">walk_ast</span>(<span class="ident">out</span>.<span class="ident">reborrow</span>())<span class="question-mark">?</span>),<span class="op">+</span>),
                 );
@@ -801,19 +801,19 @@
 <span class="doccomment">/// assert_eq!(Ok(1), users_with_name.first(&amp;connection));</span>
 <span class="doccomment">/// # }</span>
 <span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>(<span class="ident">local_inner_macros</span>)]</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">infix_operator</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>);
     };
 
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>);
     };
 
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">tt</span>)::<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
-            <span class="ident">notation</span> <span class="op">=</span> <span class="ident">infix</span>,
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
+            <span class="macro-nonterminal">notation</span> <span class="op">=</span> <span class="ident">infix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
             <span class="ident">return_ty</span> <span class="op">=</span> (
@@ -851,8 +851,8 @@
     };
 
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">ty</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
-            <span class="ident">notation</span> <span class="op">=</span> <span class="ident">infix</span>,
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
+            <span class="macro-nonterminal">notation</span> <span class="op">=</span> <span class="ident">infix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
             <span class="ident">return_ty</span> <span class="op">=</span> (
@@ -890,13 +890,13 @@
     };
 }
 
-<span class="attribute">#[<span class="ident">macro_export</span>(<span class="ident">local_inner_macros</span>)]</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;2.0.0&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;use `diesel::infix_operator!` instead&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;without-deprecated&quot;</span>)))]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">diesel_infix_operator</span> {
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">infix_operator</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>)<span class="kw-2">*</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">infix_operator</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>)<span class="kw-2">*</span>);
     }
 }
 
@@ -908,19 +908,19 @@
 <span class="doccomment">/// the single argument. See [`infix_operator!`] for example usage.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`infix_operator!`]: macro.infix_operator.html</span>
-<span class="attribute">#[<span class="ident">macro_export</span>(<span class="ident">local_inner_macros</span>)]</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">postfix_operator</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>);
     };
 
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">postfix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>);
     };
 
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
-            <span class="ident">notation</span> <span class="op">=</span> <span class="ident">postfix</span>,
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
+            <span class="macro-nonterminal">notation</span> <span class="op">=</span> <span class="ident">postfix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
             <span class="ident">return_ty</span> <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>),
@@ -932,8 +932,8 @@
     };
 
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">ty</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
-            <span class="ident">notation</span> <span class="op">=</span> <span class="ident">postfix</span>,
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
+            <span class="macro-nonterminal">notation</span> <span class="op">=</span> <span class="ident">postfix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
             <span class="ident">return_ty</span> <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>),
@@ -945,13 +945,13 @@
     };
 }
 
-<span class="attribute">#[<span class="ident">macro_export</span>(<span class="ident">local_inner_macros</span>)]</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;2.0.0&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;use `diesel::postfix_operator!` instead&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;without-deprecated&quot;</span>)))]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">diesel_postfix_operator</span> {
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">postfix_operator</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>)<span class="kw-2">*</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">postfix_operator</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>)<span class="kw-2">*</span>);
     }
 }
 
@@ -963,19 +963,19 @@
 <span class="doccomment">/// the single argument. See [`infix_operator!`] for example usage.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`infix_operator!`]: macro.infix_operator.html</span>
-<span class="attribute">#[<span class="ident">macro_export</span>(<span class="ident">local_inner_macros</span>)]</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">prefix_operator</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">prefix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">prefix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>);
     };
 
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">prefix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">prefix_operator</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>, <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>);
     };
 
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
-            <span class="ident">notation</span> <span class="op">=</span> <span class="ident">prefix</span>,
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
+            <span class="macro-nonterminal">notation</span> <span class="op">=</span> <span class="ident">prefix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
             <span class="ident">return_ty</span> <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>),
@@ -987,8 +987,8 @@
     };
 
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>:<span class="ident">ty</span>, <span class="ident">backend</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">backend</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
-            <span class="ident">notation</span> <span class="op">=</span> <span class="ident">prefix</span>,
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_operator_body</span><span class="macro">!</span>(
+            <span class="macro-nonterminal">notation</span> <span class="op">=</span> <span class="ident">prefix</span>,
             <span class="ident">struct_name</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>,
             <span class="ident">operator</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">operator</span>,
             <span class="ident">return_ty</span> <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">return_ty</span>),
@@ -1000,13 +1000,13 @@
     };
 }
 
-<span class="attribute">#[<span class="ident">macro_export</span>(<span class="ident">local_inner_macros</span>)]</span>
+<span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;2.0.0&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;use `diesel::prefix_operator!` instead&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;with-deprecated&quot;</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;without-deprecated&quot;</span>)))]</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">diesel_prefix_operator</span> {
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">prefix_operator</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>)<span class="kw-2">*</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">prefix_operator</span><span class="macro">!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">args</span>)<span class="kw-2">*</span>);
     }
 }
 
