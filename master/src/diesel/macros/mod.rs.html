@@ -1509,6 +1509,7 @@
 <span id="1506">1506</span>
 <span id="1507">1507</span>
 <span id="1508">1508</span>
+<span id="1509">1509</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_parens</span>)]</span> <span class="comment">// FIXME: Remove this attribute once false positive is resolved.</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">rustfmt</span>, <span class="ident">rustfmt_skip</span>)]</span> <span class="comment">// https://github.com/rust-lang-nursery/rustfmt/issues/2755</span>
@@ -1636,6 +1637,7 @@
 
         <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_generate_ops_impls_if_numeric</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>)<span class="kw-2">*</span>);
         <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_generate_ops_impls_if_date_time</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>)<span class="kw-2">*</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">__diesel_generate_ops_impls_if_network</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>)<span class="kw-2">*</span>);
     }
 }
 
