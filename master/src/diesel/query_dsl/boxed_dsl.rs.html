@@ -30,9 +30,21 @@
 <span id="27">27</span>
 <span id="28">28</span>
 <span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
 </pre><div class="example-wrap"><pre class="rust ">
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">dsl</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">TypedExpressionType</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">ValidGrouping</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">AsQuery</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">SelectStatement</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_source</span>::<span class="ident">Table</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Expression</span>;
 
 <span class="doccomment">/// The `into_boxed` method</span>
 <span class="doccomment">///</span>
@@ -46,15 +58,17 @@
     <span class="kw">type</span> <span class="ident">Output</span>;
 
     <span class="doccomment">/// See the trait documentation.</span>
-    <span class="kw">fn</span> <span class="ident">internal_into_boxed</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">internal_into_boxed</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">dsl</span>::<span class="ident">IntoBoxed</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="self">Self</span>, <span class="ident">DB</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="ident">BoxedDsl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span>
 <span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Table</span> <span class="op">+</span> <span class="ident">AsQuery</span>,
-    <span class="ident">T</span>::<span class="ident">Query</span>: <span class="ident">BoxedDsl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>: <span class="ident">Table</span> <span class="op">+</span> <span class="ident">AsQuery</span><span class="op">&lt;</span><span class="ident">Query</span> <span class="op">=</span> <span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">BoxedDsl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>::<span class="ident">DefaultSelection</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">T</span>::<span class="ident">SqlType</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
+    <span class="ident">T</span>::<span class="ident">SqlType</span>: <span class="ident">TypedExpressionType</span>,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">Query</span> <span class="kw">as</span> <span class="ident">BoxedDsl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">dsl</span>::<span class="ident">IntoBoxed</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">DB</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">internal_into_boxed</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>.<span class="ident">as_query</span>().<span class="ident">internal_into_boxed</span>()

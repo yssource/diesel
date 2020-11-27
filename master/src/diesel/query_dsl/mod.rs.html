@@ -1307,6 +1307,54 @@
 <span id="1304">1304</span>
 <span id="1305">1305</span>
 <span id="1306">1306</span>
+<span id="1307">1307</span>
+<span id="1308">1308</span>
+<span id="1309">1309</span>
+<span id="1310">1310</span>
+<span id="1311">1311</span>
+<span id="1312">1312</span>
+<span id="1313">1313</span>
+<span id="1314">1314</span>
+<span id="1315">1315</span>
+<span id="1316">1316</span>
+<span id="1317">1317</span>
+<span id="1318">1318</span>
+<span id="1319">1319</span>
+<span id="1320">1320</span>
+<span id="1321">1321</span>
+<span id="1322">1322</span>
+<span id="1323">1323</span>
+<span id="1324">1324</span>
+<span id="1325">1325</span>
+<span id="1326">1326</span>
+<span id="1327">1327</span>
+<span id="1328">1328</span>
+<span id="1329">1329</span>
+<span id="1330">1330</span>
+<span id="1331">1331</span>
+<span id="1332">1332</span>
+<span id="1333">1333</span>
+<span id="1334">1334</span>
+<span id="1335">1335</span>
+<span id="1336">1336</span>
+<span id="1337">1337</span>
+<span id="1338">1338</span>
+<span id="1339">1339</span>
+<span id="1340">1340</span>
+<span id="1341">1341</span>
+<span id="1342">1342</span>
+<span id="1343">1343</span>
+<span id="1344">1344</span>
+<span id="1345">1345</span>
+<span id="1346">1346</span>
+<span id="1347">1347</span>
+<span id="1348">1348</span>
+<span id="1349">1349</span>
+<span id="1350">1350</span>
+<span id="1351">1351</span>
+<span id="1352">1352</span>
+<span id="1353">1353</span>
+<span id="1354">1354</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Traits that construct SELECT statements</span>
 <span class="doccomment">//!</span>
@@ -1354,8 +1402,6 @@
 <span class="kw">mod</span> <span class="ident">single_value_dsl</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">belonging_to_dsl</span>::<span class="ident">BelongingToDsl</span>;
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">group_by_dsl</span>::<span class="ident">GroupByDsl</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">join_dsl</span>::{<span class="ident">InternalJoinDsl</span>, <span class="ident">JoinOnDsl</span>, <span class="ident">JoinWithImplicitOnClause</span>};
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">load_dsl</span>::<span class="ident">LoadQuery</span>;
@@ -1372,6 +1418,7 @@
     <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">distinct_dsl</span>::<span class="kw-2">*</span>;
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
     <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">filter_dsl</span>::<span class="kw-2">*</span>;
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">group_by_dsl</span>::<span class="ident">GroupByDsl</span>;
     <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">limit_dsl</span>::<span class="ident">LimitDsl</span>;
     <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">load_dsl</span>::{<span class="ident">ExecuteDsl</span>, <span class="ident">LoadQuery</span>};
     <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">locking_dsl</span>::{<span class="ident">LockingDsl</span>, <span class="ident">ModifyLockDsl</span>};
@@ -1727,7 +1774,7 @@
     <span class="doccomment">/// assert_eq!(Ok(expected_data), data);</span>
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">inner_join</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>
+    <span class="kw">fn</span> <span class="ident">inner_join</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">InnerJoin</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="self">Self</span>: <span class="ident">JoinWithImplicitOnClause</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">joins</span>::<span class="ident">Inner</span><span class="op">&gt;</span>,
     {
@@ -1740,7 +1787,7 @@
     <span class="doccomment">/// instead. See [`inner_join`] for usage examples.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`inner_join`]: #method.inner_join</span>
-    <span class="kw">fn</span> <span class="ident">left_outer_join</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>
+    <span class="kw">fn</span> <span class="ident">left_outer_join</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">LeftJoin</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="self">Self</span>: <span class="ident">JoinWithImplicitOnClause</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">joins</span>::<span class="ident">LeftOuter</span><span class="op">&gt;</span>,
     {
@@ -1750,7 +1797,7 @@
     <span class="doccomment">/// Alias for [`left_outer_join`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`left_outer_join`]: #method.left_outer_join</span>
-    <span class="kw">fn</span> <span class="ident">left_join</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>
+    <span class="kw">fn</span> <span class="ident">left_join</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">LeftJoin</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="self">Self</span>: <span class="ident">JoinWithImplicitOnClause</span><span class="op">&lt;</span><span class="ident">Rhs</span>, <span class="ident">joins</span>::<span class="ident">LeftOuter</span><span class="op">&gt;</span>,
     {
@@ -1859,7 +1906,7 @@
 
     <span class="doccomment">/// Sets the order clause of a query.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If there was already a order clause, it will be overridden. See</span>
+    <span class="doccomment">/// If there was already an order clause, it will be overridden. See</span>
     <span class="doccomment">/// also:</span>
     <span class="doccomment">/// [`.desc()`](../expression_methods/trait.ExpressionMethods.html#method.desc)</span>
     <span class="doccomment">/// and</span>
@@ -2078,6 +2125,55 @@
         <span class="self">Self</span>: <span class="ident">methods</span>::<span class="ident">OffsetDsl</span>,
     {
         <span class="ident">methods</span>::<span class="ident">OffsetDsl</span>::<span class="ident">offset</span>(<span class="self">self</span>, <span class="ident">offset</span>)
+    }
+
+    <span class="doccomment">/// Sets the `group by` clause of a query.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// **Note:** Queries having a `group by` clause require a custom select clause.</span>
+    <span class="doccomment">/// Use `QueryDsl::select()` to specify one</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If there was already a group by clause, it will be overridden.</span>
+    <span class="doccomment">/// Ordering by multiple columns can be achieved by passing a tuple of those</span>
+    <span class="doccomment">/// columns.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Diesel follows postgresql&#39;s group by semantic, this means any column</span>
+    <span class="doccomment">/// appearing in a group by clause is considered to be aggregated. If a</span>
+    <span class="doccomment">/// primary key is part of the group by clause every column from the</span>
+    <span class="doccomment">/// corresponding table is considerd to be aggregated. Select clauses</span>
+    <span class="doccomment">/// cannot mix aggregated and non aggregated expressions.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// For group by clauses containing columns from more than one table it</span>
+    <span class="doccomment">/// is required to call [`allow_columns_to_appear_in_same_group_by_clause!`]</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [`allow_columns_to_appear_in_same_group_by_clause!`]: ../macro.allow_columns_to_appear_in_same_group_by_clause.html</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # include!(&quot;../doctest_setup.rs&quot;);</span>
+    <span class="doccomment">/// # fn main() {</span>
+    <span class="doccomment">/// #     run_test();</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # fn run_test() -&gt; QueryResult&lt;()&gt; {</span>
+    <span class="doccomment">/// #     use crate::schema::{users, posts};</span>
+    <span class="doccomment">/// #     use diesel::dsl::count;</span>
+    <span class="doccomment">/// #     let connection = establish_connection();</span>
+    <span class="doccomment">/// let data = users::table.inner_join(posts::table)</span>
+    <span class="doccomment">///     .group_by(users::id)</span>
+    <span class="doccomment">///     .select((users::name, count(posts::id)))</span>
+    <span class="doccomment">/// #   .order_by(users::id.asc())</span>
+    <span class="doccomment">///     .load::&lt;(String, i64)&gt;(&amp;connection)?;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(vec![(String::from(&quot;Sean&quot;), 2), (String::from(&quot;Tess&quot;), 1)], data);</span>
+    <span class="doccomment">/// # Ok(())</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">group_by</span><span class="op">&lt;</span><span class="ident">GB</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">group_by</span>: <span class="ident">GB</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GroupBy</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">GB</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">GB</span>: <span class="ident">Expression</span>,
+        <span class="self">Self</span>: <span class="ident">methods</span>::<span class="ident">GroupByDsl</span><span class="op">&lt;</span><span class="ident">GB</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">methods</span>::<span class="ident">GroupByDsl</span>::<span class="ident">group_by</span>(<span class="self">self</span>, <span class="ident">group_by</span>)
     }
 
     <span class="doccomment">/// Adds `FOR UPDATE` to the end of the select statement.</span>

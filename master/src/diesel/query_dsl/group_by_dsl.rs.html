@@ -37,38 +37,38 @@
 <span id="34">34</span>
 <span id="35">35</span>
 </pre><div class="example-wrap"><pre class="rust ">
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">dsl</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">Expression</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">AsQuery</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">TypedExpressionType</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">ValidGrouping</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">AsQuery</span>, <span class="ident">SelectStatement</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_source</span>::<span class="ident">Table</span>;
 
-<span class="doccomment">/// This trait is not yet part of Diesel&#39;s public API. It may change in the</span>
-<span class="doccomment">/// future without a major version bump.</span>
+<span class="doccomment">/// The `group_by` method</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// This trait exists as a stop-gap for users who need to use `GROUP BY` in</span>
-<span class="doccomment">/// their queries, so that they are not forced to drop entirely to raw SQL. The</span>
-<span class="doccomment">/// arguments to `group_by` are not checked, nor is the select statement</span>
-<span class="doccomment">/// forced to be valid.</span>
+<span class="doccomment">/// This trait should not be relied on directly by most apps. Its behavior is</span>
+<span class="doccomment">/// provided by [`QueryDsl`]. However, you may need a where clause on this trait</span>
+<span class="doccomment">/// to call `group_by` from generic code.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Since Diesel otherwise assumes that you have no `GROUP BY` clause (which</span>
-<span class="doccomment">/// would mean that mixing an aggregate and non aggregate expression in the same</span>
-<span class="doccomment">/// query is an error), you may need to use `sql` for your select clause.</span>
+<span class="doccomment">/// [`QueryDsl`]: ../trait.QueryDsl.html</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">GroupByDsl</span><span class="op">&lt;</span><span class="ident">Expr</span>: <span class="ident">Expression</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The type returned by `.group_by`</span>
     <span class="kw">type</span> <span class="ident">Output</span>;
 
     <span class="doccomment">/// See the trait documentation.</span>
-    <span class="kw">fn</span> <span class="ident">group_by</span>(<span class="self">self</span>, <span class="ident">expr</span>: <span class="ident">Expr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">group_by</span>(<span class="self">self</span>, <span class="ident">expr</span>: <span class="ident">Expr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">dsl</span>::<span class="ident">GroupBy</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Expr</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Expr</span><span class="op">&gt;</span> <span class="ident">GroupByDsl</span><span class="op">&lt;</span><span class="ident">Expr</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span>
 <span class="kw">where</span>
     <span class="ident">Expr</span>: <span class="ident">Expression</span>,
-    <span class="ident">T</span>: <span class="ident">Table</span> <span class="op">+</span> <span class="ident">AsQuery</span>,
-    <span class="ident">T</span>::<span class="ident">Query</span>: <span class="ident">GroupByDsl</span><span class="op">&lt;</span><span class="ident">Expr</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>: <span class="ident">Table</span> <span class="op">+</span> <span class="ident">AsQuery</span><span class="op">&lt;</span><span class="ident">Query</span> <span class="op">=</span> <span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>::<span class="ident">DefaultSelection</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">T</span>::<span class="ident">SqlType</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
+    <span class="ident">T</span>::<span class="ident">SqlType</span>: <span class="ident">TypedExpressionType</span>,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">Query</span> <span class="kw">as</span> <span class="ident">GroupByDsl</span><span class="op">&lt;</span><span class="ident">Expr</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">dsl</span>::<span class="ident">GroupBy</span><span class="op">&lt;</span><span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">Expr</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">group_by</span>(<span class="self">self</span>, <span class="ident">expr</span>: <span class="ident">Expr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">group_by</span>(<span class="self">self</span>, <span class="ident">expr</span>: <span class="ident">Expr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">dsl</span>::<span class="ident">GroupBy</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Expr</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">as_query</span>().<span class="ident">group_by</span>(<span class="ident">expr</span>)
     }
 }
