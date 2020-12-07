@@ -1355,6 +1355,10 @@
 <span id="1352">1352</span>
 <span id="1353">1353</span>
 <span id="1354">1354</span>
+<span id="1355">1355</span>
+<span id="1356">1356</span>
+<span id="1357">1357</span>
+<span id="1358">1358</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Traits that construct SELECT statements</span>
 <span class="doccomment">//!</span>
@@ -1383,6 +1387,7 @@
 <span class="kw">mod</span> <span class="ident">belonging_to_dsl</span>;
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">boxed_dsl</span>;
+<span class="kw">mod</span> <span class="ident">combine_dsl</span>;
 <span class="kw">mod</span> <span class="ident">distinct_dsl</span>;
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">filter_dsl</span>;
@@ -1396,12 +1401,15 @@
 <span class="kw">mod</span> <span class="ident">nullable_select_dsl</span>;
 <span class="kw">mod</span> <span class="ident">offset_dsl</span>;
 <span class="kw">mod</span> <span class="ident">order_dsl</span>;
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">positional_order_dsl</span>;
 <span class="kw">mod</span> <span class="ident">save_changes_dsl</span>;
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">select_dsl</span>;
 <span class="kw">mod</span> <span class="ident">single_value_dsl</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">belonging_to_dsl</span>::<span class="ident">BelongingToDsl</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">combine_dsl</span>::<span class="ident">CombineDsl</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">join_dsl</span>::{<span class="ident">InternalJoinDsl</span>, <span class="ident">JoinOnDsl</span>, <span class="ident">JoinWithImplicitOnClause</span>};
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">load_dsl</span>::<span class="ident">LoadQuery</span>;

@@ -337,6 +337,7 @@
 <span id="334">334</span>
 <span id="335">335</span>
 <span id="336">336</span>
+<span id="337">337</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Contains traits responsible for the actual construction of SQL statements</span>
 <span class="doccomment">//!</span>
@@ -351,6 +352,7 @@
 
 <span class="kw">mod</span> <span class="ident">ast_pass</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">bind_collector</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">combination_clause</span>;
 <span class="kw">mod</span> <span class="ident">debug_query</span>;
 <span class="kw">mod</span> <span class="ident">delete_statement</span>;
 <span class="kw">mod</span> <span class="ident">distinct_clause</span>;

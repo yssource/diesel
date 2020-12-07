@@ -488,6 +488,56 @@
 <span id="485">485</span>
 <span id="486">486</span>
 <span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">BoxedSelectStatement</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">associations</span>::<span class="ident">HasTable</span>;
@@ -496,6 +546,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">nullable</span>::<span class="ident">Nullable</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">insertable</span>::<span class="ident">Insertable</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">combination_clause</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">distinct_clause</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">group_by_clause</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">insert_statement</span>::<span class="ident">InsertFromSelect</span>;
@@ -974,6 +1025,55 @@
             <span class="self">self</span>.<span class="ident">group_by</span>,
             <span class="self">self</span>.<span class="ident">locking</span>,
         )
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">S</span>, <span class="ident">D</span>, <span class="ident">W</span>, <span class="ident">O</span>, <span class="ident">LOf</span>, <span class="ident">G</span>, <span class="ident">LC</span><span class="op">&gt;</span> <span class="ident">CombineDsl</span> <span class="kw">for</span> <span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">S</span>, <span class="ident">D</span>, <span class="ident">W</span>, <span class="ident">O</span>, <span class="ident">LOf</span>, <span class="ident">G</span>, <span class="ident">LC</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="self">Self</span>: <span class="ident">Query</span>,
+{
+    <span class="kw">type</span> <span class="ident">Query</span> <span class="op">=</span> <span class="self">Self</span>;
+
+    <span class="kw">fn</span> <span class="ident">union</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">dsl</span>::<span class="ident">Union</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">Rhs</span>: <span class="ident">AsQuery</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Query</span> <span class="kw">as</span> <span class="ident">Query</span><span class="op">&gt;</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">CombinationClause</span>::<span class="ident">new</span>(<span class="ident">Union</span>, <span class="ident">Distinct</span>, <span class="self">self</span>, <span class="ident">rhs</span>.<span class="ident">as_query</span>())
+    }
+
+    <span class="kw">fn</span> <span class="ident">union_all</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">dsl</span>::<span class="ident">UnionAll</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">Rhs</span>: <span class="ident">AsQuery</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Query</span> <span class="kw">as</span> <span class="ident">Query</span><span class="op">&gt;</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">CombinationClause</span>::<span class="ident">new</span>(<span class="ident">Union</span>, <span class="ident">All</span>, <span class="self">self</span>, <span class="ident">rhs</span>.<span class="ident">as_query</span>())
+    }
+
+    <span class="kw">fn</span> <span class="ident">intersect</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">dsl</span>::<span class="ident">Intersect</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">Rhs</span>: <span class="ident">AsQuery</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Query</span> <span class="kw">as</span> <span class="ident">Query</span><span class="op">&gt;</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">CombinationClause</span>::<span class="ident">new</span>(<span class="ident">Intersect</span>, <span class="ident">Distinct</span>, <span class="self">self</span>, <span class="ident">rhs</span>.<span class="ident">as_query</span>())
+    }
+
+    <span class="kw">fn</span> <span class="ident">intersect_all</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">dsl</span>::<span class="ident">IntersectAll</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">Rhs</span>: <span class="ident">AsQuery</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Query</span> <span class="kw">as</span> <span class="ident">Query</span><span class="op">&gt;</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">CombinationClause</span>::<span class="ident">new</span>(<span class="ident">Intersect</span>, <span class="ident">All</span>, <span class="self">self</span>, <span class="ident">rhs</span>.<span class="ident">as_query</span>())
+    }
+
+    <span class="kw">fn</span> <span class="ident">except</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">dsl</span>::<span class="ident">Except</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">Rhs</span>: <span class="ident">AsQuery</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Query</span> <span class="kw">as</span> <span class="ident">Query</span><span class="op">&gt;</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">CombinationClause</span>::<span class="ident">new</span>(<span class="ident">Except</span>, <span class="ident">Distinct</span>, <span class="self">self</span>, <span class="ident">rhs</span>.<span class="ident">as_query</span>())
+    }
+
+    <span class="kw">fn</span> <span class="ident">except_all</span><span class="op">&lt;</span><span class="ident">Rhs</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Rhs</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">dsl</span>::<span class="ident">ExceptAll</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Rhs</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">Rhs</span>: <span class="ident">AsQuery</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Query</span> <span class="kw">as</span> <span class="ident">Query</span><span class="op">&gt;</span>::<span class="ident">SqlType</span><span class="op">&gt;</span>,
+    {
+        <span class="ident">CombinationClause</span>::<span class="ident">new</span>(<span class="ident">Except</span>, <span class="ident">All</span>, <span class="self">self</span>, <span class="ident">rhs</span>.<span class="ident">as_query</span>())
     }
 }
 </pre></div>
