@@ -421,6 +421,22 @@
 <span id="418">418</span>
 <span id="419">419</span>
 <span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! # Diesel</span>
 <span class="doccomment">//!</span>
@@ -781,6 +797,22 @@
         <span class="op">&lt;</span><span class="ident">Source</span> <span class="kw">as</span> <span class="ident">CombineDsl</span><span class="op">&gt;</span>::<span class="ident">Query</span>,
         <span class="op">&lt;</span><span class="ident">Rhs</span> <span class="kw">as</span> <span class="ident">AsQuery</span><span class="op">&gt;</span>::<span class="ident">Query</span>,
     <span class="op">&gt;</span>;
+
+    <span class="kw">type</span> <span class="ident">JoinQuerySource</span><span class="op">&lt;</span><span class="ident">Left</span>, <span class="ident">Right</span>, <span class="ident">Kind</span>, <span class="ident">On</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">joins</span>::<span class="ident">JoinOn</span><span class="op">&lt;</span><span class="ident">joins</span>::<span class="ident">Join</span><span class="op">&lt;</span><span class="ident">Left</span>, <span class="ident">Right</span>, <span class="ident">Kind</span><span class="op">&gt;</span>, <span class="ident">On</span><span class="op">&gt;</span>;
+
+    <span class="doccomment">/// A query source representing the inner join between two tables.</span>
+    <span class="doccomment">/// For example, for the inner join between three tables that implement `JoinTo`:</span>
+    <span class="doccomment">/// `InnerJoinQuerySource&lt;InnerJoinQuerySource&lt;table1, table2&gt;, table3&gt;`</span>
+    <span class="doccomment">/// Which conveniently lets you omit the exact join condition.</span>
+    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">InnerJoinQuerySource</span><span class="op">&lt;</span><span class="ident">Left</span>, <span class="ident">Right</span>, <span class="ident">On</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Left</span> <span class="kw">as</span> <span class="ident">joins</span>::<span class="ident">JoinTo</span><span class="op">&lt;</span><span class="ident">Right</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">OnClause</span><span class="op">&gt;</span> <span class="op">=</span>
+        <span class="ident">JoinQuerySource</span><span class="op">&lt;</span><span class="ident">Left</span>, <span class="ident">Right</span>, <span class="ident">joins</span>::<span class="ident">Inner</span>, <span class="ident">On</span><span class="op">&gt;</span>;
+
+    <span class="doccomment">/// A query source representing the left outer join between two tables.</span>
+    <span class="doccomment">/// For example, for the left join between three tables that implement `JoinTo`:</span>
+    <span class="doccomment">/// `LeftJoinQuerySource&lt;LeftJoinQuerySource&lt;table1, table2&gt;, table3&gt;`</span>
+    <span class="doccomment">/// Which conveniently lets you omit the exact join condition.</span>
+    <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">LeftJoinQuerySource</span><span class="op">&lt;</span><span class="ident">Left</span>, <span class="ident">Right</span>, <span class="ident">On</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Left</span> <span class="kw">as</span> <span class="ident">joins</span>::<span class="ident">JoinTo</span><span class="op">&lt;</span><span class="ident">Right</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">OnClause</span><span class="op">&gt;</span> <span class="op">=</span>
+        <span class="ident">JoinQuerySource</span><span class="op">&lt;</span><span class="ident">Left</span>, <span class="ident">Right</span>, <span class="ident">joins</span>::<span class="ident">LeftOuter</span>, <span class="ident">On</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">prelude</span> {

@@ -78,6 +78,10 @@ Foldable.</p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.ILike.html" title='diesel::dsl::ILike type'>ILike</a></td><td class='docblock-short'><p>The return type of <code>lhs.ilike(rhs)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.InnerJoin.html" title='diesel::dsl::InnerJoin type'>InnerJoin</a></td><td class='docblock-short'><p>Represents the return type of <code>.inner_join(rhs)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.InnerJoinOn.html" title='diesel::dsl::InnerJoinOn type'>InnerJoinOn</a></td><td class='docblock-short'><p>Represents the return type of <code>.inner_join(rhs.on(on))</code></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.InnerJoinQuerySource.html" title='diesel::dsl::InnerJoinQuerySource type'>InnerJoinQuerySource</a></td><td class='docblock-short'><p>A query source representing the inner join between two tables.
+For example, for the inner join between three tables that implement <code>JoinTo</code>:
+<code>InnerJoinQuerySource&lt;InnerJoinQuerySource&lt;table1, table2&gt;, table3&gt;</code>
+Which conveniently lets you omit the exact join condition.</p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Intersect.html" title='diesel::dsl::Intersect type'>Intersect</a></td><td class='docblock-short'><p>Represents the return type of <code>.intersect(rhs)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.IntersectAll.html" title='diesel::dsl::IntersectAll type'>IntersectAll</a></td><td class='docblock-short'><p>Represents the return type of <code>.intersect_all(rhs)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.IntoBoxed.html" title='diesel::dsl::IntoBoxed type'>IntoBoxed</a></td><td class='docblock-short'><p>Represents the return type of <code>.into_boxed::&lt;'a, DB&gt;()</code></p>
@@ -92,6 +96,10 @@ Foldable.</p>
 <a href="../expression_methods/trait.ExpressionMethods.html#method.is_null"><code>expr.is_null()</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.LeftJoin.html" title='diesel::dsl::LeftJoin type'>LeftJoin</a></td><td class='docblock-short'><p>Represents the return type of <code>.left_join(rhs)</code></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.LeftJoinOn.html" title='diesel::dsl::LeftJoinOn type'>LeftJoinOn</a></td><td class='docblock-short'><p>Represents the return type of <code>.left_join(rhs.on(on))</code></p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.LeftJoinQuerySource.html" title='diesel::dsl::LeftJoinQuerySource type'>LeftJoinQuerySource</a></td><td class='docblock-short'><p>A query source representing the left outer join between two tables.
+For example, for the left join between three tables that implement <code>JoinTo</code>:
+<code>LeftJoinQuerySource&lt;LeftJoinQuerySource&lt;table1, table2&gt;, table3&gt;</code>
+Which conveniently lets you omit the exact join condition.</p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Like.html" title='diesel::dsl::Like type'>Like</a></td><td class='docblock-short'><p>The return type of
 <a href="../expression_methods/trait.TextExpressionMethods.html#method.like"><code>lhs.like(rhs)</code></a></p>
 </td></tr><tr class='module-item'><td><a class="type" href="type.Limit.html" title='diesel::dsl::Limit type'>Limit</a></td><td class='docblock-short'><p>Represents the return type of <code>.limit()</code></p>
