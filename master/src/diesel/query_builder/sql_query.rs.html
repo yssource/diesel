@@ -257,6 +257,68 @@
 <span id="254">254</span>
 <span id="255">255</span>
 <span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
 
@@ -384,6 +446,9 @@
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;Queries are only executed when calling `load`, `get_result` or similar.&quot;</span>]</span>
+<span class="doccomment">/// Returned by the [`SqlQuery::bind()`] method when binding a value to a fragment of SQL.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`SqlQuery::bind()`]: ./struct.SqlQuery.html#method.bind</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UncheckedBind</span><span class="op">&lt;</span><span class="ident">Query</span>, <span class="ident">Value</span>, <span class="ident">ST</span><span class="op">&gt;</span> {
     <span class="ident">query</span>: <span class="ident">Query</span>,
     <span class="ident">value</span>: <span class="ident">Value</span>,
@@ -407,6 +472,65 @@
         <span class="ident">BoxedSqlQuery</span>::<span class="ident">new</span>(<span class="self">self</span>)
     }
 
+    <span class="doccomment">/// Construct a full SQL query using raw SQL.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This function exists for cases where a query needs to be written that is not</span>
+    <span class="doccomment">/// supported by the query builder. Unlike most queries in Diesel, `sql_query`</span>
+    <span class="doccomment">/// will deserialize its data by name, not by index. That means that you cannot</span>
+    <span class="doccomment">/// deserialize into a tuple, and structs which you deserialize from this</span>
+    <span class="doccomment">/// function will need to have `#[derive(QueryableByName)]`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This function is intended for use when you want to write the entire query</span>
+    <span class="doccomment">/// using raw SQL. If you only need a small bit of raw SQL in your query, use</span>
+    <span class="doccomment">/// [`sql`](./dsl/fn.sql.html) instead.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Query parameters can be bound into the raw query using [`SqlQuery::bind()`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Safety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The implementation of `QueryableByName` will assume that columns with a</span>
+    <span class="doccomment">/// given name will have a certain type. The compiler will be unable to verify</span>
+    <span class="doccomment">/// that the given type is correct. If your query returns a column of an</span>
+    <span class="doccomment">/// unexpected type, the result may have the wrong value, or return an error.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # include!(&quot;../doctest_setup.rs&quot;);</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # use schema::users;</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # #[derive(QueryableByName, Debug, PartialEq)]</span>
+    <span class="doccomment">/// # #[table_name=&quot;users&quot;]</span>
+    <span class="doccomment">/// # struct User {</span>
+    <span class="doccomment">/// #     id: i32,</span>
+    <span class="doccomment">/// #     name: String,</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # fn main() {</span>
+    <span class="doccomment">/// #     use diesel::sql_query;</span>
+    <span class="doccomment">/// #     use diesel::sql_types::{Integer, Text};</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// #     let connection = establish_connection();</span>
+    <span class="doccomment">/// #     diesel::insert_into(users::table)</span>
+    <span class="doccomment">/// #         .values(users::name.eq(&quot;Jim&quot;))</span>
+    <span class="doccomment">/// #         .execute(&amp;connection).unwrap();</span>
+    <span class="doccomment">/// # #[cfg(feature = &quot;postgres&quot;)]</span>
+    <span class="doccomment">/// # let users = sql_query(&quot;SELECT * FROM users WHERE id &gt; $1 AND name != $2&quot;);</span>
+    <span class="doccomment">/// # #[cfg(not(feature = &quot;postgres&quot;))]</span>
+    <span class="doccomment">/// let users = sql_query(&quot;SELECT * FROM users WHERE id &gt; ? AND name &lt;&gt; ?&quot;)</span>
+    <span class="doccomment">/// # ;</span>
+    <span class="doccomment">/// # let users = users</span>
+    <span class="doccomment">///     .bind::&lt;Integer, _&gt;(1)</span>
+    <span class="doccomment">///     .bind::&lt;Text, _&gt;(&quot;Tess&quot;)</span>
+    <span class="doccomment">///     .get_results(&amp;connection);</span>
+    <span class="doccomment">/// let expected_users = vec![</span>
+    <span class="doccomment">///     User { id: 3, name: &quot;Jim&quot;.into() },</span>
+    <span class="doccomment">/// ];</span>
+    <span class="doccomment">/// assert_eq!(Ok(expected_users), users);</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// [`SqlQuery::bind()`]: query_builder/struct.SqlQuery.html#method.bind</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sql</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">sql</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SqlQuery</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="ident">SqlQuery</span>::<span class="ident">new</span>(<span class="self">self</span>, <span class="ident">sql</span>.<span class="ident">into</span>())
     }
