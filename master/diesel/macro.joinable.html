@@ -12,8 +12,8 @@ table. This macro removes the need to call [<code>.on</code>] explicitly, you wi
 still need to invoke <a href="../diesel/macro.allow_tables_to_appear_in_same_query.html" title="allow_tables_to_appear_in_same_query!"><code>allow_tables_to_appear_in_same_query!</code></a> for these two tables to
 be able to use the resulting query, unless you are using <code>diesel print-schema</code>
 which will generate it for you.</p>
-<p>If you are using <code>diesel print-schema</code>, an invocation of this macro
-will be generated for every foreign key in your database unless
+<p>If you are using <code>infer_schema!</code> or <code>diesel print-schema</code>, an invocation of
+this macro will be generated for every foreign key in your database unless
 one of the following is true:</p>
 <ul>
 <li>The foreign key references something other than the primary key</li>
