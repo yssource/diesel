@@ -813,6 +813,8 @@
 <span id="810">810</span>
 <span id="811">811</span>
 <span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! AST types representing various typed SQL expressions.</span>
 <span class="doccomment">//!</span>
@@ -1585,6 +1587,7 @@
     <span class="self">Self</span>: <span class="ident">Expression</span>,
     <span class="self">Self</span>: <span class="ident">SelectableExpression</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span>,
     <span class="self">Self</span>: <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="self">Self</span>: <span class="ident">Send</span>,
 {
 }
 
@@ -1595,6 +1598,7 @@
     <span class="ident">T</span>: <span class="ident">SelectableExpression</span><span class="op">&lt;</span><span class="ident">QS</span><span class="op">&gt;</span>,
     <span class="ident">T</span>: <span class="ident">ValidGrouping</span><span class="op">&lt;</span><span class="ident">GB</span><span class="op">&gt;</span>,
     <span class="ident">T</span>: <span class="ident">QueryFragment</span><span class="op">&lt;</span><span class="ident">DB</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>: <span class="ident">Send</span>,
     <span class="ident">T</span>::<span class="ident">IsAggregate</span>: <span class="ident">MixedAggregates</span><span class="op">&lt;</span><span class="ident">IsAggregate</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="ident">IsAggregate</span><span class="op">&gt;</span>,
 {
 }
