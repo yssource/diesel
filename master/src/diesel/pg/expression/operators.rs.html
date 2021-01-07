@@ -26,10 +26,10 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">expression_types</span>::<span class="ident">NotSelectable</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">pg</span>::<span class="ident">Pg</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">Bigint</span>, <span class="ident">Inet</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">sql_types</span>::{<span class="ident">Bigint</span>, <span class="ident">Bool</span>, <span class="ident">Inet</span>};
 
-<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">IsDistinctFrom</span>, <span class="string">&quot; IS DISTINCT FROM &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
-<span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">IsNotDistinctFrom</span>, <span class="string">&quot; IS NOT DISTINCT FROM &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
+<span class="macro">__diesel_infix_operator</span><span class="macro">!</span>(<span class="ident">IsDistinctFrom</span>, <span class="string">&quot; IS DISTINCT FROM &quot;</span>, <span class="ident">ConstantNullability</span> <span class="ident">Bool</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
+<span class="macro">__diesel_infix_operator</span><span class="macro">!</span>(<span class="ident">IsNotDistinctFrom</span>, <span class="string">&quot; IS NOT DISTINCT FROM &quot;</span>, <span class="ident">ConstantNullability</span> <span class="ident">Bool</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">OverlapsWith</span>, <span class="string">&quot; &amp;&amp; &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">Contains</span>, <span class="string">&quot; @&gt; &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
 <span class="macro">infix_operator</span><span class="macro">!</span>(<span class="ident">IsContainedBy</span>, <span class="string">&quot; &lt;@ &quot;</span>, <span class="ident">backend</span>: <span class="ident">Pg</span>);
