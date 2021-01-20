@@ -196,7 +196,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">mysql</span>::<span class="ident">MysqlType</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::{<span class="ident">DatabaseErrorKind</span>, <span class="ident">QueryResult</span>};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">metadata</span>::<span class="ident">StatementMetadata</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">metadata</span>::{<span class="ident">MysqlFieldMetadata</span>, <span class="ident">StatementMetadata</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Statement</span> {
     <span class="ident">stmt</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">MYSQL_STMT</span><span class="op">&gt;</span>,
