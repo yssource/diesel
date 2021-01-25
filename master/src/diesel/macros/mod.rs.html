@@ -1507,9 +1507,6 @@
 <span id="1504">1504</span>
 <span id="1505">1505</span>
 <span id="1506">1506</span>
-<span id="1507">1507</span>
-<span id="1508">1508</span>
-<span id="1509">1509</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_parens</span>)]</span> <span class="comment">// FIXME: Remove this attribute once false positive is resolved.</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">rustfmt</span>, <span class="ident">rustfmt_skip</span>)]</span> <span class="comment">// https://github.com/rust-lang-nursery/rustfmt/issues/2755</span>
@@ -1622,16 +1619,13 @@
 
         <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">EqAll</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span> <span class="kw">where</span>
             <span class="ident">T</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression</span>::<span class="ident">AsExpression</span><span class="op">&lt;</span>$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>)<span class="kw-2">*</span><span class="op">&gt;</span>,
-            <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Nullable</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Eq</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span><span class="op">&gt;</span>:
-            <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Nullable</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+            <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Eq</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">column_name</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span><span class="op">=</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">sql_types</span>::<span class="ident">Bool</span><span class="op">&gt;</span>,
         {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Nullable</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Eq</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">dsl</span>::<span class="ident">Eq</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">T</span>::<span class="ident">Expression</span><span class="op">&gt;</span>;
 
             <span class="kw">fn</span> <span class="ident">eq_all</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
                 <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression_methods</span>::<span class="ident">ExpressionMethods</span>;
-                <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">expression_methods</span>::<span class="ident">NullableExpressionMethods</span>;
-
-                <span class="self">self</span>.<span class="ident">eq</span>(<span class="ident">rhs</span>).<span class="ident">nullable</span>()
+                <span class="self">self</span>.<span class="ident">eq</span>(<span class="ident">rhs</span>)
             }
         }
 

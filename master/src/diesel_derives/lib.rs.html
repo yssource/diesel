@@ -2111,12 +2111,12 @@
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// # table! { crates { id -&gt; Integer, name -&gt; VarChar, } }</span>
 <span class="doccomment">/// #</span>
-<span class="doccomment">/// use diesel::sql_types::{Foldable, Nullable};</span>
+<span class="doccomment">/// use diesel::sql_types::Foldable;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// sql_function! {</span>
 <span class="doccomment">///     #[aggregate]</span>
 <span class="doccomment">///     #[sql_name = &quot;SUM&quot;]</span>
-<span class="doccomment">///     fn sum&lt;ST: Foldable&gt;(expr: Nullable&lt;ST&gt;) -&gt; ST::Sum;</span>
+<span class="doccomment">///     fn sum&lt;ST: Foldable&gt;(expr: ST) -&gt; ST::Sum;</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # fn main() {</span>
