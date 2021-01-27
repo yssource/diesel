@@ -1176,6 +1176,10 @@
 <span id="1173">1173</span>
 <span id="1174">1174</span>
 <span id="1175">1175</span>
+<span id="1176">1176</span>
+<span id="1177">1177</span>
+<span id="1178">1178</span>
+<span id="1179">1179</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">recursion_limit</span> <span class="op">=</span> <span class="string">&quot;1024&quot;</span>]</span>
 <span class="comment">// Built-in Lints</span>
@@ -1581,9 +1585,12 @@
 <span class="doccomment">/// To provide custom deserialization behavior for a field, you can use</span>
 <span class="doccomment">/// `#[diesel(deserialize_as = &quot;SomeType&quot;)]`. If this attribute is present, Diesel</span>
 <span class="doccomment">/// will deserialize the corresponding field into `SomeType`, rather than the</span>
-<span class="doccomment">/// actual field type on your struct and then call `.into` to convert it to the</span>
-<span class="doccomment">/// actual field type. This can be used to add custom behavior for a</span>
+<span class="doccomment">/// actual field type on your struct and then call</span>
+<span class="doccomment">/// [`.try_into`](https://doc.rust-lang.org/stable/std/convert/trait.TryInto.html#tymethod.try_into)</span>
+<span class="doccomment">/// to convert it to the actual field type. This can be used to add custom behavior for a</span>
 <span class="doccomment">/// single field, or use types that are otherwise unsupported by Diesel.</span>
+<span class="doccomment">/// (Note: all types that have `Into&lt;T&gt;` automatically implement `TryInto&lt;T&gt;`,</span>
+<span class="doccomment">/// for cases where your conversion is not faillible.)</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Attributes</span>
 <span class="doccomment">///</span>
@@ -1591,8 +1598,9 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// * `#[diesel(deserialize_as = &quot;Type&quot;)]`, instead of deserializing directly</span>
 <span class="doccomment">///   into the field type, the implementation will deserialize into `Type`.</span>
-<span class="doccomment">///   Then `Type` is converted via `.into()` into the field type. By default</span>
-<span class="doccomment">///   this derive will deserialize directly into the field type</span>
+<span class="doccomment">///   Then `Type` is converted via</span>
+<span class="doccomment">///   [`.try_into`](https://doc.rust-lang.org/stable/std/convert/trait.TryInto.html#tymethod.try_into)</span>
+<span class="doccomment">///   into the field type. By default this derive will deserialize directly into the field type</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
@@ -1634,7 +1642,7 @@
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// # use schema::users;</span>
 <span class="doccomment">/// # use diesel::backend::{self, Backend};</span>
-<span class="doccomment">/// # use diesel::deserialize::{Queryable, FromSql};</span>
+<span class="doccomment">/// # use diesel::deserialize::{self, Queryable, FromSql};</span>
 <span class="doccomment">/// # use diesel::sql_types::Text;</span>
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// struct LowercaseString(String);</span>
@@ -1653,8 +1661,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">///     type Row = String;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     fn build(s: String) -&gt; Self {</span>
-<span class="doccomment">///         LowercaseString(s.to_lowercase())</span>
+<span class="doccomment">///     fn build(s: String) -&gt; deserialize::Result&lt;Self&gt; {</span>
+<span class="doccomment">///         Ok(LowercaseString(s.to_lowercase()))</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
@@ -1687,7 +1695,7 @@
 <span class="doccomment">/// # include!(&quot;../../diesel/src/doctest_setup.rs&quot;);</span>
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// use schema::users;</span>
-<span class="doccomment">/// use diesel::deserialize::{Queryable, FromSqlRow};</span>
+<span class="doccomment">/// use diesel::deserialize::{self, Queryable, FromSqlRow};</span>
 <span class="doccomment">/// use diesel::row::Row;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # /*</span>
@@ -1706,8 +1714,8 @@
 <span class="doccomment">/// {</span>
 <span class="doccomment">///     type Row = (i32, String);</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     fn build((id, name): Self::Row) -&gt; Self {</span>
-<span class="doccomment">///         User { id, name: name.to_lowercase() }</span>
+<span class="doccomment">///     fn build((id, name): Self::Row) -&gt; deserialize::Result&lt;Self&gt; {</span>
+<span class="doccomment">///         Ok(User { id, name: name.to_lowercase() })</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>

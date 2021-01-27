@@ -503,7 +503,7 @@
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// # use schema::users;</span>
 <span class="doccomment">/// # use diesel::backend::{self, Backend};</span>
-<span class="doccomment">/// # use diesel::deserialize::{Queryable, FromSql};</span>
+<span class="doccomment">/// # use diesel::deserialize::{self, Queryable, FromSql};</span>
 <span class="doccomment">/// # use diesel::sql_types::Text;</span>
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// struct LowercaseString(String);</span>
@@ -521,8 +521,8 @@
 <span class="doccomment">/// {</span>
 <span class="doccomment">///     type Row = String;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     fn build(s: String) -&gt; Self {</span>
-<span class="doccomment">///         LowercaseString(s.to_lowercase())</span>
+<span class="doccomment">///     fn build(s: String) -&gt; deserialize::Result&lt;Self&gt; {</span>
+<span class="doccomment">///         Ok(LowercaseString(s.to_lowercase()))</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
@@ -553,7 +553,7 @@
 <span class="doccomment">/// # include!(&quot;doctest_setup.rs&quot;);</span>
 <span class="doccomment">/// #</span>
 <span class="doccomment">/// use schema::users;</span>
-<span class="doccomment">/// use diesel::deserialize::Queryable;</span>
+<span class="doccomment">/// use diesel::deserialize::{self, Queryable};</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # /*</span>
 <span class="doccomment">/// type DB = diesel::sqlite::Sqlite;</span>
@@ -568,11 +568,11 @@
 <span class="doccomment">/// impl Queryable&lt;users::SqlType, DB&gt; for User {</span>
 <span class="doccomment">///     type Row = (i32, String);</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     fn build(row: Self::Row) -&gt; Self {</span>
-<span class="doccomment">///         User {</span>
+<span class="doccomment">///     fn build(row: Self::Row) -&gt; deserialize::Result&lt;Self&gt; {</span>
+<span class="doccomment">///         Ok(User {</span>
 <span class="doccomment">///             id: row.0,</span>
 <span class="doccomment">///             name: row.1.to_lowercase(),</span>
-<span class="doccomment">///         }</span>
+<span class="doccomment">///         })</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
@@ -589,7 +589,7 @@
 <span class="doccomment">/// #     Ok(())</span>
 <span class="doccomment">/// # }</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Queryable</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>: <span class="ident">Sized</span>
 <span class="kw">where</span>
     <span class="ident">DB</span>: <span class="ident">Backend</span>,
 {
@@ -599,7 +599,7 @@
     <span class="kw">type</span> <span class="ident">Row</span>: <span class="ident">FromStaticSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Construct an instance of this type</span>
-    <span class="kw">fn</span> <span class="ident">build</span>(<span class="ident">row</span>: <span class="self">Self</span>::<span class="ident">Row</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
+    <span class="kw">fn</span> <span class="ident">build</span>(<span class="ident">row</span>: <span class="self">Self</span>::<span class="ident">Row</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
 }
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
@@ -840,7 +840,7 @@
 {
     <span class="kw">fn</span> <span class="ident">build_from_row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">row</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Row</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">DB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">row</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">Row</span> <span class="kw">as</span> <span class="ident">FromStaticSqlRow</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">DB</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">build_from_row</span>(<span class="ident">row</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">T</span>::<span class="ident">build</span>(<span class="ident">row</span>))
+        <span class="ident">T</span>::<span class="ident">build</span>(<span class="ident">row</span>)
     }
 }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `Queryable` derive in crate `diesel`."><meta name="keywords" content="rust, rustlang, rust-lang, Queryable"><title>diesel::deserialize::Queryable - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
 <link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc derive"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../diesel/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><p class="location"><a href="../index.html">diesel</a>::<wbr><a href="index.html">deserialize</a></p><script>window.sidebarCurrent = {name: "Queryable", ty: "derive", relpath: ""};</script><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
-                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../src/diesel_derives/lib.rs.html#549" title="goto source code">[src]</a></span><span class="in-band">Derive Macro <a href="../index.html">diesel</a>::<wbr><a href="index.html">deserialize</a>::<wbr><a class="derive" href="">Queryable</a></span></h1><pre class="rust derive">#[derive(Queryable)]
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../src/diesel_derives/lib.rs.html#553" title="goto source code">[src]</a></span><span class="in-band">Derive Macro <a href="../index.html">diesel</a>::<wbr><a href="index.html">deserialize</a>::<wbr><a class="derive" href="">Queryable</a></span></h1><pre class="rust derive">#[derive(Queryable)]
 {
     // Attributes available to this derive:
     #[column_name]
@@ -15,15 +15,19 @@ no effect.</strong></p>
 <p>To provide custom deserialization behavior for a field, you can use
 <code>#[diesel(deserialize_as = &quot;SomeType&quot;)]</code>. If this attribute is present, Diesel
 will deserialize the corresponding field into <code>SomeType</code>, rather than the
-actual field type on your struct and then call <code>.into</code> to convert it to the
-actual field type. This can be used to add custom behavior for a
-single field, or use types that are otherwise unsupported by Diesel.</p>
+actual field type on your struct and then call
+<a href="https://doc.rust-lang.org/stable/std/convert/trait.TryInto.html#tymethod.try_into"><code>.try_into</code></a>
+to convert it to the actual field type. This can be used to add custom behavior for a
+single field, or use types that are otherwise unsupported by Diesel.
+(Note: all types that have <code>Into&lt;T&gt;</code> automatically implement <code>TryInto&lt;T&gt;</code>,
+for cases where your conversion is not faillible.)</p>
 <h1 id="attributes" class="section-header"><a href="#attributes">Attributes</a></h1><h2 id="optional-field-attributes" class="section-header"><a href="#optional-field-attributes">Optional field attributes:</a></h2>
 <ul>
 <li><code>#[diesel(deserialize_as = &quot;Type&quot;)]</code>, instead of deserializing directly
 into the field type, the implementation will deserialize into <code>Type</code>.
-Then <code>Type</code> is converted via <code>.into()</code> into the field type. By default
-this derive will deserialize directly into the field type</li>
+Then <code>Type</code> is converted via
+<a href="https://doc.rust-lang.org/stable/std/convert/trait.TryInto.html#tymethod.try_into"><code>.try_into</code></a>
+into the field type. By default this derive will deserialize directly into the field type</li>
 </ul>
 <h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
 <p>If we just want to map a query to our struct, we can use <code>derive</code>.</p>
@@ -58,8 +62,8 @@ this derive will deserialize directly into the field type</li>
 
     <span class="kw">type</span> <span class="ident">Row</span> <span class="op">=</span> <span class="ident">String</span>;
 
-    <span class="kw">fn</span> <span class="ident">build</span>(<span class="ident">s</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">LowercaseString</span>(<span class="ident">s</span>.<span class="ident">to_lowercase</span>())
+    <span class="kw">fn</span> <span class="ident">build</span>(<span class="ident">s</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">LowercaseString</span>(<span class="ident">s</span>.<span class="ident">to_lowercase</span>()))
     }
 }
 
@@ -77,7 +81,7 @@ this derive will deserialize directly into the field type</li>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
 <span class="kw">use</span> <span class="ident">schema</span>::<span class="ident">users</span>;
-<span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">deserialize</span>::{<span class="ident">Queryable</span>, <span class="ident">FromSqlRow</span>};
+<span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">deserialize</span>::{<span class="self">self</span>, <span class="ident">Queryable</span>, <span class="ident">FromSqlRow</span>};
 <span class="kw">use</span> <span class="ident">diesel</span>::<span class="ident">row</span>::<span class="ident">Row</span>;
 
 <span class="kw">type</span> <span class="ident">DB</span> <span class="op">=</span> <span class="ident">diesel</span>::<span class="ident">sqlite</span>::<span class="ident">Sqlite</span>;
@@ -94,8 +98,8 @@ this derive will deserialize directly into the field type</li>
 {
     <span class="kw">type</span> <span class="ident">Row</span> <span class="op">=</span> (<span class="ident">i32</span>, <span class="ident">String</span>);
 
-    <span class="kw">fn</span> <span class="ident">build</span>((<span class="ident">id</span>, <span class="ident">name</span>): <span class="self">Self</span>::<span class="ident">Row</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">User</span> { <span class="ident">id</span>, <span class="ident">name</span>: <span class="ident">name</span>.<span class="ident">to_lowercase</span>() }
+    <span class="kw">fn</span> <span class="ident">build</span>((<span class="ident">id</span>, <span class="ident">name</span>): <span class="self">Self</span>::<span class="ident">Row</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">deserialize</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">User</span> { <span class="ident">id</span>, <span class="ident">name</span>: <span class="ident">name</span>.<span class="ident">to_lowercase</span>() })
     }
 }
 
