@@ -25,9 +25,14 @@
 <span id="22">22</span>
 <span id="23">23</span>
 <span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="ident">order_dsl</span>::<span class="ident">ValidOrderingForDistinct</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">QueryResult</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">QueryId</span>)]</span>
@@ -47,6 +52,9 @@
         <span class="prelude-val">Ok</span>(())
     }
 }
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span> <span class="ident">ValidOrderingForDistinct</span><span class="op">&lt;</span><span class="ident">NoDistinctClause</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">O</span> {}
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span> <span class="ident">ValidOrderingForDistinct</span><span class="op">&lt;</span><span class="ident">DistinctClause</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">O</span> {}
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;postgres&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">pg</span>::<span class="ident">DistinctOnClause</span>;

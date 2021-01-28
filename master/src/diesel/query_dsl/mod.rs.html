@@ -1359,6 +1359,9 @@
 <span id="1356">1356</span>
 <span id="1357">1357</span>
 <span id="1358">1358</span>
+<span id="1359">1359</span>
+<span id="1360">1360</span>
+<span id="1361">1361</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Traits that construct SELECT statements</span>
 <span class="doccomment">//!</span>
@@ -1400,7 +1403,7 @@
 <span class="kw">mod</span> <span class="ident">locking_dsl</span>;
 <span class="kw">mod</span> <span class="ident">nullable_select_dsl</span>;
 <span class="kw">mod</span> <span class="ident">offset_dsl</span>;
-<span class="kw">mod</span> <span class="ident">order_dsl</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">order_dsl</span>;
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">positional_order_dsl</span>;
 <span class="kw">mod</span> <span class="ident">save_changes_dsl</span>;
@@ -1514,7 +1517,10 @@
     <span class="doccomment">///     .execute(&amp;connection)</span>
     <span class="doccomment">///     .unwrap();</span>
     <span class="doccomment">/// let all_animals = animals.select((species, name, legs)).load(&amp;connection);</span>
-    <span class="doccomment">/// let distinct_animals = animals.select((species, name, legs)).distinct_on(species).load(&amp;connection);</span>
+    <span class="doccomment">/// let distinct_animals = animals</span>
+    <span class="doccomment">///     .select((species, name, legs))</span>
+    <span class="doccomment">///     .order_by((species, legs))</span>
+    <span class="doccomment">///     .distinct_on(species).load(&amp;connection);</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// assert_eq!(Ok(vec![Animal::new(&quot;dog&quot;, Some(&quot;Jack&quot;), 4),</span>
     <span class="doccomment">///                    Animal::new(&quot;dog&quot;, None, 4),</span>

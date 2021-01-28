@@ -538,6 +538,7 @@
 <span id="535">535</span>
 <span id="536">536</span>
 <span id="537">537</span>
+<span id="538">538</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">BoxedSelectStatement</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">associations</span>::<span class="ident">HasTable</span>;
@@ -563,6 +564,7 @@
 };
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="ident">boxed_dsl</span>::<span class="ident">BoxedDsl</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="ident">methods</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="ident">order_dsl</span>::<span class="ident">ValidOrderingForDistinct</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_source</span>::<span class="ident">joins</span>::{<span class="ident">Join</span>, <span class="ident">JoinOn</span>, <span class="ident">JoinTo</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_source</span>::<span class="ident">QuerySource</span>;
@@ -700,7 +702,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">ST</span>, <span class="ident">F</span>, <span class="ident">S</span>, <span class="ident">D</span>, <span class="ident">W</span>, <span class="ident">O</span>, <span class="ident">LOf</span>, <span class="ident">G</span>, <span class="ident">LC</span>, <span class="ident">Expr</span><span class="op">&gt;</span> <span class="ident">OrderDsl</span><span class="op">&lt;</span><span class="ident">Expr</span><span class="op">&gt;</span>
     <span class="kw">for</span> <span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">S</span>, <span class="ident">D</span>, <span class="ident">W</span>, <span class="ident">O</span>, <span class="ident">LOf</span>, <span class="ident">G</span>, <span class="ident">LC</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">Expr</span>: <span class="ident">AppearsOnTable</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>,
+    <span class="ident">Expr</span>: <span class="ident">AppearsOnTable</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ValidOrderingForDistinct</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>,
     <span class="self">Self</span>: <span class="ident">SelectQuery</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
     <span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">S</span>, <span class="ident">D</span>, <span class="ident">W</span>, <span class="ident">OrderClause</span><span class="op">&lt;</span><span class="ident">Expr</span><span class="op">&gt;</span>, <span class="ident">LOf</span>, <span class="ident">G</span>, <span class="ident">LC</span><span class="op">&gt;</span>: <span class="ident">SelectQuery</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">ST</span><span class="op">&gt;</span>,
 {

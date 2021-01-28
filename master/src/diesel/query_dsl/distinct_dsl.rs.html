@@ -75,8 +75,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">SelectableExpression</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">TypedExpressionType</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">expression</span>::<span class="ident">ValidGrouping</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">AsQuery</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">SelectStatement</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::{<span class="ident">AsQuery</span>, <span class="ident">SelectStatement</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">query_source</span>::<span class="ident">Table</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">Expression</span>;
 
@@ -129,6 +128,7 @@
 <span class="kw">where</span>
     <span class="ident">Selection</span>: <span class="ident">SelectableExpression</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
     <span class="ident">T</span>: <span class="ident">Table</span> <span class="op">+</span> <span class="ident">AsQuery</span><span class="op">&lt;</span><span class="ident">Query</span> <span class="op">=</span> <span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">SelectStatement</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">DistinctOnDsl</span><span class="op">&lt;</span><span class="ident">Selection</span><span class="op">&gt;</span>,
     <span class="ident">T</span>::<span class="ident">DefaultSelection</span>: <span class="ident">Expression</span><span class="op">&lt;</span><span class="ident">SqlType</span> <span class="op">=</span> <span class="ident">T</span>::<span class="ident">SqlType</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ValidGrouping</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
     <span class="ident">T</span>::<span class="ident">SqlType</span>: <span class="ident">TypedExpressionType</span>,
 {

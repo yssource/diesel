@@ -503,6 +503,10 @@
 <span id="500">500</span>
 <span id="501">501</span>
 <span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">associations</span>::<span class="ident">BelongsTo</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">backend</span>::<span class="ident">Backend</span>;
@@ -821,6 +825,10 @@
                     )<span class="kw-2">*</span>))
                 }
             }
+
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;postgres&quot;</span>)]</span>
+            <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">__D</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="kw-2">*</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">query_dsl</span>::<span class="ident">order_dsl</span>::<span class="ident">ValidOrderingForDistinct</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">pg</span>::<span class="ident">DistinctOnClause</span><span class="op">&lt;</span><span class="ident">__D</span><span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="kw">for</span> <span class="kw">crate</span>::<span class="ident">query_builder</span>::<span class="ident">order_clause</span>::<span class="ident">OrderClause</span><span class="op">&lt;</span>(<span class="ident">__D</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">T</span>,)<span class="kw-2">*</span>)<span class="op">&gt;</span> {}
 
         )<span class="op">+</span>
     }
