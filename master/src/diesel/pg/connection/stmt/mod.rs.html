@@ -84,6 +84,10 @@
 <span id="81">81</span>
 <span id="82">82</span>
 <span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">pq_sys</span>;
 
@@ -144,7 +148,11 @@
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueryResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">name</span>.<span class="ident">unwrap_or</span>(<span class="string">&quot;&quot;</span>))<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">sql</span> <span class="op">=</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">sql</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">param_types_vec</span> <span class="op">=</span> <span class="ident">param_types</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">oid</span>).<span class="ident">collect</span>();
+        <span class="kw">let</span> <span class="ident">param_types_vec</span> <span class="op">=</span> <span class="ident">param_types</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">oid</span>())
+            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()
+            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="kw">crate</span>::<span class="ident">result</span>::<span class="ident">Error</span>::<span class="ident">SerializationError</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">e</span>)))<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="ident">internal_result</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="ident">conn</span>.<span class="ident">raw_connection</span>.<span class="ident">prepare</span>(

@@ -196,24 +196,6 @@
 <span id="193">193</span>
 <span id="194">194</span>
 <span id="195">195</span>
-<span id="196">196</span>
-<span id="197">197</span>
-<span id="198">198</span>
-<span id="199">199</span>
-<span id="200">200</span>
-<span id="201">201</span>
-<span id="202">202</span>
-<span id="203">203</span>
-<span id="204">204</span>
-<span id="205">205</span>
-<span id="206">206</span>
-<span id="207">207</span>
-<span id="208">208</span>
-<span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
-<span id="212">212</span>
-<span id="213">213</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">byteorder</span>::{<span class="ident">NetworkEndian</span>, <span class="ident">ReadBytesExt</span>, <span class="ident">WriteBytesExt</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">Bound</span>;
@@ -377,55 +359,37 @@
 
 <span class="kw">impl</span> <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">Int4range</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pg</span> {
     <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">PgMetadataLookup</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PgTypeMetadata</span> {
-        <span class="ident">PgTypeMetadata</span> {
-            <span class="ident">oid</span>: <span class="number">3904</span>,
-            <span class="ident">array_oid</span>: <span class="number">3905</span>,
-        }
+        <span class="ident">PgTypeMetadata</span>::<span class="ident">new</span>(<span class="number">3904</span>, <span class="number">3905</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">Numrange</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pg</span> {
     <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">PgMetadataLookup</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PgTypeMetadata</span> {
-        <span class="ident">PgTypeMetadata</span> {
-            <span class="ident">oid</span>: <span class="number">3906</span>,
-            <span class="ident">array_oid</span>: <span class="number">3907</span>,
-        }
+        <span class="ident">PgTypeMetadata</span>::<span class="ident">new</span>(<span class="number">3906</span>, <span class="number">3907</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">Tsrange</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pg</span> {
     <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">PgMetadataLookup</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PgTypeMetadata</span> {
-        <span class="ident">PgTypeMetadata</span> {
-            <span class="ident">oid</span>: <span class="number">3908</span>,
-            <span class="ident">array_oid</span>: <span class="number">3909</span>,
-        }
+        <span class="ident">PgTypeMetadata</span>::<span class="ident">new</span>(<span class="number">3908</span>, <span class="number">3909</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">Tstzrange</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pg</span> {
     <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">PgMetadataLookup</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PgTypeMetadata</span> {
-        <span class="ident">PgTypeMetadata</span> {
-            <span class="ident">oid</span>: <span class="number">3910</span>,
-            <span class="ident">array_oid</span>: <span class="number">3911</span>,
-        }
+        <span class="ident">PgTypeMetadata</span>::<span class="ident">new</span>(<span class="number">3910</span>, <span class="number">3911</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">Daterange</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pg</span> {
     <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">PgMetadataLookup</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PgTypeMetadata</span> {
-        <span class="ident">PgTypeMetadata</span> {
-            <span class="ident">oid</span>: <span class="number">3912</span>,
-            <span class="ident">array_oid</span>: <span class="number">3913</span>,
-        }
+        <span class="ident">PgTypeMetadata</span>::<span class="ident">new</span>(<span class="number">3912</span>, <span class="number">3913</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">HasSqlType</span><span class="op">&lt;</span><span class="ident">Int8range</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Pg</span> {
     <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">PgMetadataLookup</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PgTypeMetadata</span> {
-        <span class="ident">PgTypeMetadata</span> {
-            <span class="ident">oid</span>: <span class="number">3926</span>,
-            <span class="ident">array_oid</span>: <span class="number">3927</span>,
-        }
+        <span class="ident">PgTypeMetadata</span>::<span class="ident">new</span>(<span class="number">3926</span>, <span class="number">3927</span>)
     }
 }
 </pre></div>

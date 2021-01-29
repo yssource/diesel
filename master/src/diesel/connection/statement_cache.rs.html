@@ -475,7 +475,7 @@
             <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">sql</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">construct_sql</span>(<span class="ident">source</span>)<span class="question-mark">?</span>;
                 <span class="prelude-val">Ok</span>(<span class="ident">StatementCacheKey</span>::<span class="ident">Sql</span> {
-                    <span class="ident">sql</span>: <span class="ident">sql</span>,
+                    <span class="ident">sql</span>,
                     <span class="ident">bind_types</span>: <span class="ident">bind_types</span>.<span class="ident">into</span>(),
                 })
             }

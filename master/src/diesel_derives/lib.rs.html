@@ -1180,6 +1180,7 @@
 <span id="1177">1177</span>
 <span id="1178">1178</span>
 <span id="1179">1179</span>
+<span id="1180">1180</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#![<span class="ident">recursion_limit</span> <span class="op">=</span> <span class="string">&quot;1024&quot;</span>]</span>
 <span class="comment">// Built-in Lints</span>
@@ -1939,7 +1940,7 @@
 <span class="doccomment">/// You don&#39;t need to specify every backend,</span>
 <span class="doccomment">/// only the ones supported by your type.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// For PostgreSQL, add  `#[postgres(type_name = &quot;pg_type_name&quot;)]`</span>
+<span class="doccomment">/// For PostgreSQL, add  `#[postgres(type_name = &quot;pg_type_name&quot;, type_schema = &quot;pg_schema_name&quot;)]`</span>
 <span class="doccomment">/// or `#[postgres(oid = &quot;some_oid&quot;, array_oid = &quot;some_oid&quot;)]` for</span>
 <span class="doccomment">/// builtin types.</span>
 <span class="doccomment">/// For MySQL, specify which variant of `MysqlType` should be used</span>
@@ -1951,9 +1952,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ## Type attributes</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// * `#[postgres(type_name = &quot;TypeName&quot;)]` specifies support for</span>
-<span class="doccomment">/// a postgresql type with the name `TypeName`. Prefer this variant</span>
-<span class="doccomment">/// for types with no stable OID (== everything but the builtin types)</span>
+<span class="doccomment">/// * `#[postgres(type_name = &quot;TypeName&quot;, type_schema = &quot;public&quot;)]` specifies support for</span>
+<span class="doccomment">/// a postgresql type with the name `TypeName` in the schema `public`. Prefer this variant</span>
+<span class="doccomment">/// for types with no stable OID (== everything but the builtin types). It&#39;s possible to leaf</span>
+<span class="doccomment">/// of the `type_schema` part. In that case diesel defaults to the default postgres search path.</span>
 <span class="doccomment">/// * `#[postgres(oid = 42, array_oid = 142)]`, specifies support for a</span>
 <span class="doccomment">/// postgresql type with the given `oid` and `array_oid`. This variant</span>
 <span class="doccomment">/// should only be used with types that have a stable OID.</span>

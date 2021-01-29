@@ -160,6 +160,12 @@
 <span id="157">157</span>
 <span id="158">158</span>
 <span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>;
 <span class="kw">use</span> <span class="ident">syn</span>;
@@ -269,15 +275,17 @@
             <span class="kw">let</span> <span class="ident">metadata_fn</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ty</span> {
                 <span class="ident">PgType</span>::<span class="ident">Fixed</span> { <span class="ident">oid</span>, <span class="ident">array_oid</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote</span><span class="macro">!</span>(
                     <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">PgMetadataLookup</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PgTypeMetadata</span> {
-                        <span class="ident">PgTypeMetadata</span> {
-                            <span class="ident">oid</span>: #<span class="ident">oid</span>,
-                            <span class="ident">array_oid</span>: #<span class="ident">array_oid</span>,
-                        }
+                        <span class="ident">PgTypeMetadata</span>::<span class="ident">new</span>(#<span class="ident">oid</span>, #<span class="ident">array_oid</span>)
                     }
                 ),
-                <span class="ident">PgType</span>::<span class="ident">Lookup</span>(<span class="ident">type_name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote</span><span class="macro">!</span>(
+                <span class="ident">PgType</span>::<span class="ident">Lookup</span>(<span class="ident">type_name</span>, <span class="prelude-val">Some</span>(<span class="ident">type_schema</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote</span><span class="macro">!</span>(
                     <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="ident">lookup</span>: <span class="kw-2">&amp;</span><span class="ident">PgMetadataLookup</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PgTypeMetadata</span> {
-                        <span class="ident">lookup</span>.<span class="ident">lookup_type</span>(#<span class="ident">type_name</span>)
+                        <span class="ident">lookup</span>.<span class="ident">lookup_type</span>(#<span class="ident">type_name</span>, <span class="prelude-val">Some</span>(#<span class="ident">type_schema</span>))
+                    }
+                ),
+                <span class="ident">PgType</span>::<span class="ident">Lookup</span>(<span class="ident">type_name</span>, <span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote</span><span class="macro">!</span>(
+                    <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="ident">lookup</span>: <span class="kw-2">&amp;</span><span class="ident">PgMetadataLookup</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PgTypeMetadata</span> {
+                        <span class="ident">lookup</span>.<span class="ident">lookup_type</span>(#<span class="ident">type_name</span>, <span class="prelude-val">None</span>)
                     }
                 ),
             };
@@ -296,9 +304,13 @@
 }
 
 <span class="kw">fn</span> <span class="ident">get_type_name</span>(<span class="ident">attr</span>: <span class="kw-2">&amp;</span><span class="ident">MetaItem</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PgType</span><span class="op">&gt;</span>, <span class="ident">Diagnostic</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">schema</span> <span class="op">=</span> <span class="ident">attr</span>.<span class="ident">nested_item</span>(<span class="string">&quot;type_schema&quot;</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">attr</span>.<span class="ident">nested_item</span>(<span class="string">&quot;type_name&quot;</span>)<span class="question-mark">?</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">ty</span><span class="op">|</span> {
-        <span class="ident">attr</span>.<span class="ident">warn_if_other_options</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;type_name&quot;</span>]);
-        <span class="ident">PgType</span>::<span class="ident">Lookup</span>(<span class="ident">ty</span>.<span class="ident">expect_str_value</span>())
+        <span class="ident">attr</span>.<span class="ident">warn_if_other_options</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;type_name&quot;</span>, <span class="string">&quot;type_schema&quot;</span>]);
+        <span class="ident">PgType</span>::<span class="ident">Lookup</span>(
+            <span class="ident">ty</span>.<span class="ident">expect_str_value</span>(),
+            <span class="ident">schema</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">schema</span><span class="op">|</span> <span class="ident">schema</span>.<span class="ident">expect_str_value</span>()),
+        )
     }))
 }
 
@@ -318,7 +330,7 @@
 
 <span class="kw">enum</span> <span class="ident">PgType</span> {
     <span class="ident">Fixed</span> { <span class="ident">oid</span>: <span class="ident">u32</span>, <span class="ident">array_oid</span>: <span class="ident">u32</span> },
-    <span class="ident">Lookup</span>(<span class="ident">String</span>),
+    <span class="ident">Lookup</span>(<span class="ident">String</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>),
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "diesel_derives";</script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
