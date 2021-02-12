@@ -1,6 +1,6 @@
 (function() {var implementors = {};
 implementors["diesel_dynamic_schema"] = [{"text":"impl&lt;V&gt; IntoIterator for DynamicRow&lt;V&gt;","synthetic":false,"types":[]},{"text":"impl&lt;'a, V&gt; IntoIterator for &amp;'a DynamicRow&lt;V&gt;","synthetic":false,"types":[]}];
-implementors["ipnetwork"] = [{"text":"impl&lt;'_&gt; IntoIterator for &amp;'_ Ipv4Network","synthetic":false,"types":[]},{"text":"impl&lt;'_&gt; IntoIterator for &amp;'_ Ipv6Network","synthetic":false,"types":[]},{"text":"impl&lt;'_&gt; IntoIterator for &amp;'_ IpNetwork","synthetic":false,"types":[]}];
+implementors["ipnetwork"] = [{"text":"impl IntoIterator for &amp;Ipv4Network","synthetic":false,"types":[]},{"text":"impl IntoIterator for &amp;Ipv6Network","synthetic":false,"types":[]},{"text":"impl IntoIterator for &amp;IpNetwork","synthetic":false,"types":[]}];
 implementors["proc_macro2"] = [{"text":"impl IntoIterator for TokenStream","synthetic":false,"types":[]}];
 implementors["regex"] = [{"text":"impl IntoIterator for SetMatches","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; IntoIterator for &amp;'a SetMatches","synthetic":false,"types":[]},{"text":"impl IntoIterator for SetMatches","synthetic":false,"types":[]},{"text":"impl&lt;'a&gt; IntoIterator for &amp;'a SetMatches","synthetic":false,"types":[]}];
 implementors["regex_syntax"] = [{"text":"impl&lt;'a&gt; IntoIterator for &amp;'a Utf8Sequence","synthetic":false,"types":[]}];

@@ -4,6 +4,7 @@ implementors["bigdecimal"] = [{"text":"impl Error for ParseBigDecimalError","syn
 implementors["chrono"] = [{"text":"impl Error for ParseError","synthetic":false,"types":[]},{"text":"impl Error for RoundingError","synthetic":false,"types":[]}];
 implementors["diesel"] = [{"text":"impl Error for Error","synthetic":false,"types":[]},{"text":"impl Error for Error","synthetic":false,"types":[]},{"text":"impl Error for ConnectionError","synthetic":false,"types":[]},{"text":"impl Error for UnexpectedNullError","synthetic":false,"types":[]},{"text":"impl Error for UnexpectedEndOfRow","synthetic":false,"types":[]},{"text":"impl Error for MigrationError","synthetic":false,"types":[]},{"text":"impl Error for RunMigrationsError","synthetic":false,"types":[]}];
 implementors["getrandom"] = [{"text":"impl Error for Error","synthetic":false,"types":[]}];
+implementors["idna"] = [{"text":"impl Error for Errors","synthetic":false,"types":[]}];
 implementors["ipnetwork"] = [{"text":"impl Error for IpNetworkError","synthetic":false,"types":[]}];
 implementors["libsqlite3_sys"] = [{"text":"impl Error for Error","synthetic":false,"types":[]}];
 implementors["log"] = [{"text":"impl Error for SetLoggerError","synthetic":false,"types":[]},{"text":"impl Error for ParseLevelError","synthetic":false,"types":[]}];
